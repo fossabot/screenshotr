@@ -8,32 +8,28 @@ function pause(time = 3000) {
 }
 
 exports.takeScreenshot = functions.https.onRequest((req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
   return cors(req, res, async () => {
-    res.set('Access-Control-Allow-Origin', '*');
     const puppeteerOpts = {
       defaultViewport: {
         width: 1920,
         height: 1080
-      }
+      },
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
     };
-
     const browser = await puppeteer.launch(puppeteerOpts);
-
     const page = await browser.newPage();
-
-    await page.goto(req.body.targetURL);
-
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36'
+    );
+    const { targetURL } = await req.body;
+    await page.goto(targetURL);
     await pause(200);
-
     const screenshot = await page.screenshot({
       encoding: 'base64',
       type: 'png',
       fullPage: true
     });
-
     await browser.close();
-
-    res.status(200).json({ screenshot });
+    return res.status(200).json({ screenshot });
   });
 });
