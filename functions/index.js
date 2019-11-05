@@ -8,7 +8,9 @@ function pause(time = 3000) {
 }
 
 exports.takeScreenshot = functions.https.onRequest((req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   return cors(req, res, async () => {
+    res.set('Access-Control-Allow-Origin', '*');
     const puppeteerOpts = {
       defaultViewport: {
         width: 1920,
@@ -22,7 +24,7 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
 
     await page.goto(req.body.targetURL);
 
-    await pause(1000);
+    await pause(200);
 
     const screenshot = await page.screenshot({
       encoding: 'base64',

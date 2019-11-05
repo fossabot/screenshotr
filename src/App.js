@@ -10,19 +10,20 @@ function App() {
   };
 
   const getImage = async () => {
-    const response = await fetch(
-      'http://localhost:5001/screen-shottr/us-central1/takeScreenshot',
-      {
-        method: 'POST',
-        body: JSON.stringify({ targetURL: inputVal }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    const response = await fetch(process.env.REACT_APP_SCREENSHOT_ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify({ targetURL: inputVal }),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    );
-    const data = await response.json();
+    });
+    const text = await response.text();
+    console.log(text);
+    // const data = await response.json();
+    // console.log(data);
+    const data = JSON.parse(text);
+
     setImgData(`data:image/png;base64,${data.screenshot}`);
-    console.log(data);
   };
 
   return (

@@ -49,6 +49,7 @@ button {
   background: #3498db;
   letter-spacing: 1px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 button:disabled,
