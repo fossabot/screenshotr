@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import domtoimage from 'dom-to-image';
+import FileSaver from 'file-saver';
+import WebPageFrame from './components/web-page-frame/web-page-frame';
 import './App.css';
 
 function App() {
@@ -26,6 +29,12 @@ function App() {
     setImgData(`data:image/png;base64,${data.screenshot}`);
   };
 
+  const getScreenshot = async () => {
+    const exportNode = document.getElementById('export');
+    const dataURL = await domtoimage.toPng(exportNode, { quality: 1 });
+    FileSaver.saveAs(dataURL, 'screen.png');
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -40,9 +49,20 @@ function App() {
           <button type="button" onClick={getImage} disabled={!inputVal}>
             SUBMIT
           </button>
+          <button type="button" onClick={getScreenshot} disabled={!inputVal}>
+            Screenshot
+          </button>
+        </article>
+        <article id="export">
+          <WebPageFrame url={inputVal}>
+            {imgData ? (
+              <img src={imgData} alt="Screenshot" />
+            ) : (
+              <iframe title="iframe" src="https://onedollar.pizza" />
+            )}
+          </WebPageFrame>
         </article>
       </header>
-      {imgData && <img src={imgData} alt="Screenshot" />}
     </div>
   );
 }

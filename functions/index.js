@@ -11,8 +11,8 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
   return cors(req, res, async () => {
     const puppeteerOpts = {
       defaultViewport: {
-        width: 1920,
-        height: 1080
+        width: 1600,
+        height: 900
       },
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     };
@@ -22,7 +22,7 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36'
     );
     const { targetURL } = await req.body;
-    await page.goto(targetURL);
+    await page.goto(targetURL, { waitUntil: 'networkidle2' });
     await pause(200);
     const screenshot = await page.screenshot({
       encoding: 'base64',

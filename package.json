@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.2",
+    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
