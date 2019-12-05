@@ -1,20 +1,37 @@
 .App {
   text-align: center;
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #fefefe;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.App-header {
+.app-body {
+  display: flex;
+  flex: 1;
+}
+
+.body-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.web-frame-placeholder {
+  height: 720px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+  color: #222;
 }
 
 .input-row {
@@ -22,6 +39,21 @@
   align-items: stretch;
   width: 100%;
   max-width: 30rem;
+}
+
+.input-row > * {
+  border-left-width: 0;
+}
+
+.input-row > *:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-left-width: 1px;
+}
+
+.input-row > *:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 input,
@@ -32,18 +64,14 @@ button {
   font-size: 1.125rem;
   padding: 1rem 1.5rem;
   outline: none;
-  border: 0;
+  border: 1px solid #333;
 }
 
 input {
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
   flex: 1;
 }
 
 button {
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
   flex: 0 0 auto;
   color: white;
   background: #3498db;
@@ -56,7 +84,4 @@ button:disabled,
 button:disabled:hover {
   background-color: darkgrey;
   cursor: default;
-}
-
-#export {
 }

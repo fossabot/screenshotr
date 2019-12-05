@@ -1,7 +1,7 @@
 import React from 'react';
 import './web-page-frame.scss';
 
-function WebPageFrame({ children, url }) {
+function WebPageFrame({ children, url, favicon }) {
   return (
     <article className="browser-window">
       <section className="header-bar">
@@ -10,9 +10,12 @@ function WebPageFrame({ children, url }) {
           <article className="dot yellow" />
           <article className="dot green" />
         </section>
-        <section className="address-bar">{url}</section>
+        <section className="address-bar">
+          {!!favicon && <img className="favicon" src={favicon} alt="favicon" />}
+          <span className="address">{url}</span>
+        </section>
       </section>
-      <article className="body-container">{children}</article>
+      {children}
     </article>
   );
 }
