@@ -8,26 +8,45 @@ import WebPageFrame from './components/web-page-frame/web-page-frame';
 import './App.css';
 
 const getCorrectUrl = url => {
-  if (isUri(url)) {
-    if (isWebUri(url)) {
-      return url;
-    }
-    return `https://${url}`;
+  let newUrl = url.trim();
+  if (!newUrl.match(/^https?:\/\//i)) {
+    newUrl = `https://${url}`;
   }
+  if (isWebUri(newUrl)) {
+    console.log('is web uri');
+    return newUrl;
+  }
+
   return '';
 };
 
-const pullFavicon = async url => {
-  const faviconURL = url.split('//')[url.split('//').length - 1];
+const pullFavicon = async targetURL => {
   const response = await fetch(
-    `https://favicongrabber.com/api/grab/${faviconURL}`
+    `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}pullFavicon`,
+    {
+      method: 'POST',
+      body: JSON.stringify({ targetURL }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
   );
-  const { icons } = await response.json();
-  const faviconIcoArr = icons.filter(({ src }) => /favicon.ico/.test(src));
-  if (icons && icons.length) {
-    return faviconIcoArr.length ? faviconIcoArr[0].src : icons[0].src;
-  }
-  return '';
+  console.log('favicon response:', response);
+  const imageStr = await response.arrayBuffer().then(buffer => {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+
+    bytes.forEach(b => {
+      binary += String.fromCharCode(b);
+    });
+    let image = 'data:image/jpeg;base64,';
+    image += window.btoa(binary);
+
+    return image;
+  });
+
+  console.log(imageStr);
+  return imageStr;
 };
 
 function App() {
@@ -46,22 +65,27 @@ function App() {
   //   };
   // }, [inputVal])
 
-  const getImage = async () => {
+  const getImage = async e => {
+    e.preventDefault();
+
     const targetURL = getCorrectUrl(inputVal);
 
     if (targetURL.length) {
-      const response = await fetch(process.env.REACT_APP_SCREENSHOT_ENDPOINT, {
-        method: 'POST',
-        body: JSON.stringify({ targetURL: inputVal }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
       const favicon = await pullFavicon(targetURL);
       if (favicon) {
         setFaviconURL(favicon);
       }
+
+      const response = await fetch(
+        `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}takeScreenshot`,
+        {
+          method: 'POST',
+          body: JSON.stringify({ targetURL }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
       const text = await response.text();
       console.log(text);
