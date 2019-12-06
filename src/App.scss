@@ -1,0 +1,55 @@
+@import './styles/colors';
+@import './styles/general';
+
+.App {
+  text-align: center;
+  background-color: $off-white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+}
+
+.app-body-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: $off-black;
+}
+
+input,
+button {
+  font-size: 1.125rem;
+
+  outline: none;
+}
+
+button {
+  flex: 0 0 auto;
+  color: white;
+  background: $mondrian-blue;
+  letter-spacing: 1px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border: $border-width solid $off-black;
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: $apple-light;
+    cursor: default;
+  }
+}

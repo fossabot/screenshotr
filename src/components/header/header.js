@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './header.scss';
 
 function Header({ inputVal, updateInputVal, getImage }) {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  });
+
   return (
     <header id="header">
       <article className="logo">screenshotr</article>
@@ -10,11 +16,11 @@ function Header({ inputVal, updateInputVal, getImage }) {
           className="address-input"
           placeholder="Enter web address..."
           value={inputVal}
+          ref={inputRef}
           onChange={updateInputVal}
-          type="text"
         />
         <button type="submit" disabled={!inputVal}>
-          submit
+          Submit
         </button>
       </form>
     </header>

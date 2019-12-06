@@ -1,16 +1,19 @@
+@import '../../styles/colors';
+@import '../../styles/general';
+
 #header {
-  border-bottom: 2px solid #333;
+  border-bottom: $border-width solid $off-black;
   display: flex;
   flex: 0 0 4rem;
 
   .logo {
     flex: 0 0 20rem;
-    border-right: 2px solid #333;
+    border-right: $border-width solid $off-black;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2.25rem;
-    font-family: 'Sulphur Point', 'Muli', sans-serif;
+    font-family: 'Sulphur Point', 'Montserrat', sans-serif;
     line-height: 1.5;
   }
 
@@ -20,24 +23,22 @@
     display: flex;
 
     input.address-input {
+      font-size: 1.25rem;
       flex: 1;
       border: 0;
       outline: none;
       box-sizing: border-box;
+      padding: 1rem 1.5rem;
     }
 
     button {
-      font-family: 'Sulphur Point', 'Muli', sans-serif;
-      font-weight: 300;
-      font-size: 1.75rem;
-      // text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 1.25rem;
       border: 0;
       flex: 0 0 12rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-left: 2px solid #333;
+      border-left: $border-width solid $off-black;
     }
   }
 }

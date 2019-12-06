@@ -4,8 +4,8 @@ import FileSaver from 'file-saver';
 import { isWebUri } from 'valid-url';
 import Header from './components/header/header';
 import Sidebar from './components/sidebar/sidebar';
-import WebPageFrame from './components/web-page-frame/web-page-frame';
-import './App.css';
+import BrowserWindow from './components/browser-window/browser-window';
+import './App.scss';
 
 const getCorrectUrl = url => {
   let newUrl = url.trim();
@@ -69,18 +69,17 @@ const pullImage = async targetURL => {
 function App() {
   const [imgData, setImgData] = useState();
   const [inputVal, setInputVal] = useState('');
+
+  const cleanUrl = inputVal
+    .replace(/https?:\/\//, '')
+    .split('/')[0]
+    .trim();
+
   const [faviconURL, setFaviconURL] = useState('');
-  // const [isUrlValid, setUrlValid] = useState('');
+
   const updateInputVal = e => {
     setInputVal(e.target.value);
   };
-
-  // useEffect(() => {
-  //   effect
-  //   return () => {
-  //     cleanup
-  //   };
-  // }, [inputVal])
 
   const getImage = async e => {
     e.preventDefault();
@@ -100,34 +99,17 @@ function App() {
       if (screenshot) {
         setImgData(screenshot);
       }
-
-      // const response = await fetch(
-      //   `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}takeScreenshot`,
-      //   {
-      //     method: 'POST',
-      //     body: JSON.stringify({ targetURL }),
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     }
-      //   }
-      // );
-
-      // const text = await response.text();
-      // console.log(text);
-      // // const data = await response.json();
-      // // console.log(data);
-      // const data = JSON.parse(text);
-
-      // setImgData(`data:image/png;base64,${data.screenshot}`);
     } else {
       console.log('INVALID URL');
     }
   };
 
   const getScreenshot = async () => {
+    const filenameURL = cleanUrl.split('.');
+    const filename = filenameURL[filenameURL.length - 2];
     const exportNode = document.getElementById('export');
     const dataURL = await domtoimage.toPng(exportNode, { quality: 1 });
-    FileSaver.saveAs(dataURL, 'screen.png');
+    FileSaver.saveAs(dataURL, `${filename}.url`);
   };
 
   return (
@@ -139,17 +121,21 @@ function App() {
       />
       <section className="app-body">
         <Sidebar handleDownloadClick={getScreenshot} />
-        <article className="body-content">
+        <article className="app-body-content">
           <article id="export">
-            <WebPageFrame url={inputVal} favicon={faviconURL}>
+            <BrowserWindow url={cleanUrl} favicon={faviconURL}>
               {imgData ? (
-                <img src={imgData} alt="Screenshot" />
+                <img
+                  className="screenshot-image"
+                  src={imgData}
+                  alt="Screenshot"
+                />
               ) : (
                 <article className="web-frame-placeholder">
                   <h1>Enter a URL at the top</h1>
                 </article>
               )}
-            </WebPageFrame>
+            </BrowserWindow>
           </article>
         </article>
       </section>
