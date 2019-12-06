@@ -1,8 +1,18 @@
 import React from 'react';
 import './sidebar.scss';
 
-function Sidebar({ url, favicon }) {
-  return <article id="sidebar" />;
+function Sidebar({ handleDownloadClick }) {
+  return (
+    <article id="sidebar">
+      <button
+        className="download-button"
+        type="button"
+        onClick={handleDownloadClick}
+      >
+        Download
+      </button>
+    </article>
+  );
 }
 
 export default Sidebar;

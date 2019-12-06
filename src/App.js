@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import domtoimage from 'dom-to-image';
 import FileSaver from 'file-saver';
-import { isUri, isWebUri } from 'valid-url';
+import { isWebUri } from 'valid-url';
 import Header from './components/header/header';
 import Sidebar from './components/sidebar/sidebar';
 import WebPageFrame from './components/web-page-frame/web-page-frame';
@@ -49,6 +49,23 @@ const pullFavicon = async targetURL => {
   return imageStr;
 };
 
+const pullImage = async targetURL => {
+  const response = await fetch(
+    `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}takeScreenshot`,
+    {
+      method: 'POST',
+      body: JSON.stringify({ targetURL }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+
+  const { screenshot } = await response.json();
+  console.log(screenshot);
+  return `data:image/png;base64,${screenshot}`;
+};
+
 function App() {
   const [imgData, setImgData] = useState();
   const [inputVal, setInputVal] = useState('');
@@ -71,29 +88,37 @@ function App() {
     const targetURL = getCorrectUrl(inputVal);
 
     if (targetURL.length) {
-      const favicon = await pullFavicon(targetURL);
+      const [screenshot, favicon] = await Promise.all([
+        pullImage(targetURL),
+        pullFavicon(targetURL)
+      ]);
+
       if (favicon) {
         setFaviconURL(favicon);
       }
 
-      const response = await fetch(
-        `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}takeScreenshot`,
-        {
-          method: 'POST',
-          body: JSON.stringify({ targetURL }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+      if (screenshot) {
+        setImgData(screenshot);
+      }
 
-      const text = await response.text();
-      console.log(text);
-      // const data = await response.json();
-      // console.log(data);
-      const data = JSON.parse(text);
+      // const response = await fetch(
+      //   `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}takeScreenshot`,
+      //   {
+      //     method: 'POST',
+      //     body: JSON.stringify({ targetURL }),
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     }
+      //   }
+      // );
 
-      setImgData(`data:image/png;base64,${data.screenshot}`);
+      // const text = await response.text();
+      // console.log(text);
+      // // const data = await response.json();
+      // // console.log(data);
+      // const data = JSON.parse(text);
+
+      // setImgData(`data:image/png;base64,${data.screenshot}`);
     } else {
       console.log('INVALID URL');
     }
@@ -113,23 +138,8 @@ function App() {
         getImage={getImage}
       />
       <section className="app-body">
-        <Sidebar />
+        <Sidebar handleDownloadClick={getScreenshot} />
         <article className="body-content">
-          {/*   <h1>Enter the URL of a page you want to screenshot</h1>
-          <article className="input-row">
-              <input
-                value={inputVal}
-                onChange={updateInputVal}
-                type="text"
-                placeholder="Enter page URL..."
-              />
-              <button type="button" onClick={getImage} disabled={!inputVal}>
-                Submit
-              </button>
-              <button type="button" onClick={getScreenshot} disabled={!imgData}>
-                Download
-              </button>
-  </article> */}
           <article id="export">
             <WebPageFrame url={inputVal} favicon={faviconURL}>
               {imgData ? (
