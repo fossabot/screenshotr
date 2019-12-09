@@ -8,6 +8,10 @@
         "function": "takeScreenshot"
       },
       {
+        "source": "/pullFavicon",
+        "function": "pullFavicon"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
