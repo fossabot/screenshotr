@@ -1,13 +1,30 @@
 @import '../../styles/colors';
 @import '../../styles/general';
+@import './input-range';
 
 #sidebar {
-  flex: 0 0 20rem;
+  flex: 0 0 18rem;
   border-right: $border-width solid $off-black;
   height: 100%;
+  padding: 1rem;
 
   .download-button {
-    width: calc(100% - 2rem);
-    margin: 1rem;
+    width: 100%;
+  }
+
+  .select {
+    margin-top: 1rem;
+  }
+
+  .range-slider-container {
+    margin-top: 1rem;
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }

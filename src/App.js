@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import domtoimage from 'dom-to-image';
 import FileSaver from 'file-saver';
 import { isWebUri } from 'valid-url';
 import Header from './components/header/header';
 import Sidebar from './components/sidebar/sidebar';
 import BrowserWindow from './components/browser-window/browser-window';
+import OptionsContext from './contexts/options-context';
 import './App.scss';
 
 const getCorrectUrl = url => {
@@ -32,6 +33,7 @@ const pullFavicon = async targetURL => {
     }
   );
   console.log('favicon response:', response);
+  const contentType = response.headers.get('Content-Type');
   const imageStr = await response.arrayBuffer().then(buffer => {
     let binary = '';
     const bytes = new Uint8Array(buffer);
@@ -39,7 +41,7 @@ const pullFavicon = async targetURL => {
     bytes.forEach(b => {
       binary += String.fromCharCode(b);
     });
-    let image = 'data:image/jpeg;base64,';
+    let image = `data:${contentType};base64,`;
     image += window.btoa(binary);
 
     return image;
@@ -49,12 +51,12 @@ const pullFavicon = async targetURL => {
   return imageStr;
 };
 
-const pullImage = async targetURL => {
+const pullImage = async (targetURL, resolution) => {
   const response = await fetch(
     `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}takeScreenshot`,
     {
       method: 'POST',
-      body: JSON.stringify({ targetURL }),
+      body: JSON.stringify({ targetURL, resolution }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -67,6 +69,9 @@ const pullImage = async targetURL => {
 };
 
 function App() {
+  const { options } = useContext(OptionsContext);
+  const resolution = options.resolution.value;
+
   const [imgData, setImgData] = useState();
   const [inputVal, setInputVal] = useState('');
 
@@ -88,7 +93,7 @@ function App() {
 
     if (targetURL.length) {
       const [screenshot, favicon] = await Promise.all([
-        pullImage(targetURL),
+        pullImage(targetURL, resolution),
         pullFavicon(targetURL)
       ]);
 
@@ -107,9 +112,18 @@ function App() {
   const getScreenshot = async () => {
     const filenameURL = cleanUrl.split('.');
     const filename = filenameURL[filenameURL.length - 2];
-    const exportNode = document.getElementById('export');
-    const dataURL = await domtoimage.toPng(exportNode, { quality: 1 });
-    FileSaver.saveAs(dataURL, `${filename}.url`);
+    const elm = document.getElementById('export');
+    const scale = 2;
+    const dataURL = await domtoimage.toPng(elm, {
+      height: elm.offsetHeight * scale,
+      style: {
+        transform: `scale(${scale}) translate(${elm.offsetWidth /
+          2 /
+          scale}px, ${elm.offsetHeight / 2 / scale}px)`
+      },
+      width: elm.offsetWidth * scale
+    });
+    FileSaver.saveAs(dataURL, `${filename}.png`);
   };
 
   return (
