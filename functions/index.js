@@ -20,9 +20,6 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
       const page = await browser.newPage();
       // https://github.com/puppeteer/puppeteer/issues/571#issuecomment-325404760
       await page.setViewport({ ...resolution, deviceScaleFactor: 2 });
-      await page.setUserAgent(
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36'
-      );
       await page.goto(targetURL, { waitUntil: 'networkidle2' });
       await pause(200);
       const screenshot = await page.screenshot({
