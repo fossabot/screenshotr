@@ -18,7 +18,8 @@ const OptionsProvider = ({ children }) => {
     verticalPadding: 75,
     horizontalPadding: 75,
     outputWidth: 75,
-    background: 'transparent'
+    background: 'transparent',
+    controlScale: 1
   });
 
   const updateOptions = newOpts => {

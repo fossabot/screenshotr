@@ -18,6 +18,7 @@ function Header({ inputVal, updateInputVal, getImage }) {
           value={inputVal}
           ref={inputRef}
           onChange={updateInputVal}
+          type="search"
         />
         <button type="submit" disabled={!inputVal}>
           Submit

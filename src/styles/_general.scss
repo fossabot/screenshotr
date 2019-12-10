@@ -1,1 +1,4 @@
-$border-width: 2px;
+@import './colors';
+
+$border-width: 0.125em;
+$mondrian-border: $border-width solid $off-black;

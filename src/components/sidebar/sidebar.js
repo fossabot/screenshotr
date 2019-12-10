@@ -81,7 +81,8 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     verticalPadding,
     horizontalPadding,
     outputWidth,
-    background
+    background,
+    controlScale
   } = options;
 
   return (
@@ -94,6 +95,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         >
           Download
         </button>
+        <h2>Style</h2>
         <article className="input-container">
           <label htmlFor="browser-style">Browser Style</label>
           <Select
@@ -107,6 +109,20 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           />
         </article>
         <article className="input-container">
+          <label htmlFor="background-color">Background Color</label>
+          <ColorPicker
+            id="background-color"
+            onChange={newColor => updateOptions({ background: newColor.hex })}
+            color={background}
+          />
+        </article>
+        <h2>
+          Sizing{' '}
+          <span>
+            {exportSize.width} x {exportSize.height}
+          </span>
+        </h2>
+        <article className="input-container">
           <label htmlFor="vertical-padding">Screenshot Resolution</label>
           <Select
             id="screenshot-resolution"
@@ -118,22 +134,19 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             value={resolution}
           />
         </article>
-        <h2>
-          Sizing{' '}
-          <span>
-            {exportSize.width} x {exportSize.height}
-          </span>
-        </h2>
         <article className="input-container">
           <label htmlFor="output-width">
             Output Width
-            <span className="slider-val">{outputWidth}%</span>
+            <span className="slider-val">
+              {Number(outputWidth).toFixed(1)}%
+            </span>
           </label>
           <input
             id="output-width"
             type="range"
             value={outputWidth}
             min="20"
+            step="0.5"
             onChange={e => {
               console.log(e.target.value);
               updateOptions({ outputWidth: e.target.value });
@@ -172,11 +185,24 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             }}
           />
         </article>
-        <h2>Background Color</h2>
-        <ColorPicker
-          onChange={newColor => updateOptions({ background: newColor.hex })}
-          color={background}
-        />
+        <article className="input-container">
+          <label htmlFor="control-scale">
+            Browser Control Scale
+            <span className="slider-val">{controlScale * 100}%</span>
+          </label>
+          <input
+            id="vertical-padding"
+            type="range"
+            value={controlScale}
+            min="0.5"
+            max="2"
+            step="0.25"
+            onChange={e => {
+              console.log(e.target.value);
+              updateOptions({ controlScale: e.target.value });
+            }}
+          />
+        </article>
       </div>
     </article>
   );

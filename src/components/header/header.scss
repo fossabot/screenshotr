@@ -2,13 +2,13 @@
 @import '../../styles/general';
 
 #header {
-  border-bottom: $border-width solid $off-black;
+  border-bottom: $mondrian-border;
   display: flex;
   flex: 0 0 4rem;
 
   .logo {
     flex: 0 0 20rem;
-    border-right: $border-width solid $off-black;
+    border-right: 0.125rem solid $off-black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +38,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-left: $border-width solid $off-black;
+      border-left: 0.125rem solid $off-black;
     }
   }
 }

@@ -11,15 +11,37 @@ function WebPageFrame() {
   const { screenshot, favicon, loading } = output;
 
   const browserStyle = options.style.value;
-  const { horizontalPadding, verticalPadding } = options;
+  const { horizontalPadding, verticalPadding, controlScale } = options;
 
   const areControlsOnLeft = !browserStyle.includes('windows');
+
+  const getBodyContent = () => {
+    if (loading) {
+      return (
+        <article className="web-frame-placeholder">
+          <Loader />
+        </article>
+      );
+    }
+
+    if (screenshot) {
+      return (
+        <img className="screenshot-image" src={screenshot} alt="Screenshot" />
+      );
+    }
+    return (
+      <article className="web-frame-placeholder">
+        <h1>Enter a URL at the top</h1>
+      </article>
+    );
+  };
 
   return (
     <article
       className={`browser-window ${browserStyle}`}
       style={{
-        margin: `${verticalPadding}px ${horizontalPadding}px`
+        margin: `${verticalPadding}px ${horizontalPadding}px`,
+        fontSize: controlScale * 16
       }}
     >
       <section className="header-bar">
@@ -36,17 +58,7 @@ function WebPageFrame() {
           visible={!areControlsOnLeft}
         />
       </section>
-      {loading ? (
-        <article className="web-frame-placeholder">
-          <Loader />
-        </article>
-      ) : screenshot ? (
-        <img className="screenshot-image" src={screenshot} alt="Screenshot" />
-      ) : (
-        <article className="web-frame-placeholder">
-          <h1>Enter a URL at the top</h1>
-        </article>
-      )}
+      {getBodyContent()}
     </article>
   );
 }

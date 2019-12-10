@@ -50,7 +50,7 @@ button {
   font-weight: bold;
   cursor: pointer;
   padding: 1rem 1.5rem;
-  border: $border-width solid $off-black;
+  border: 0.125rem solid $off-black;
 
   &:disabled,
   &:disabled:hover {
@@ -59,16 +59,16 @@ button {
   }
 }
 
-.export-size {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: $off-white;
-  padding: 0.5rem;
-  border: $border-width solid $off-black;
-  // border-left: $border-width solid $off-black;
-}
+// .export-size {
+//   display: inline-block;
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   background: $off-white;
+//   padding: 0.5rem;
+//   border: $border-width solid $off-black;
+//   // border-left: $border-width solid $off-black;
+// }
 
 .export-background {
   position: absolute;

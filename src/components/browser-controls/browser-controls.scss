@@ -42,9 +42,9 @@
 
   &.mondrian {
     .control {
-      border: 2px solid #333;
-      height: 1rem;
-      width: 1rem;
+      border: $mondrian-border;
+      height: 1em;
+      width: 1em;
 
       &.control-1 {
         background: #f50f0f;
@@ -62,36 +62,36 @@
 
   &.windows {
     .control {
-      margin: 0.25rem 0.625rem;
+      margin: 0.25em 0.625em;
       position: relative;
 
       &.control-1 {
-        width: 16px;
-        height: 16px;
+        width: 1em;
+        height: 1em;
 
         &:before {
           content: ' ';
           position: absolute;
           top: 50%;
           display: block;
-          height: 2px;
+          height: 0.125em;
           width: 100%;
           background: $off-white;
         }
       }
 
       &.control-2 {
-        width: 16px;
-        height: 16px;
+        width: 1em;
+        height: 1em;
 
         &:before,
         &:after {
           content: ' ';
           position: absolute;
-          width: 9px;
-          height: 9px;
+          width: 0.5625em;
+          height: 0.5625em;
           display: block;
-          border: 2px solid $off-white;
+          border: 0.125em solid $off-white;
           background: $off-black;
         }
         &:before {
@@ -105,25 +105,25 @@
       }
 
       &.control-3 {
-        width: 18px;
-        height: 18px;
+        width: 1.125em;
+        height: 1.125em;
 
         &:before,
         &:after {
           content: ' ';
           display: block;
           width: 100%;
-          height: 2px;
+          height: 0.125em;
           position: absolute;
           background: white;
         }
         &:before {
           top: 0;
-          transform: translateY(8px) rotate(-45deg);
+          transform: translateY(0.5em) rotate(-45deg);
         }
         &:after {
           bottom: 0;
-          transform: translateY(-8px) rotate(45deg);
+          transform: translateY(-0.5em) rotate(45deg);
         }
       }
     }
@@ -131,27 +131,27 @@
 
   &.windows98 {
     justify-content: flex-end;
-    padding-right: 2px;
+    padding-right: 0.125em;
 
     .control {
-      width: 18px;
-      height: 18px;
-      border-left: 2px solid #ededed;
-      border-top: 2px solid #ededed;
-      border-right: 2px solid #404040;
-      border-bottom: 2px solid #404040;
+      width: 1.125em;
+      height: 1.125em;
+      border-left: 0.125em solid #ededed;
+      border-top: 0.125em solid #ededed;
+      border-right: 0.125em solid #404040;
+      border-bottom: 0.125em solid #404040;
       border-radius: 0;
-      margin: 2px;
+      margin: 0.125em;
       position: relative;
 
       &.control-1 {
         &:before {
           content: ' ';
           position: absolute;
-          bottom: 2px;
-          left: 3px;
-          width: 8px;
-          height: 2px;
+          bottom: 0.125em;
+          left: 0.1875em;
+          width: 0.5em;
+          height: 0.125em;
           display: block;
           background: $off-black;
         }
@@ -160,13 +160,13 @@
         &:before {
           content: ' ';
           position: absolute;
-          top: 2px;
-          left: 2px;
-          width: 8px;
-          height: 7px;
+          top: 0.125em;
+          left: 0.125em;
+          width: 0.5em;
+          height: 0.4375em;
           display: block;
-          border: 1px solid $off-black;
-          border-top-width: 2px;
+          border: 0.0625em solid $off-black;
+          border-top-width: 0.125em;
           background: transparent;
         }
       }
@@ -175,11 +175,12 @@
           content: '×';
           width: 100%;
           // height: 100%;
-          line-height: 14px;
+          line-height: 1;
           position: absolute;
-          bottom: 0;
-          left: 0;
-          font-size: 1.5rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.625em;
         }
       }
     }
