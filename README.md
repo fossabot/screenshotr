@@ -1,3 +1,8 @@
-# Screenshotr
+<p align="center" style="color: #343a40">
+  <a href="https://screen-shottr.firebaseapp.com/"><img src="./public/android-chrome-192x192.png" alt="screenshotr logo" height="150"></a>
+  <h1 align="center"><a href="https://screen-shottr.firebaseapp.com/">screenshotr</a></h1>
+</p>
+<p align="center" style="font-size: 1.2rem;">Create mockup screenshots of any website, just enter the URL</p>
+<p align="center"><a href="https://ko-fi.com/D1D513LDD" target="_blank"><img src="./github/ko-fi.png" alt="Support me on Ko-fi" height="35"></a></p>
 
-A tool for taking screenshots of any website you want!
+![](./github/example-1.png)
