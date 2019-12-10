@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import Select from 'react-select';
-import OptionsContext from '../../contexts/options-context';
 import ColorPicker from '../color-picker/color-picker';
 import RangeInput from '../range-input/range-input';
+import OptionsContext from '../../contexts/options-context';
+import OutputContext from '../../contexts/output-context';
 import './sidebar.scss';
 
 const resolutions = [
@@ -75,7 +76,6 @@ const styleOptions = [
 
 function Sidebar({ handleDownloadClick, exportSize }) {
   const { options, updateOptions } = useContext(OptionsContext);
-
   const {
     style,
     resolution,
@@ -86,6 +86,8 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     controlScale
   } = options;
 
+  const { loading, screenshot } = useContext(OutputContext).output;
+
   return (
     <article id="sidebar">
       <div className="sidebar-content">
@@ -93,6 +95,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           className="download-button"
           type="button"
           onClick={handleDownloadClick}
+          disabled={loading || !screenshot}
         >
           Download
         </button>
@@ -127,6 +130,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           <label htmlFor="vertical-padding">Screenshot Resolution</label>
           <Select
             id="screenshot-resolution"
+            isDisabled={loading}
             className="resolution-select select"
             options={resolutions}
             onChange={newResolution => {
@@ -138,28 +142,28 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         <RangeInput
           containerClassName="input-container"
           label="Output Width"
-            id="output-width"
-            value={outputWidth}
+          id="output-width"
+          value={outputWidth}
           displayValue={`${Number(outputWidth).toFixed(1)}%`}
           min={20}
           max={100}
           step={0.2}
           onChange={val => updateOptions({ outputWidth: val })}
-          />
+        />
         <RangeInput
           containerClassName="input-container"
           label="Horizontal Padding"
-            id="horizontal-padding"
-            value={horizontalPadding}
+          id="horizontal-padding"
+          value={horizontalPadding}
           displayValue={`${horizontalPadding}px`}
           max={200}
           onChange={val => updateOptions({ horizontalPadding: val })}
-          />
+        />
         <RangeInput
           containerClassName="input-container"
           label="Vertical Padding"
-            id="vertical-padding"
-            value={verticalPadding}
+          id="vertical-padding"
+          value={verticalPadding}
           displayValue={`${verticalPadding}px`}
           max={200}
           onChange={val => updateOptions({ verticalPadding: val })}
@@ -174,7 +178,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           max={2}
           step={0.25}
           onChange={val => updateOptions({ controlScale: val })}
-          />
+        />
       </div>
     </article>
   );

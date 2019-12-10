@@ -5,7 +5,10 @@ import './header.scss';
 function Header() {
   const inputRef = useRef();
 
-  const { getScreenshot } = useContext(OutputContext);
+  const {
+    getScreenshot,
+    output: { loading }
+  } = useContext(OutputContext);
 
   const [inputVal, setInputVal] = useState('');
 
@@ -20,7 +23,7 @@ function Header() {
 
   useEffect(() => {
     inputRef.current.focus();
-  });
+  }, []);
 
   return (
     <header id="header">
@@ -34,7 +37,7 @@ function Header() {
           onChange={updateInputVal}
           type="search"
         />
-        <button type="submit" disabled={!inputVal}>
+        <button type="submit" disabled={!inputVal || loading}>
           Submit
         </button>
       </form>
