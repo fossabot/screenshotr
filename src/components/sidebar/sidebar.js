@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Select from 'react-select';
 import OptionsContext from '../../contexts/options-context';
 import ColorPicker from '../color-picker/color-picker';
+import RangeInput from '../range-input/range-input';
 import './sidebar.scss';
 
 const resolutions = [
@@ -134,75 +135,46 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             value={resolution}
           />
         </article>
-        <article className="input-container">
-          <label htmlFor="output-width">
-            Output Width
-            <span className="slider-val">
-              {Number(outputWidth).toFixed(1)}%
-            </span>
-          </label>
-          <input
+        <RangeInput
+          containerClassName="input-container"
+          label="Output Width"
             id="output-width"
-            type="range"
             value={outputWidth}
-            min="20"
-            step="0.5"
-            onChange={e => {
-              console.log(e.target.value);
-              updateOptions({ outputWidth: e.target.value });
-            }}
+          displayValue={`${Number(outputWidth).toFixed(1)}%`}
+          min={20}
+          max={100}
+          step={0.2}
+          onChange={val => updateOptions({ outputWidth: val })}
           />
-        </article>
-        <article className="input-container">
-          <label htmlFor="horizontal-padding">
-            Horizontal Padding
-            <span className="slider-val">{horizontalPadding}px</span>
-          </label>
-          <input
+        <RangeInput
+          containerClassName="input-container"
+          label="Horizontal Padding"
             id="horizontal-padding"
-            type="range"
             value={horizontalPadding}
-            max="200"
-            onChange={e => {
-              console.log(e.target.value);
-              updateOptions({ horizontalPadding: e.target.value });
-            }}
+          displayValue={`${horizontalPadding}px`}
+          max={200}
+          onChange={val => updateOptions({ horizontalPadding: val })}
           />
-        </article>
-        <article className="input-container">
-          <label htmlFor="vertical-padding">
-            Vertical Padding
-            <span className="slider-val">{verticalPadding}px</span>
-          </label>
-          <input
+        <RangeInput
+          containerClassName="input-container"
+          label="Vertical Padding"
             id="vertical-padding"
-            type="range"
             value={verticalPadding}
-            max="200"
-            onChange={e => {
-              console.log(e.target.value);
-              updateOptions({ verticalPadding: e.target.value });
-            }}
+          displayValue={`${verticalPadding}px`}
+          max={200}
+          onChange={val => updateOptions({ verticalPadding: val })}
+        />
+        <RangeInput
+          containerClassName="input-container"
+          label="Browser Control Scale"
+          id="control-scale"
+          value={controlScale}
+          displayValue={`${controlScale * 100}%`}
+          min={0.5}
+          max={2}
+          step={0.25}
+          onChange={val => updateOptions({ controlScale: val })}
           />
-        </article>
-        <article className="input-container">
-          <label htmlFor="control-scale">
-            Browser Control Scale
-            <span className="slider-val">{controlScale * 100}%</span>
-          </label>
-          <input
-            id="vertical-padding"
-            type="range"
-            value={controlScale}
-            min="0.5"
-            max="2"
-            step="0.25"
-            onChange={e => {
-              console.log(e.target.value);
-              updateOptions({ controlScale: e.target.value });
-            }}
-          />
-        </article>
       </div>
     </article>
   );
