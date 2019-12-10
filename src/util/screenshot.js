@@ -1,10 +1,10 @@
-import { toPng } from 'dom-to-image';
+import { toBlob } from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
 export const downloadScreenshot = async (filename, exportNode, exportWidth) => {
   // https://github.com/tsayen/dom-to-image/issues/69#issuecomment-486146688
   const scale = exportWidth / exportNode.offsetWidth;
-  const dataURL = await toPng(exportNode, {
+  const dataURL = await toBlob(exportNode, {
     height: exportNode.offsetHeight * scale,
     width: exportNode.offsetWidth * scale,
     filter: el => {
