@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
+import useComponentSize from '@rehooks/component-size';
 import BrowserControls from '../browser-controls/browser-controls';
 import Loader from '../loader/loader';
 import OptionsContext from '../../contexts/options-context';
@@ -14,6 +15,9 @@ function BrowserWindow() {
   const { horizontalPadding, verticalPadding, controlScale } = options;
 
   const areControlsOnLeft = !browserStyle.includes('windows');
+
+  const browserWindowRef = useRef(null);
+  const isBrowserSkinny = useComponentSize(browserWindowRef).width < 500;
 
   const getBodyContent = () => {
     if (loading) {
@@ -32,32 +36,42 @@ function BrowserWindow() {
 
     return (
       <article className="web-frame-placeholder">
-        <h1>Enter a URL at the top</h1>
+        <div className="content">
+          <h1>Enter a URL at the top</h1>
+        </div>
       </article>
     );
   };
 
   return (
     <article
-      className={`browser-window ${browserStyle}`}
+      ref={browserWindowRef}
+      className={`browser-window ${browserStyle} ${
+        isBrowserSkinny ? 'skinny' : ''
+      }`}
       style={{
         margin: `${verticalPadding}px ${horizontalPadding}px`,
         fontSize: controlScale * 16
       }}
     >
       <section className="header-bar">
-        <BrowserControls
-          browserStyle={browserStyle}
-          visible={areControlsOnLeft}
-        />
+        {(areControlsOnLeft || !isBrowserSkinny) && (
+          <BrowserControls
+            browserStyle={browserStyle}
+            visible={areControlsOnLeft}
+          />
+        )}
+
         <section className="address-bar">
           {!!favicon && <img className="favicon" src={favicon} alt="favicon" />}
           <span className="address">{cleanURL}</span>
         </section>
-        <BrowserControls
-          browserStyle={browserStyle}
-          visible={!areControlsOnLeft}
-        />
+        {(!areControlsOnLeft || !isBrowserSkinny) && (
+          <BrowserControls
+            browserStyle={browserStyle}
+            visible={!areControlsOnLeft}
+          />
+        )}
       </section>
       {getBodyContent()}
     </article>
