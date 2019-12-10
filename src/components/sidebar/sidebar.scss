@@ -3,20 +3,19 @@
 @import './input-range';
 
 #sidebar {
-  flex: 0 0 18rem;
+  flex: 0 0 20rem;
   border-right: $border-width solid $off-black;
   height: 100%;
-  padding: 1rem;
+
+  .sidebar-content {
+    margin: 1rem;
+  }
 
   .download-button {
     width: 100%;
   }
 
-  .select {
-    margin-top: 1rem;
-  }
-
-  .range-slider-container {
+  .input-container {
     margin-top: 1rem;
 
     label {
@@ -26,5 +25,10 @@
       display: flex;
       justify-content: space-between;
     }
+  }
+
+  h2 {
+    display: flex;
+    justify-content: space-between;
   }
 }

@@ -1,3 +1,5 @@
+import { isWebUri } from 'valid-url';
+
 export const isURL = input => {
   const pattern = /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[:?\d]*)\S*$/;
 
@@ -40,4 +42,17 @@ export const getDomain = url => {
 
 export const prefixHttp = url => {
   return url.includes('://') ? url.trim() : `http://${url.trim()}`;
+};
+
+export const getCorrectUrl = url => {
+  let newUrl = url.trim();
+  if (!newUrl.match(/^https?:\/\//i)) {
+    newUrl = `https://${url}`;
+  }
+  if (isWebUri(newUrl)) {
+    console.log('is web uri');
+    return newUrl;
+  }
+
+  return '';
 };

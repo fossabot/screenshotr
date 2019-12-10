@@ -37,7 +37,7 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
 }
 
 @mixin track {
-  cursor: default;
+  cursor: pointer;
   height: $track-height;
   transition: all 0.2s ease;
   width: $track-width;
@@ -49,7 +49,7 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
   border: $thumb-border-width solid $thumb-border-color;
   border-radius: $thumb-radius;
   box-sizing: border-box;
-  cursor: default;
+  cursor: pointer;
   height: $thumb-height;
   width: $thumb-width;
 }

@@ -2,11 +2,15 @@
 @import './styles/general';
 
 .App {
-  text-align: center;
   background-color: $off-white;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .app-body {
@@ -19,6 +23,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 h1 {
@@ -52,4 +57,23 @@ button {
     background-color: $apple-light;
     cursor: default;
   }
+}
+
+.export-size {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $off-white;
+  padding: 0.5rem;
+  border: $border-width solid $off-black;
+  // border-left: $border-width solid $off-black;
+}
+
+.export-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

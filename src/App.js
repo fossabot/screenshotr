@@ -1,86 +1,29 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import domtoimage from 'dom-to-image';
 import FileSaver from 'file-saver';
-import { isWebUri } from 'valid-url';
+import useComponentSize from '@rehooks/component-size';
+import { Checkboard } from 'react-color/lib/components/common';
 import Header from './components/header/header';
 import Sidebar from './components/sidebar/sidebar';
 import BrowserWindow from './components/browser-window/browser-window';
 import OptionsContext from './contexts/options-context';
+import OutputContext from './contexts/output-context';
 import './App.scss';
 
-const getCorrectUrl = url => {
-  let newUrl = url.trim();
-  if (!newUrl.match(/^https?:\/\//i)) {
-    newUrl = `https://${url}`;
-  }
-  if (isWebUri(newUrl)) {
-    console.log('is web uri');
-    return newUrl;
-  }
-
-  return '';
-};
-
-const pullFavicon = async targetURL => {
-  const response = await fetch(
-    `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}pullFavicon`,
-    {
-      method: 'POST',
-      body: JSON.stringify({ targetURL }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-  );
-  console.log('favicon response:', response);
-  const contentType = response.headers.get('Content-Type');
-  const imageStr = await response.arrayBuffer().then(buffer => {
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
-
-    bytes.forEach(b => {
-      binary += String.fromCharCode(b);
-    });
-    let image = `data:${contentType};base64,`;
-    image += window.btoa(binary);
-
-    return image;
-  });
-
-  console.log(imageStr);
-  return imageStr;
-};
-
-const pullImage = async (targetURL, resolution) => {
-  const response = await fetch(
-    `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}takeScreenshot`,
-    {
-      method: 'POST',
-      body: JSON.stringify({ targetURL, resolution }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-  );
-
-  const { screenshot } = await response.json();
-  console.log(screenshot);
-  return `data:image/png;base64,${screenshot}`;
-};
+// IF THERE IS AN IMAGE ALREADY THERE WHEN THE RESOLUTION IS CHANGED, REPULL THE IMAGE
+// NOT THE FAVICON, JUST THE IMAGE
 
 function App() {
   const { options } = useContext(OptionsContext);
-  const resolution = options.resolution.value;
+  const { getScreenshot } = useContext(OutputContext);
+  const { outputWidth, background } = options;
 
-  const [imgData, setImgData] = useState();
   const [inputVal, setInputVal] = useState('');
 
   const cleanUrl = inputVal
     .replace(/https?:\/\//, '')
     .split('/')[0]
     .trim();
-
-  const [faviconURL, setFaviconURL] = useState('');
 
   const updateInputVal = e => {
     setInputVal(e.target.value);
@@ -89,39 +32,32 @@ function App() {
   const getImage = async e => {
     e.preventDefault();
 
-    const targetURL = getCorrectUrl(inputVal);
-
-    if (targetURL.length) {
-      const [screenshot, favicon] = await Promise.all([
-        pullImage(targetURL, resolution),
-        pullFavicon(targetURL)
-      ]);
-
-      if (favicon) {
-        setFaviconURL(favicon);
-      }
-
-      if (screenshot) {
-        setImgData(screenshot);
-      }
-    } else {
-      console.log('INVALID URL');
-    }
+    getScreenshot(inputVal);
   };
 
-  const getScreenshot = async () => {
+  const exportRef = useRef(null);
+  const exportSize = useComponentSize(exportRef);
+
+  const downloadScreenshot = async () => {
     const filenameURL = cleanUrl.split('.');
     const filename = filenameURL[filenameURL.length - 2];
-    const elm = document.getElementById('export');
-    const scale = 2;
-    const dataURL = await domtoimage.toPng(elm, {
-      height: elm.offsetHeight * scale,
-      style: {
-        transform: `scale(${scale}) translate(${elm.offsetWidth /
-          2 /
-          scale}px, ${elm.offsetHeight / 2 / scale}px)`
+    const node = exportRef.current;
+    const scale = exportSize.width / node.offsetWidth;
+    const dataURL = await domtoimage.toPng(node, {
+      height: node.offsetHeight * scale,
+      width: node.offsetWidth * scale,
+      filter: el => {
+        console.log(el);
+        console.log(el.classList);
+        return !el?.classList?.contains('do-not-export');
       },
-      width: elm.offsetWidth * scale
+      style: {
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        width: `${node.offsetWidth}px`,
+        height: `${node.offsetHeight}px`,
+        backgroundImage: 'none'
+      }
     });
     FileSaver.saveAs(dataURL, `${filename}.png`);
   };
@@ -134,22 +70,27 @@ function App() {
         getImage={getImage}
       />
       <section className="app-body">
-        <Sidebar handleDownloadClick={getScreenshot} />
+        <Sidebar
+          handleDownloadClick={downloadScreenshot}
+          exportSize={exportSize}
+        />
         <article className="app-body-content">
-          <article id="export">
-            <BrowserWindow url={cleanUrl} favicon={faviconURL}>
-              {imgData ? (
-                <img
-                  className="screenshot-image"
-                  src={imgData}
-                  alt="Screenshot"
-                />
-              ) : (
-                <article className="web-frame-placeholder">
-                  <h1>Enter a URL at the top</h1>
-                </article>
-              )}
-            </BrowserWindow>
+          <article
+            ref={exportRef}
+            id="export"
+            style={{ width: `${outputWidth}%`, background }}
+          >
+            <div className="do-not-export">
+              <Checkboard />
+            </div>
+            <div
+              className="export-background"
+              style={{ background: background || 'transparent' }}
+            />
+            {/* <span className="export-size do-not-export">
+              {exportSize.width} x {exportSize.height}
+            </span> */}
+            <BrowserWindow />
           </article>
         </article>
       </section>

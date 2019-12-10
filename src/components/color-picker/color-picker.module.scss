@@ -1,0 +1,36 @@
+@import '../../styles/colors';
+@import '../../styles/general';
+
+.swatch {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  cursor: pointer;
+  height: 1.5rem;
+
+  .color {
+    width: 100%;
+
+    border: $border-width solid $off-black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.popover {
+  position: absolute;
+  z-index: 2;
+}
+
+.cover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

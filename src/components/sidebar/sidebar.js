@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Select from 'react-select';
-import './sidebar.scss';
 import OptionsContext from '../../contexts/options-context';
+import ColorPicker from '../color-picker/color-picker';
+import './sidebar.scss';
 
 const resolutions = [
   {
@@ -71,69 +72,112 @@ const styleOptions = [
   }
 ];
 
-function Sidebar({ handleDownloadClick }) {
+function Sidebar({ handleDownloadClick, exportSize }) {
   const { options, updateOptions } = useContext(OptionsContext);
 
-  const { style, resolution, verticalPadding, horizontalPadding } = options;
-
-  // const [horizontalPadding, setHorizontalPadding] = useState(50);
-  // const [verticalPadding, setVerticalPadding] = useState(50);
+  const {
+    style,
+    resolution,
+    verticalPadding,
+    horizontalPadding,
+    outputWidth,
+    background
+  } = options;
 
   return (
     <article id="sidebar">
-      <button
-        className="download-button"
-        type="button"
-        onClick={handleDownloadClick}
-      >
-        Download
-      </button>
-      <Select
-        className="style-select select"
-        options={styleOptions}
-        onChange={newStyle => {
-          updateOptions({ style: newStyle });
-        }}
-        value={style}
-      />
-      <Select
-        className="resolution-select select"
-        options={resolutions}
-        onChange={newResolution => {
-          updateOptions({ resolution: newResolution });
-        }}
-        value={resolution}
-      />
-      <article className="range-slider-container">
-        <label htmlFor="padding-horizontal">
-          Horizontal Padding
-          <span className="slider-val">{horizontalPadding}px</span>
-        </label>
-        <input
-          id="padding-horizontal"
-          type="range"
-          value={horizontalPadding}
-          onChange={e => {
-            console.log(e.target.value);
-            updateOptions({ horizontalPadding: e.target.value });
-          }}
+      <div className="sidebar-content">
+        <button
+          className="download-button"
+          type="button"
+          onClick={handleDownloadClick}
+        >
+          Download
+        </button>
+        <article className="input-container">
+          <label htmlFor="browser-style">Browser Style</label>
+          <Select
+            id="browser-style"
+            className="style-select select"
+            options={styleOptions}
+            onChange={newStyle => {
+              updateOptions({ style: newStyle });
+            }}
+            value={style}
+          />
+        </article>
+        <article className="input-container">
+          <label htmlFor="vertical-padding">Screenshot Resolution</label>
+          <Select
+            id="screenshot-resolution"
+            className="resolution-select select"
+            options={resolutions}
+            onChange={newResolution => {
+              updateOptions({ resolution: newResolution });
+            }}
+            value={resolution}
+          />
+        </article>
+        <h2>
+          Sizing{' '}
+          <span>
+            {exportSize.width} x {exportSize.height}
+          </span>
+        </h2>
+        <article className="input-container">
+          <label htmlFor="output-width">
+            Output Width
+            <span className="slider-val">{outputWidth}%</span>
+          </label>
+          <input
+            id="output-width"
+            type="range"
+            value={outputWidth}
+            min="20"
+            onChange={e => {
+              console.log(e.target.value);
+              updateOptions({ outputWidth: e.target.value });
+            }}
+          />
+        </article>
+        <article className="input-container">
+          <label htmlFor="horizontal-padding">
+            Horizontal Padding
+            <span className="slider-val">{horizontalPadding}px</span>
+          </label>
+          <input
+            id="horizontal-padding"
+            type="range"
+            value={horizontalPadding}
+            max="200"
+            onChange={e => {
+              console.log(e.target.value);
+              updateOptions({ horizontalPadding: e.target.value });
+            }}
+          />
+        </article>
+        <article className="input-container">
+          <label htmlFor="vertical-padding">
+            Vertical Padding
+            <span className="slider-val">{verticalPadding}px</span>
+          </label>
+          <input
+            id="vertical-padding"
+            type="range"
+            value={verticalPadding}
+            max="200"
+            onChange={e => {
+              console.log(e.target.value);
+              updateOptions({ verticalPadding: e.target.value });
+            }}
+          />
+        </article>
+        <h2>Background Color</h2>
+        <ColorPicker
+          onChange={newColor => updateOptions({ background: newColor.hex })}
+          color={background}
         />
-      </article>
-      <article className="range-slider-container">
-        <label htmlFor="vertical-padding">
-          Vertical Padding
-          <span className="slider-val">{verticalPadding}px</span>
-        </label>
-        <input
-          id="vertical-padding"
-          type="range"
-          value={verticalPadding}
-          onChange={e => {
-            console.log(e.target.value);
-            updateOptions({ verticalPadding: e.target.value });
-          }}
-        />
-      </article>
+      </div>
     </article>
   );
 }

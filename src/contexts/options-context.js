@@ -15,8 +15,10 @@ const OptionsProvider = ({ children }) => {
       value: 'mondrian',
       label: 'Mondrian'
     },
-    verticalPadding: 50,
-    horizontalPadding: 50
+    verticalPadding: 75,
+    horizontalPadding: 75,
+    outputWidth: 75,
+    background: 'transparent'
   });
 
   const updateOptions = newOpts => {
