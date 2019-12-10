@@ -31,22 +31,26 @@ const ColorPicker = ({ onChange = () => {}, color = 'transparent' }) => {
             color={color}
             onChange={handleChange}
             presetColors={[
-              '#D0021B',
-              '#F5A623',
-              '#F8E71C',
-              '#8B572A',
-              '#7ED321',
-              '#417505',
-              '#BD10E0',
-              '#9013FE',
-              '#4A90E2',
-              '#50E3C2',
-              '#B8E986',
-              '#000000',
-              '#4A4A4A',
-              '#9B9B9B',
-              '#FFFFFF',
-              'transparent'
+              'transparent',
+              '#1abc9c',
+              '#2ecc71',
+              '#3498db',
+              '#9b59b6',
+              '#34495e',
+              '#f1c40f',
+              '#e67e22',
+              '#e74c3c',
+              '#95a5a6',
+              '#ffffff',
+              '#16a085',
+              '#27ae60',
+              '#2980b9',
+              '#8e44ad',
+              '#2c3e50',
+              '#f39c12',
+              '#d35400',
+              '#c0392b',
+              '#7f8c8d'
             ]}
           />
         </div>
