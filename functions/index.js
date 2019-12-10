@@ -14,11 +14,11 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
     try {
       const { targetURL, resolution } = await req.body;
       const puppeteerOpts = {
-        defaultViewport: resolution,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       };
       const browser = await puppeteer.launch(puppeteerOpts);
       const page = await browser.newPage();
+      // https://github.com/puppeteer/puppeteer/issues/571#issuecomment-325404760
       await page.setViewport({ ...resolution, deviceScaleFactor: 2 });
       await page.setUserAgent(
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36'
@@ -52,20 +52,24 @@ exports.pullFavicon = functions.https.onRequest((req, res) => {
       const cleanTargetURL = cleanUrl(targetURL);
 
       const favicons = await fetch(
-        `https://favicongrabber.com/api/grab/${cleanTargetURL}`
+        `https://besticon-favicon-service-zlnadqoywq-ue.a.run.app/allicons.json?url=${cleanTargetURL}`
       )
         .then(response => response.json())
         .then(({ icons }) => icons);
+      console.log(favicons);
 
       if (!favicons || !favicons.length) {
         return res.status(404);
       }
+      const smallIcon = favicons.find(
+        icon => icon.width === 64 || icon.width === 32
+      );
 
-      const icoArr = favicons.filter(icon => icon.type === 'image/x-icon');
+      // const icoArr = favicons.filter(icon => icon.type === 'image/x-icon');
 
-      const { src } = icoArr.length ? icoArr[0] : favicons[0];
+      const { url } = smallIcon || favicons[0];
 
-      return request(src).pipe(res);
+      return request(url).pipe(res);
     } catch (error) {
       console.log(error.stack);
       return res.status(400).json(error);
