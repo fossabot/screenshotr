@@ -1,5 +1,3 @@
-import { isWebUri } from 'valid-url';
-
 export const isURL = input => {
   const pattern = /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[:?\d]*)\S*$/;
 
@@ -24,32 +22,31 @@ export const getDomain = url => {
   let hostname = url;
 
   if (hostname.includes('http://') || hostname.includes('https://')) {
-    hostname = hostname.split('://')[1];
+    [, hostname] = hostname.split('://');
   }
 
   if (hostname.includes('?')) {
-    hostname = hostname.split('?')[0];
+    [hostname] = hostname.split('?');
   }
 
   if (hostname.includes('://')) {
     hostname = `${hostname.split('://')[0]}://${hostname.split('/')[2]}`;
   } else {
-    hostname = hostname.split('/')[0];
+    [hostname] = hostname.split('/');
   }
 
   return hostname;
 };
 
-export const prefixHttp = url => {
-  return url.includes('://') ? url.trim() : `http://${url.trim()}`;
+export const prefixHttps = url => {
+  return url.includes('://')
+    ? `https://${url.split('://')[1].trim()}`
+    : `https://${url.trim()}`;
 };
 
 export const getCorrectUrl = url => {
-  let newUrl = url.trim();
-  if (!newUrl.match(/^https?:\/\//i)) {
-    newUrl = `https://${url}`;
-  }
-  if (isWebUri(newUrl)) {
+  const newUrl = prefixHttps(url);
+  if (isURL(newUrl)) {
     console.log('is web uri');
     return newUrl;
   }
