@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import BrowserControls from '../browser-controls/browser-controls';
-import './browser-window.scss';
+import Loader from '../loader/loader';
 import OptionsContext from '../../contexts/options-context';
 import OutputContext from '../../contexts/output-context';
-import Loader from '../loader/loader';
+import './browser-window.scss';
 
-function WebPageFrame() {
+function BrowserWindow() {
   const { options } = useContext(OptionsContext);
   const { output, cleanURL } = useContext(OutputContext);
   const { screenshot, favicon, loading } = output;
@@ -29,6 +29,7 @@ function WebPageFrame() {
         <img className="screenshot-image" src={screenshot} alt="Screenshot" />
       );
     }
+
     return (
       <article className="web-frame-placeholder">
         <h1>Enter a URL at the top</h1>
@@ -63,4 +64,4 @@ function WebPageFrame() {
   );
 }
 
-export default WebPageFrame;
+export default BrowserWindow;

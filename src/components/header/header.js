@@ -1,8 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext, useState } from 'react';
+import OutputContext from '../../contexts/output-context';
 import './header.scss';
 
-function Header({ inputVal, updateInputVal, getImage }) {
+function Header() {
   const inputRef = useRef();
+
+  const { getScreenshot } = useContext(OutputContext);
+
+  const [inputVal, setInputVal] = useState('');
+
+  const updateInputVal = e => {
+    setInputVal(e.target.value);
+  };
+
+  const getImage = async e => {
+    e.preventDefault();
+    getScreenshot(inputVal);
+  };
 
   useEffect(() => {
     inputRef.current.focus();
