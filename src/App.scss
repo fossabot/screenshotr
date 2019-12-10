@@ -51,10 +51,12 @@ button {
   cursor: pointer;
   padding: 1rem 1.5rem;
   border: 0.125rem solid $off-black;
+  transition: 80ms ease-out all;
 
   &:disabled,
   &:disabled:hover {
-    background-color: $apple-light;
+    background: $disabled-background;
+    color: $disabled-text;
     cursor: default;
   }
 }
