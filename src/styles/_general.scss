@@ -5,3 +5,17 @@ $mondrian-border: $border-width solid $off-black;
 
 $box-shadow-lg: rgba(0, 0, 0, 0.55) 0px 20px 50px 0px;
 $box-shadow-md: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+@mixin border-outset {
+  border-left: 0.125em solid #ededed;
+  border-top: 0.125em solid #ededed;
+  border-right: 0.125em solid #404040;
+  border-bottom: 0.125em solid #404040;
+}
+
+@mixin border-inset {
+  border-left: 0.125em solid #404040;
+  border-top: 0.125em solid #404040;
+  border-right: 0.125em solid #ededed;
+  border-bottom: 0.125em solid #ededed;
+}

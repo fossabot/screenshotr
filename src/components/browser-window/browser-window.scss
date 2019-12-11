@@ -128,20 +128,19 @@
   }
 
   &.windows98 {
+    @include border-outset;
     border-radius: 0;
     background: #c0c0c0;
-    border-style: outset;
-    padding: 0.125em;
+    padding: 0 0.25em 0.25em 0.25em;
 
     .header-bar {
       background: #c0c0c0;
-      flex: 0 0 1.5em;
+      flex: 0 0 2em;
     }
 
     .address-bar {
+      @include border-inset;
       border-radius: 0;
-      border-width: 0.125em;
-      border-style: inset;
       height: 1.4375em;
     }
 
@@ -156,12 +155,13 @@
     }
 
     .web-frame-placeholder {
+      @include border-inset;
       background: $off-white;
       border-width: $border-width;
-      border-style: inset;
     }
 
     .screenshot-image {
+      @include border-inset;
       border-radius: 0;
       border-style: inset;
       border-width: $border-width;
