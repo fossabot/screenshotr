@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import OptionsContext from './options-context';
-import { getCorrectUrl } from '../util/url';
+import { getCorrectUrl, getDomain } from '../util/url';
 import { pullImage, pullFavicon } from '../api';
 
 const OutputContext = createContext();
@@ -15,11 +15,7 @@ const OutputProvider = ({ children }) => {
     loading: false
   });
 
-  const cleanURL =
-    output.targetURL
-      ?.replace(/https?:\/\//, '')
-      ?.split('/')[0]
-      ?.trim() || '';
+  const cleanURL = getDomain(output.targetURL);
 
   const updateOutput = newOutput => {
     setOutput(prevOutput => {
@@ -35,7 +31,7 @@ const OutputProvider = ({ children }) => {
     const targetURL = getCorrectUrl(inputVal);
 
     if (targetURL.length) {
-      updateOutput({ loading: true });
+      updateOutput({ loading: true, favicon: '', targetURL: '' });
       const [screenshot, favicon] = await Promise.all([
         pullImage(targetURL, resolution),
         pullFavicon(targetURL)
