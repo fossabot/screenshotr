@@ -22,7 +22,8 @@ const OptionsProvider = ({ children }) => {
     background: 'transparent',
     controlScale: 1,
     shadow: 'shadow-large',
-    darkLight: 'dark'
+    darkLight: 'dark',
+    address: 'address-full'
   });
 
   const updateOptions = newOpts => {

@@ -18,7 +18,8 @@ function BrowserWindow() {
     controlScale,
     shadow: shadowStyle,
     style: { value: browserStyle },
-    darkLight
+    darkLight,
+    address
   } = options;
 
   const areControlsOnLeft = !browserStyle.toLowerCase().includes('windows');
@@ -75,9 +76,21 @@ function BrowserWindow() {
           />
         )}
 
-        <section className="address-bar">
-          {!!favicon && <img className="favicon" src={favicon} alt="favicon" />}
-          <span className="address">{cleanURL}</span>
+        <section
+          className="address-bar"
+          style={address === 'address-none' ? { visibility: 'hidden' } : {}}
+        >
+          {!!favicon && address === 'address-full' && (
+            <img className="favicon" src={favicon} alt="favicon" />
+          )}
+          <span
+            className="address"
+            style={
+              address !== 'address-full' ? { paddingLeft: 0, border: 0 } : {}
+            }
+          >
+            {cleanURL}
+          </span>
         </section>
         {(!areControlsOnLeft || !isBrowserSkinny) && (
           <BrowserControls

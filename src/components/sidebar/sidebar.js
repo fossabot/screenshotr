@@ -99,6 +99,21 @@ const darkLightOptions = [
   }
 ];
 
+const addressOptions = [
+  {
+    value: 'address-none',
+    label: 'None'
+  },
+  {
+    value: 'address-no-favicon',
+    label: 'Simple'
+  },
+  {
+    value: 'address-full',
+    label: 'Favicon'
+  }
+];
+
 function Sidebar({ handleDownloadClick, exportSize }) {
   const { options, updateOptions } = useContext(OptionsContext);
   const {
@@ -110,7 +125,8 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     background,
     controlScale,
     shadow,
-    darkLight
+    darkLight,
+    address
   } = options;
   console.log('style', style);
   const hasDarkLightOption =
@@ -166,6 +182,13 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           options={shadowOptions}
           value={shadow}
           onChange={option => updateOptions({ shadow: option.value })}
+        />
+        <RowInput
+          label="Address Bar"
+          name="address-bar"
+          options={addressOptions}
+          value={address}
+          onChange={option => updateOptions({ address: option.value })}
         />
         <h2>
           Sizing{' '}
