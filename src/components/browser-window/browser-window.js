@@ -11,10 +11,16 @@ function BrowserWindow() {
   const { output, cleanURL } = useContext(OutputContext);
   const { screenshot, favicon, loading } = output;
 
-  const browserStyle = options.style.value;
-  const { horizontalPadding, verticalPadding, controlScale } = options;
+  // const browserStyle = options.style.value;
+  const {
+    horizontalPadding,
+    verticalPadding,
+    controlScale,
+    shadow: { value: shadowStyle },
+    style: { value: browserStyle }
+  } = options;
 
-  const areControlsOnLeft = !browserStyle.includes('windows');
+  const areControlsOnLeft = !browserStyle.toLowerCase().includes('windows');
 
   const browserWindowRef = useRef(null);
   const browserWidth = useComponentSize(browserWindowRef).width;
@@ -53,7 +59,7 @@ function BrowserWindow() {
   return (
     <article
       ref={browserWindowRef}
-      className={`browser-window ${browserStyle} ${
+      className={`browser-window ${browserStyle} ${shadowStyle} ${
         isBrowserSkinny ? 'skinny' : ''
       }`}
       style={{

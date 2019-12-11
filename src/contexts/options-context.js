@@ -20,7 +20,11 @@ const OptionsProvider = ({ children }) => {
     horizontalPadding: 75,
     outputWidth: 75,
     background: 'transparent',
-    controlScale: 1
+    controlScale: 1,
+    shadow: {
+      value: 'shadow-large',
+      label: 'Large'
+    }
   });
 
   const updateOptions = newOpts => {

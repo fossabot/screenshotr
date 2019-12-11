@@ -5,6 +5,7 @@ import RangeInput from '../range-input/range-input';
 import GithubButton from '../github-button/github-button';
 import OptionsContext from '../../contexts/options-context';
 import OutputContext from '../../contexts/output-context';
+import RowInput from '../row-input/row-input';
 import { GITHUB_LINK } from '../../constants';
 import './sidebar.scss';
 
@@ -76,6 +77,21 @@ const styleOptions = [
   }
 ];
 
+const shadowOptions = [
+  {
+    value: 'shadow-none',
+    label: 'None'
+  },
+  {
+    value: 'shadow-small',
+    label: 'Small'
+  },
+  {
+    value: 'shadow-large',
+    label: 'Large'
+  }
+];
+
 function Sidebar({ handleDownloadClick, exportSize }) {
   const { options, updateOptions } = useContext(OptionsContext);
   const {
@@ -85,7 +101,8 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     horizontalPadding,
     outputWidth,
     background,
-    controlScale
+    controlScale,
+    shadow
   } = options;
 
   const { loading, screenshot } = useContext(OutputContext).output;
@@ -122,6 +139,13 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             color={background}
           />
         </article>
+        <RowInput
+          label="Shadow"
+          containerClassName="input-container"
+          options={shadowOptions}
+          value={shadow}
+          onChange={option => updateOptions({ shadow: option })}
+        />
         <h2>
           Sizing{' '}
           <span>

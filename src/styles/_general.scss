@@ -19,3 +19,9 @@ $box-shadow-md: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)
   border-right: 0.125em solid #ededed;
   border-bottom: 0.125em solid #ededed;
 }
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

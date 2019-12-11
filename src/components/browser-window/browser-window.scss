@@ -2,7 +2,6 @@
 @import '../../styles/general';
 
 .browser-window {
-  box-shadow: $box-shadow-lg;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -15,6 +14,14 @@
 
   * {
     box-sizing: inherit;
+  }
+
+  &.shadow-small {
+    box-shadow: $box-shadow-md;
+  }
+
+  &.shadow-large {
+    box-shadow: $box-shadow-lg;
   }
 
   .header-bar {
@@ -71,7 +78,6 @@
   }
 
   &.mondrian {
-    // box-shadow: none;
     border: $mondrian-border;
     border-radius: 0;
 
@@ -163,7 +169,6 @@
     .screenshot-image {
       @include border-inset;
       border-radius: 0;
-      border-style: inset;
       border-width: $border-width;
     }
   }
