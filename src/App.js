@@ -12,7 +12,10 @@ import './App.scss';
 
 function App() {
   const { options } = useContext(OptionsContext);
-  const { cleanURL } = useContext(OutputContext);
+  const {
+    cleanURL,
+    output: { firstLoad }
+  } = useContext(OutputContext);
   const { outputWidth, background } = options;
 
   const exportRef = useRef(null);
@@ -30,26 +33,29 @@ function App() {
     <div className="App">
       <Header />
       <section className="app-body">
-        <Sidebar
-          handleDownloadClick={handleDownloadClick}
-          exportSize={exportSize}
-        />
+        {firstLoad && (
+          <Sidebar
+            handleDownloadClick={handleDownloadClick}
+            exportSize={exportSize}
+          />
+        )}
         <article className="app-body-content">
           <article
             ref={exportRef}
             id="export"
-            style={{ width: `${outputWidth}%`, background }}
+            style={{ width: `${outputWidth}%` }}
           >
-            <div className="do-not-export">
-              <Checkboard />
-            </div>
-            <div
-              className="export-background"
-              style={{ background: background || 'transparent' }}
-            />
-            {/* <span className="export-size do-not-export">
-              {exportSize.width} x {exportSize.height}
-            </span> */}
+            {firstLoad && (
+              <>
+                <div className="do-not-export">
+                  <Checkboard />
+                </div>
+                <div
+                  className="export-background"
+                  style={{ background: background || 'transparent' }}
+                />
+              </>
+            )}
             <BrowserWindow />
           </article>
         </article>

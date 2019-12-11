@@ -12,7 +12,8 @@ const OutputProvider = ({ children }) => {
     screenshot: '',
     favicon: '',
     targetURL: '',
-    loading: false
+    loading: false,
+    firstLoad: false
   });
 
   const cleanURL = getDomain(output.targetURL);
@@ -39,6 +40,7 @@ const OutputProvider = ({ children }) => {
       console.log(screenshot, favicon);
       if (screenshot) {
         updateOutput({
+          firstLoad: true,
           favicon,
           screenshot,
           targetURL,
