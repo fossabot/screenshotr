@@ -33,8 +33,8 @@
         "extensions": [".js", ".jsx"]
       }
     ],
-    "react/prop-types": 0,
-    "no-underscore-dangle": 0,
+    "react/prop-types": "off",
+    "no-underscore-dangle": "off",
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
     "no-console": "off",
@@ -48,6 +48,8 @@
         "depth": 3
       }
     ],
-    "no-template-curly-in-string": "off"
+    "no-template-curly-in-string": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-no-target-blank": "off"
   }
 }
