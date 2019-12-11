@@ -14,7 +14,9 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
     try {
       const { targetURL, resolution } = await req.body;
       const puppeteerOpts = {
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        // https://github.com/puppeteer/puppeteer/issues/1088#issuecomment-338353489
+        ignoreHTTPSErrors: true
       };
       const browser = await puppeteer.launch(puppeteerOpts);
       const page = await browser.newPage();
@@ -30,7 +32,8 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
       await browser.close();
       return res.status(200).json({ screenshot });
     } catch (error) {
-      return res.status(400).json({ error });
+      console.log(error.stack);
+      return res.status(200).json({ error: error.stack });
     }
   });
 });
