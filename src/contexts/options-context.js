@@ -21,10 +21,8 @@ const OptionsProvider = ({ children }) => {
     outputWidth: 75,
     background: 'transparent',
     controlScale: 1,
-    shadow: {
-      value: 'shadow-large',
-      label: 'Large'
-    }
+    shadow: 'shadow-large',
+    darkLight: 'dark'
   });
 
   const updateOptions = newOpts => {

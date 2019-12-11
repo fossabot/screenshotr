@@ -16,8 +16,9 @@ function BrowserWindow() {
     horizontalPadding,
     verticalPadding,
     controlScale,
-    shadow: { value: shadowStyle },
-    style: { value: browserStyle }
+    shadow: shadowStyle,
+    style: { value: browserStyle },
+    darkLight
   } = options;
 
   const areControlsOnLeft = !browserStyle.toLowerCase().includes('windows');
@@ -41,9 +42,7 @@ function BrowserWindow() {
               <h1>
                 Welcome to <strong>screenshotr</strong>
               </h1>
-              <p>
-                The easiest way to create mockup screenshots for your websites.
-              </p>
+              <p>Create professional looking website mockups in a snap</p>
               <p>Just enter a URL at the top and click GO!</p>
             </div>
           )}
@@ -61,7 +60,7 @@ function BrowserWindow() {
       ref={browserWindowRef}
       className={`browser-window ${browserStyle} ${shadowStyle} ${
         isBrowserSkinny ? 'skinny' : ''
-      }`}
+      } ${darkLight}`}
       style={{
         margin: `${verticalPadding}px ${horizontalPadding}px`,
         fontSize: controlScale * 16
@@ -71,6 +70,7 @@ function BrowserWindow() {
         {(areControlsOnLeft || !isBrowserSkinny) && (
           <BrowserControls
             browserStyle={browserStyle}
+            darkLight={darkLight}
             visible={areControlsOnLeft}
           />
         )}
@@ -82,6 +82,7 @@ function BrowserWindow() {
         {(!areControlsOnLeft || !isBrowserSkinny) && (
           <BrowserControls
             browserStyle={browserStyle}
+            darkLight={darkLight}
             visible={!areControlsOnLeft}
           />
         )}

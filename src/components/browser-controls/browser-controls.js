@@ -1,10 +1,14 @@
 import React from 'react';
 import './browser-controls.scss';
 
-function BrowserControls({ browserStyle = '', visible = true }) {
+function BrowserControls({
+  browserStyle = '',
+  visible = true,
+  darkLight = ''
+}) {
   return (
     <section
-      className={`browser-controls ${browserStyle} ${
+      className={`browser-controls ${browserStyle} ${darkLight} ${
         visible ? 'visible' : 'hidden'
       }`}
     >

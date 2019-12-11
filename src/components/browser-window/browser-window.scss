@@ -9,7 +9,6 @@
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
-  border-radius: 0.375em;
   z-index: 5;
 
   * {
@@ -29,8 +28,6 @@
     flex: 0 0 2.5em;
     display: flex;
     align-items: center;
-    border-top-left-radius: 0.375em;
-    border-top-right-radius: 0.375em;
   }
 
   .address-bar {
@@ -60,8 +57,6 @@
 
   .screenshot-image {
     width: 100%;
-    border-bottom-left-radius: 0.375em;
-    border-bottom-right-radius: 0.375em;
   }
 
   .favicon {
@@ -79,7 +74,6 @@
 
   &.mondrian {
     border: $mondrian-border;
-    border-radius: 0;
 
     .header-bar {
       background: #fff;
@@ -103,39 +97,83 @@
   }
 
   &.apple {
+    border-radius: 0.375em;
+
+    .header-bar {
+      border-top-left-radius: 0.375em;
+      border-top-right-radius: 0.375em;
+    }
+
+    .screenshot-image {
+      border-bottom-left-radius: 0.375em;
+      border-bottom-right-radius: 0.375em;
+    }
+
     &.dark {
-      background: $off-black;
-
-      // .web-frame-placeholder {
-      //   * {
-      //     color: $off-white;
-      //   }
-      // }
-
       .header-bar {
         background: $apple-dark;
       }
     }
 
     &.light {
-      background: $off-white;
-
-      .web-frame-placeholder {
-        * {
-          color: $off-black;
-        }
-      }
-
       .header-bar {
         background: $apple-light;
-        // border-bottom: 2px solid $apple-light-accent;
+      }
+    }
+  }
+
+  &.windows10 {
+    .address-bar {
+      border-radius: 0;
+    }
+
+    address {
+      padding-left: 0.5em;
+    }
+
+    .address {
+      padding-left: 0.5em;
+    }
+
+    &.light {
+      background: $windows-light;
+      border: 1px solid $windows-light-accent;
+
+      .header-bar {
+        background: $windows-light;
+        border-bottom: 1px solid $windows-light-accent;
+      }
+
+      .address-bar {
+        border: 1px solid $windows-light-accent;
+      }
+
+      .address {
+        border-left: 1px solid $windows-light-accent;
+      }
+    }
+
+    &.dark {
+      background: $windows-dark;
+      border: 1px solid $windows-dark-accent;
+
+      .header-bar {
+        background: $windows-dark;
+        border-bottom: 1px solid $windows-dark-accent;
+      }
+
+      .address-bar {
+        border: 1px solid $windows-dark-accent;
+      }
+
+      .address {
+        border-left: 1px solid $windows-light-accent;
       }
     }
   }
 
   &.windows98 {
     @include border-outset;
-    border-radius: 0;
     background: #c0c0c0;
     padding: 0 0.25em 0.25em 0.25em;
 

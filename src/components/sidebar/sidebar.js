@@ -60,15 +60,11 @@ const styleOptions = [
     label: 'Mondrian'
   },
   {
-    value: 'apple dark',
-    label: 'Apple Dark'
+    value: 'apple',
+    label: 'Apple'
   },
   {
-    value: 'apple light',
-    label: 'Apple Light'
-  },
-  {
-    value: 'windows',
+    value: 'windows10',
     label: 'Windows 10'
   },
   {
@@ -92,6 +88,17 @@ const shadowOptions = [
   }
 ];
 
+const darkLightOptions = [
+  {
+    value: 'dark',
+    label: 'Dark'
+  },
+  {
+    value: 'light',
+    label: 'Light'
+  }
+];
+
 function Sidebar({ handleDownloadClick, exportSize }) {
   const { options, updateOptions } = useContext(OptionsContext);
   const {
@@ -102,8 +109,13 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     outputWidth,
     background,
     controlScale,
-    shadow
+    shadow,
+    darkLight
   } = options;
+  console.log('style', style);
+  const hasDarkLightOption =
+    style?.value?.toLowerCase()?.includes('apple') ||
+    style?.value?.toLowerCase()?.includes('windows10');
 
   const { loading, screenshot } = useContext(OutputContext).output;
 
@@ -131,6 +143,14 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             value={style}
           />
         </article>
+        {hasDarkLightOption && (
+          <RowInput
+            options={darkLightOptions}
+            value={darkLight}
+            onChange={option => updateOptions({ darkLight: option })}
+          />
+        )}
+
         <article className="input-container">
           <label htmlFor="background-color">Background Color</label>
           <ColorPicker
@@ -141,7 +161,6 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         </article>
         <RowInput
           label="Shadow"
-          containerClassName="input-container"
           options={shadowOptions}
           value={shadow}
           onChange={option => updateOptions({ shadow: option })}
