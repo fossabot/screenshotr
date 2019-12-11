@@ -5,10 +5,17 @@
 #sidebar {
   flex: 0 0 20rem;
   border-right: $mondrian-border;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-weight: 400;
+  }
 
   .sidebar-content {
-    margin: 1rem;
+    flex: 1;
+    padding: 1rem;
+    overflow-y: scroll;
   }
 
   .download-button {
@@ -16,7 +23,7 @@
   }
 
   .input-container {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 
     label {
       display: block;

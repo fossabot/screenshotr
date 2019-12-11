@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import Select from 'react-select';
 import ColorPicker from '../color-picker/color-picker';
 import RangeInput from '../range-input/range-input';
+import GithubButton from '../github-button/github-button';
 import OptionsContext from '../../contexts/options-context';
 import OutputContext from '../../contexts/output-context';
+import { GITHUB_LINK } from '../../constants';
 import './sidebar.scss';
 
 const resolutions = [
@@ -180,6 +182,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           onChange={val => updateOptions({ controlScale: val })}
         />
       </div>
+      <GithubButton link={GITHUB_LINK} color="#fff" />
     </article>
   );
 }
