@@ -3,6 +3,7 @@ import styles from './row-input.module.scss';
 
 function RowInput({
   label = '',
+  name = '',
   options = [
     { value: 'val1', label: 'Value 1' },
     { value: 'val2', label: 'Value 2' },
@@ -10,22 +11,23 @@ function RowInput({
   ],
   value = 'val1',
   containerClassName = '',
-  onChange = () => {}
+  onChange = () => {},
+  vertical = false
 }) {
-  const handleOptionChange = option => {
-    console.log(option);
-    onChange(option);
-  };
-
   return (
     <article
       className={`${styles['row-input-container']} ${containerClassName}`}
     >
       {label && <label className={styles['row-input-label']}>{label}</label>}
 
-      <div className={styles['row-input']}>
+      <div
+        className={`${styles['row-input']} ${vertical ? styles.vertical : ''}`}
+      >
         {options.map(option => {
-          const isSelected = option.value === value;
+          const isSelected =
+            typeof value === 'string'
+              ? option.value === value
+              : option.value === value.value;
 
           return (
             <div
@@ -34,12 +36,14 @@ function RowInput({
               }`}
               key={option.value}
             >
-              <label>
+              <label htmlFor={option.value}>
                 <input
                   type="radio"
+                  name={name}
+                  id={option.value}
                   value={option.value}
                   checked={isSelected}
-                  onChange={() => handleOptionChange(option.value)}
+                  onChange={() => onChange(option)}
                 />
                 {option.label}
               </label>

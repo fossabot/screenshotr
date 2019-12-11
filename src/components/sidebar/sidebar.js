@@ -145,9 +145,10 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         </article>
         {hasDarkLightOption && (
           <RowInput
+            name="dark-light"
             options={darkLightOptions}
             value={darkLight}
-            onChange={option => updateOptions({ darkLight: option })}
+            onChange={option => updateOptions({ darkLight: option.value })}
           />
         )}
 
@@ -161,9 +162,10 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         </article>
         <RowInput
           label="Shadow"
+          name="shadow"
           options={shadowOptions}
           value={shadow}
-          onChange={option => updateOptions({ shadow: option })}
+          onChange={option => updateOptions({ shadow: option.value })}
         />
         <h2>
           Sizing{' '}
