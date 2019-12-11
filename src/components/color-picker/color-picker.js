@@ -9,7 +9,6 @@ const ColorPicker = ({ onChange = () => {}, color = 'transparent' }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const handleClick = () => setDisplayColorPicker(!displayColorPicker);
-  const handleClose = () => setDisplayColorPicker(false);
   const handleChange = newColor => onChange(newColor);
   return (
     <div>
@@ -25,7 +24,7 @@ const ColorPicker = ({ onChange = () => {}, color = 'transparent' }) => {
       </div>
       {displayColorPicker ? (
         <div className={styles.popover}>
-          <div className={styles.cover} onClick={handleClose} />
+          <div className={styles.cover} onClick={handleClick} />
           <SketchPicker
             width={266}
             color={color}

@@ -7,11 +7,7 @@ export const downloadScreenshot = async (filename, exportNode, exportWidth) => {
   const dataURL = await toBlob(exportNode, {
     height: exportNode.offsetHeight * scale,
     width: exportNode.offsetWidth * scale,
-    filter: el => {
-      console.log(el);
-      console.log(el.classList);
-      return !el?.classList?.contains('do-not-export');
-    },
+    filter: el => !el?.classList?.contains('do-not-export'),
     style: {
       transform: `scale(${scale})`,
       transformOrigin: 'top left',

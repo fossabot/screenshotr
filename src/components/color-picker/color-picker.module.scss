@@ -8,17 +8,19 @@
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
   display: inline-block;
   cursor: pointer;
-  height: 1.5rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+}
 
-  .color {
-    width: 100%;
-    border: $mondrian-border;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
+.color {
+  border-radius: 0.25rem;
+  width: 100%;
+  border: $mondrian-border;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .popover {

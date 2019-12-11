@@ -42,5 +42,8 @@ export const pullImage = async (targetURL, resolution) => {
 
   const { screenshot } = await response.json();
   console.log(screenshot);
+  if (!screenshot) {
+    return null;
+  }
   return `data:image/png;base64,${screenshot}`;
 };

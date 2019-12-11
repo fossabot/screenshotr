@@ -38,7 +38,7 @@ function Header() {
           type="search"
         />
         <button type="submit" disabled={!inputVal || loading}>
-          Submit
+          GO &rarr;
         </button>
       </form>
     </header>

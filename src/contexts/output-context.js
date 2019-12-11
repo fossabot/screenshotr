@@ -36,13 +36,19 @@ const OutputProvider = ({ children }) => {
         pullImage(targetURL, resolution),
         pullFavicon(targetURL)
       ]);
-
-      updateOutput({
-        favicon,
-        screenshot,
-        targetURL,
-        loading: false
-      });
+      console.log(screenshot, favicon);
+      if (screenshot) {
+        updateOutput({
+          favicon,
+          screenshot,
+          targetURL,
+          loading: false
+        });
+      } else {
+        updateOutput({
+          loading: false
+        });
+      }
     } else {
       console.log('INVALID URL');
     }

@@ -16,14 +16,15 @@
 .app-body {
   display: flex;
   flex: 1;
+  overflow: hidden;
 }
 
 .app-body-content {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 }
 
 h1 {
@@ -52,6 +53,11 @@ button {
   padding: 1rem 1.5rem;
   border: 0.125rem solid $off-black;
   transition: 80ms ease-out all;
+  user-select: none;
+
+  &:hover {
+    background: $mondrian-blue-shade;
+  }
 
   &:disabled,
   &:disabled:hover {

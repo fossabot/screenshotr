@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
 import BrowserControls from '../browser-controls/browser-controls';
-import Loader from '../loader/loader';
+import { LoaderFill } from '../loader/loader';
 import OptionsContext from '../../contexts/options-context';
 import OutputContext from '../../contexts/output-context';
 import './browser-window.scss';
@@ -17,29 +17,36 @@ function BrowserWindow() {
   const areControlsOnLeft = !browserStyle.includes('windows');
 
   const browserWindowRef = useRef(null);
-  const isBrowserSkinny = useComponentSize(browserWindowRef).width < 500;
+  const browserWidth = useComponentSize(browserWindowRef).width;
+  const placeholderHeight = browserWidth / (16 / 9);
+  const isBrowserSkinny = browserWidth < 500;
 
   const getBodyContent = () => {
-    if (loading) {
+    if (loading || !screenshot) {
       return (
-        <article className="web-frame-placeholder">
-          <Loader />
+        <article
+          className="web-frame-placeholder"
+          style={{ height: placeholderHeight }}
+        >
+          {loading ? (
+            <LoaderFill color="#333" />
+          ) : (
+            <div className="content">
+              <h1>
+                Welcome to <strong>screenshotr</strong>
+              </h1>
+              <p>
+                The easiest way to create mockup screenshots for your websites.
+              </p>
+              <p>Just enter a URL at the top and click GO!</p>
+            </div>
+          )}
         </article>
       );
     }
 
-    if (screenshot) {
-      return (
-        <img className="screenshot-image" src={screenshot} alt="Screenshot" />
-      );
-    }
-
     return (
-      <article className="web-frame-placeholder">
-        <div className="content">
-          <h1>Enter a URL at the top</h1>
-        </div>
-      </article>
+      <img className="screenshot-image" src={screenshot} alt="Screenshot" />
     );
   };
 
