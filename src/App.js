@@ -43,7 +43,9 @@ function App() {
           <article
             ref={exportRef}
             id="export"
-            style={{ width: `${outputWidth}%` }}
+            style={{
+              width: firstLoad ? `${outputWidth}%` : '65%'
+            }}
           >
             {firstLoad && (
               <>

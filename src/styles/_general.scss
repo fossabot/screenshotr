@@ -4,7 +4,7 @@ $border-width: 0.125em;
 $mondrian-border: $border-width solid $off-black;
 
 $box-shadow-lg: rgba(0, 0, 0, 0.55) 0px 20px 50px 0px;
-$box-shadow-md: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+$box-shadow-md: 0 10px 32px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.22);
 
 @mixin border-outset {
   border-left: 0.125em solid #ededed;
