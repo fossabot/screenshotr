@@ -1,10 +1,9 @@
-import React, { createContext } from 'react';
-import { useLocalStorage } from '../util/hooks';
+import React, { createContext, useState } from 'react';
 
 const OptionsContext = createContext();
 
 const OptionsProvider = ({ children }) => {
-  const [options, setOptions] = useLocalStorage('export-options', {
+  const [options, setOptions] = useState({
     resolution: {
       label: '1280 x 720',
       value: {
@@ -21,7 +20,7 @@ const OptionsProvider = ({ children }) => {
     outputWidth: 75,
     background: 'transparent',
     controlScale: 1,
-    shadow: 'shadow-large',
+    shadow: 'shadow-small',
     darkLight: 'dark',
     address: 'address-full'
   });
