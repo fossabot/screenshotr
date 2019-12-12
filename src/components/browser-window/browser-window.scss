@@ -110,11 +110,8 @@
     }
 
     &.dark {
-      border: 1px solid $apple-dark-accent;
-
       .header-bar {
         background: $apple-dark;
-        border-bottom: 1px solid $apple-dark-accent;
       }
 
       .address-bar {
