@@ -84,6 +84,8 @@ function BrowserWindow() {
           )}
           <span
             className="address"
+            contentEditable
+            spellCheck="false"
             style={
               address !== 'address-full' ? { paddingLeft: 0, border: 0 } : {}
             }
