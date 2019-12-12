@@ -11,7 +11,6 @@ function BrowserWindow() {
   const { output, cleanURL } = useContext(OutputContext);
   const { screenshot, favicon, loading } = output;
 
-  // const browserStyle = options.style.value;
   const {
     horizontalPadding,
     verticalPadding,
