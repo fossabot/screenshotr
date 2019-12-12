@@ -2,8 +2,8 @@ const functions = require('firebase-functions');
 const puppeteer = require('puppeteer');
 const fetch = require('node-fetch');
 const request = require('request');
-require('dotenv').config();
 const cors = require('cors')({ origin: true });
+require('dotenv').config();
 
 function pause(time = 3000) {
   return new Promise(resolve => setTimeout(resolve, time));
@@ -38,21 +38,14 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
   });
 });
 
-const cleanUrl = url => {
-  return url
-    .replace(/https?:\/\//, '')
-    .split('/')[0]
-    .trim();
-};
-
 exports.pullFavicon = functions.https.onRequest((req, res) => {
   return cors(req, res, async () => {
     try {
       const { targetURL } = await req.body;
-      const cleanTargetURL = cleanUrl(targetURL);
+      const encodedURL = encodeURIComponent(targetURL);
 
       const favicons = await fetch(
-        `https://besticon-favicon-service-zlnadqoywq-ue.a.run.app/allicons.json?url=${cleanTargetURL}`
+        `https://besticon-favicon-service-zlnadqoywq-ue.a.run.app/allicons.json?url=${encodedURL}`
       )
         .then(response => response.json())
         .then(({ icons }) => icons);
@@ -64,8 +57,6 @@ exports.pullFavicon = functions.https.onRequest((req, res) => {
       const smallIcon = favicons.find(
         icon => icon.width === 64 || icon.width === 32
       );
-
-      // const icoArr = favicons.filter(icon => icon.type === 'image/x-icon');
 
       const { url } = smallIcon || favicons[0];
 
