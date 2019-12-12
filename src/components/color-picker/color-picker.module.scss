@@ -1,8 +1,11 @@
 @import '../../styles/colors';
 @import '../../styles/general';
 
-.swatch {
+.swatch-container {
   position: relative;
+}
+
+.swatch {
   width: 100%;
   background: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);

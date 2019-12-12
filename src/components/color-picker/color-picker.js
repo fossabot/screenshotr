@@ -9,9 +9,12 @@ const ColorPicker = ({ onChange = () => {}, color = 'transparent' }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const handleClick = () => setDisplayColorPicker(!displayColorPicker);
-  const handleChange = newColor => onChange(newColor);
+  const handleChange = newColor => {
+    console.log(newColor);
+    onChange(newColor);
+  };
   return (
-    <div>
+    <div className={styles['swatch-container']}>
       <div className={styles.swatch} onClick={handleClick}>
         <Checkboard />
 
@@ -26,7 +29,7 @@ const ColorPicker = ({ onChange = () => {}, color = 'transparent' }) => {
         <div className={styles.popover}>
           <div className={styles.cover} onClick={handleClick} />
           <SketchPicker
-            width={266}
+            disableAlpha
             color={color}
             onChange={handleChange}
             presetColors={[
@@ -35,21 +38,17 @@ const ColorPicker = ({ onChange = () => {}, color = 'transparent' }) => {
               '#2ecc71',
               '#3498db',
               '#9b59b6',
-              '#34495e',
               '#f1c40f',
               '#e67e22',
               '#e74c3c',
-              '#95a5a6',
               '#ffffff',
               '#16a085',
               '#27ae60',
               '#2980b9',
               '#8e44ad',
-              '#2c3e50',
               '#f39c12',
               '#d35400',
-              '#c0392b',
-              '#7f8c8d'
+              '#c0392b'
             ]}
           />
         </div>
