@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
-import OutputContext from '../../contexts/output-context';
+import OutputContext from 'contexts/output-context';
 import './header.scss';
 
 function Header() {

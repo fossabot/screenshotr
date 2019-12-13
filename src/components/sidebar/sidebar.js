@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import Select from 'react-select';
-import ColorPicker from '../color-picker/color-picker';
-import RangeInput from '../range-input/range-input';
-import GithubButton from '../github-button/github-button';
-import OptionsContext from '../../contexts/options-context';
-import OutputContext from '../../contexts/output-context';
-import RowInput from '../row-input/row-input';
-import { GITHUB_LINK } from '../../constants';
+import ColorPicker from 'components/color-picker/color-picker';
+import RangeInput from 'components/range-input/range-input';
+import GithubButton from 'components/github-button/github-button';
+import RowInput from 'components/row-input/row-input';
+import OptionsContext from 'contexts/options-context';
+import OutputContext from 'contexts/output-context';
+import { GITHUB_LINK } from 'constants.js';
 import './sidebar.scss';
 
 const resolutions = [

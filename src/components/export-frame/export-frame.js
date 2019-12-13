@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Checkboard } from 'react-color/lib/components/common';
-import OptionsContext from '../../contexts/options-context';
+import OptionsContext from 'contexts/options-context';
 import './export-frame.scss';
 
 function ExportFrame({ children }) {

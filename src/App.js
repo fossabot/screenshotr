@@ -1,14 +1,14 @@
 import React, { useContext, useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
 import { Checkboard } from 'react-color/lib/components/common';
-import Header from './components/header/header';
-import Sidebar from './components/sidebar/sidebar';
-import BrowserWindow from './components/browser-window/browser-window';
+import 'App.scss';
+import Header from 'components/header/header';
+import Sidebar from 'components/sidebar/sidebar';
+import BrowserWindow from 'components/browser-window/browser-window';
+import OptionsContext from 'contexts/options-context';
+import OutputContext from 'contexts/output-context';
+import { downloadScreenshot } from 'util/screenshot';
 // import ExportFrame from './components/export-frame/export-frame';
-import OptionsContext from './contexts/options-context';
-import OutputContext from './contexts/output-context';
-import { downloadScreenshot } from './util/screenshot';
-import './App.scss';
 
 function App() {
   const { options } = useContext(OptionsContext);

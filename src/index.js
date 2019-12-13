@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { OptionsProvider } from './contexts/options-context';
-import { OutputProvider } from './contexts/output-context';
-import * as serviceWorker from './serviceWorker';
+import 'index.css';
+import App from 'App';
+import { OptionsProvider } from 'contexts/options-context';
+import { OutputProvider } from 'contexts/output-context';
+import * as serviceWorker from 'serviceWorker';
 
 ReactDOM.render(
   <OptionsProvider>

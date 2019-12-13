@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import OptionsContext from './options-context';
-import { getCorrectUrl, getDomain } from '../util/url';
-import { pullImage, pullFavicon } from '../api';
+import OptionsContext from 'contexts/options-context';
+import { getCorrectUrl, getDomain } from 'util/url';
+import { pullImage, pullFavicon } from 'api';
 
 const OutputContext = createContext();
 
@@ -31,7 +31,7 @@ const OutputProvider = ({ children }) => {
     console.log(inputVal);
     const targetURL = getCorrectUrl(inputVal);
 
-    if (targetURL.length) {
+    if (targetURL) {
       updateOutput({ loading: true, favicon: '', targetURL: '' });
       const [screenshot, favicon] = await Promise.all([
         pullImage(targetURL, resolution),

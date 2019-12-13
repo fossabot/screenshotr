@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
-import BrowserControls from '../browser-controls/browser-controls';
-import { LoaderFill } from '../loader/loader';
-import OptionsContext from '../../contexts/options-context';
-import OutputContext from '../../contexts/output-context';
+import BrowserControls from 'components/browser-controls/browser-controls';
+import { LoaderFill } from 'components/loader/loader';
+import OptionsContext from 'contexts/options-context';
+import OutputContext from 'contexts/output-context';
 import './browser-window.scss';
 
 function BrowserWindow() {
