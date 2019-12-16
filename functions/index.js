@@ -21,12 +21,22 @@ function prefixHttp(url) {
     : `http://${url.trim()}`;
 }
 
+function getDomain(url) {
+  let hostname = url;
+
+  if (hostname.includes('http://') || hostname.includes('https://')) {
+    [, hostname] = hostname.split('://');
+  }
+
+  [hostname] = hostname.split('/');
+
+  return hostname;
+}
+
 exports.takeScreenshot = functions.https.onRequest((req, res) => {
   return cors(req, res, async () => {
     try {
       const { targetURL, resolution } = await req.body;
-      const httpsURL = prefixHttps(targetURL);
-      const httpURL = prefixHttp(targetURL);
       const puppeteerOpts = {
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
         // https://github.com/puppeteer/puppeteer/issues/1088#issuecomment-338353489
@@ -37,8 +47,10 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
       // https://github.com/puppeteer/puppeteer/issues/571#issuecomment-325404760
       await page.setViewport({ ...resolution, deviceScaleFactor: 2 });
       try {
+        const httpsURL = prefixHttps(targetURL);
         await page.goto(httpsURL, { waitUntil: 'networkidle2' });
       } catch (err) {
+        const httpURL = prefixHttp(targetURL);
         await page.goto(httpURL, { waitUntil: 'networkidle2' });
       }
       await pause(200);
@@ -60,15 +72,23 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
 exports.pullFavicon = functions.https.onRequest((req, res) => {
   return cors(req, res, async () => {
     try {
+      let faviconSrc = 'besticon';
       const { targetURL } = await req.body;
       const httpsURL = encodeURIComponent(prefixHttps(targetURL));
-      const httpURL = encodeURIComponent(prefixHttp(targetURL));
       let faviconJson = await fetch(
         `https://besticon-favicon-service-zlnadqoywq-ue.a.run.app/allicons.json?url=${httpsURL}`
       ).then(response => response.json());
       if (faviconJson.error) {
+        const httpURL = encodeURIComponent(prefixHttp(targetURL));
         faviconJson = await fetch(
           `https://besticon-favicon-service-zlnadqoywq-ue.a.run.app/allicons.json?url=${httpURL}`
+        ).then(response => response.json());
+      }
+      if (faviconJson.error) {
+        faviconSrc = 'favicongrabber';
+        const cleanURL = getDomain(targetURL);
+        faviconJson = await fetch(
+          `https://favicongrabber.com/api/grab/${cleanURL}`
         ).then(response => response.json());
       }
 
@@ -77,11 +97,18 @@ exports.pullFavicon = functions.https.onRequest((req, res) => {
       if (!icons || !icons.length) {
         return res.status(404).json(faviconJson);
       }
-      const smallIcon = icons.find(
-        icon => icon.width === 64 || icon.width === 32
-      );
 
-      const { url } = smallIcon || icons[0];
+      let url = '';
+
+      if (faviconSrc === 'besticon') {
+        const smallIcon = icons.find(
+          icon => icon.width === 64 || icon.width === 32
+        );
+        url = smallIcon.url || icons[0].url;
+      } else if (faviconSrc === 'favicongrabber') {
+        const icoArr = icons.filter(icon => icon.type === 'image/x-icon');
+        url = icoArr.length ? icoArr[0].src : icons[0].src;
+      }
 
       return request(url).pipe(res);
     } catch (error) {
