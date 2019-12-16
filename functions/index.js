@@ -98,16 +98,18 @@ exports.pullFavicon = functions.https.onRequest((req, res) => {
         return res.status(404).json(faviconJson);
       }
 
+      console.log(icons);
+
       let url = '';
 
       if (faviconSrc === 'besticon') {
         const smallIcon = icons.find(
           icon => icon.width === 64 || icon.width === 32
         );
-        url = smallIcon.url || icons[0].url;
+        url = smallIcon ? smallIcon.url : icons[0].url;
       } else if (faviconSrc === 'favicongrabber') {
-        const icoArr = icons.filter(icon => icon.type === 'image/x-icon');
-        url = icoArr.length ? icoArr[0].src : icons[0].src;
+        const smallIcon = icons.find(icon => icon.type === 'image/x-icon');
+        url = smallIcon ? smallIcon.src : icons[0].src;
       }
 
       return request(url).pipe(res);
