@@ -6,113 +6,15 @@ import GithubButton from 'components/github-button/github-button';
 import RowInput from 'components/row-input/row-input';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
-import { GITHUB_LINK } from 'constants.js';
+import {
+  GITHUB_LINK,
+  RESOLUTION_OPTIONS,
+  STYLE_OPTIONS,
+  SHADOW_OPTIONS,
+  DARK_LIGHT_OPTIONS,
+  ADDRESS_BAR_OPTIONS
+} from 'constants.js';
 import './sidebar.scss';
-
-const resolutions = [
-  {
-    label: '1024 x 576',
-    value: {
-      height: 576,
-      width: 1024
-    }
-  },
-  {
-    label: '1152 x 648',
-    value: {
-      height: 648,
-      width: 1152
-    }
-  },
-  {
-    label: '1280 x 720',
-    value: {
-      height: 720,
-      width: 1280
-    }
-  },
-  {
-    label: '1366 x 768',
-    value: {
-      height: 768,
-      width: 1366
-    }
-  },
-  {
-    label: '1600 x 900',
-    value: {
-      height: 900,
-      width: 1600
-    }
-  },
-  {
-    label: '1920 x 1080',
-    value: {
-      height: 1080,
-      width: 1920
-    }
-  }
-];
-
-const styleOptions = [
-  {
-    value: 'mondrian',
-    label: 'Mondrian'
-  },
-  {
-    value: 'apple',
-    label: 'Apple'
-  },
-  {
-    value: 'windows10',
-    label: 'Windows 10'
-  },
-  {
-    value: 'windows98',
-    label: 'Windows 98'
-  }
-];
-
-const shadowOptions = [
-  {
-    value: 'shadow-none',
-    label: 'None'
-  },
-  {
-    value: 'shadow-small',
-    label: 'Small'
-  },
-  {
-    value: 'shadow-large',
-    label: 'Large'
-  }
-];
-
-const darkLightOptions = [
-  {
-    value: 'dark',
-    label: 'Dark'
-  },
-  {
-    value: 'light',
-    label: 'Light'
-  }
-];
-
-const addressOptions = [
-  {
-    value: 'address-none',
-    label: 'None'
-  },
-  {
-    value: 'address-no-favicon',
-    label: 'Simple'
-  },
-  {
-    value: 'address-full',
-    label: 'Favicon'
-  }
-];
 
 function Sidebar({ handleDownloadClick, exportSize }) {
   const { options, updateOptions } = useContext(OptionsContext);
@@ -152,7 +54,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           <Select
             id="browser-style"
             className="style-select select"
-            options={styleOptions}
+            options={STYLE_OPTIONS}
             onChange={newStyle => {
               updateOptions({ style: newStyle });
             }}
@@ -162,7 +64,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         {hasDarkLightOption && (
           <RowInput
             name="dark-light"
-            options={darkLightOptions}
+            options={DARK_LIGHT_OPTIONS}
             value={darkLight}
             onChange={option => updateOptions({ darkLight: option.value })}
           />
@@ -179,14 +81,14 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         <RowInput
           label="Shadow"
           name="shadow"
-          options={shadowOptions}
+          options={SHADOW_OPTIONS}
           value={shadow}
           onChange={option => updateOptions({ shadow: option.value })}
         />
         <RowInput
           label="Address Bar"
           name="address-bar"
-          options={addressOptions}
+          options={ADDRESS_BAR_OPTIONS}
           value={address}
           onChange={option => updateOptions({ address: option.value })}
         />
@@ -202,7 +104,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             id="screenshot-resolution"
             isDisabled={loading}
             className="resolution-select select"
-            options={resolutions}
+            options={RESOLUTION_OPTIONS}
             onChange={newResolution => {
               updateOptions({ resolution: newResolution });
             }}

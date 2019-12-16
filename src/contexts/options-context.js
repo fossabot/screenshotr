@@ -1,29 +1,10 @@
 import React, { createContext, useState } from 'react';
+import { DEFAULT_OPTIONS } from 'constants.js';
 
 const OptionsContext = createContext();
 
 const OptionsProvider = ({ children }) => {
-  const [options, setOptions] = useState({
-    resolution: {
-      label: '1280 x 720',
-      value: {
-        height: 720,
-        width: 1280
-      }
-    },
-    style: {
-      value: 'mondrian',
-      label: 'Mondrian'
-    },
-    verticalPadding: 75,
-    horizontalPadding: 75,
-    outputWidth: 75,
-    background: 'transparent',
-    controlScale: 1,
-    shadow: 'shadow-small',
-    darkLight: 'dark',
-    address: 'address-full'
-  });
+  const [options, setOptions] = useState(DEFAULT_OPTIONS);
 
   const updateOptions = newOpts => {
     setOptions(prevOpts => {
