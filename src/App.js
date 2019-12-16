@@ -21,6 +21,12 @@ function App() {
   const exportRef = useRef(null);
   const exportSize = useComponentSize(exportRef);
 
+  const bodyContentRef = useRef(null);
+  const bodySize = useComponentSize(bodyContentRef);
+
+  const bodyAlignment =
+    exportSize.height > bodySize.height ? 'flex-start' : 'center';
+
   const handleDownloadClick = () => {
     const filenameArr = cleanURL.split('.');
     const filename = filenameArr[filenameArr.length - 2];
@@ -39,7 +45,13 @@ function App() {
             exportSize={exportSize}
           />
         )}
-        <article className="app-body-content">
+        <article
+          className="app-body-content"
+          ref={bodyContentRef}
+          style={{
+            alignItems: bodyAlignment
+          }}
+        >
           <article
             ref={exportRef}
             id="export"
