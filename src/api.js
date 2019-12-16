@@ -10,22 +10,27 @@ export const pullFavicon = async targetURL => {
     }
   );
   console.log('favicon response:', response);
-  const contentType = response.headers.get('Content-Type');
-  const imageStr = await response.arrayBuffer().then(buffer => {
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
+  if (response.ok) {
+    const contentType = response.headers.get('Content-Type');
+    const imageStr = await response.arrayBuffer().then(buffer => {
+      let binary = '';
+      const bytes = new Uint8Array(buffer);
 
-    bytes.forEach(b => {
-      binary += String.fromCharCode(b);
+      bytes.forEach(b => {
+        binary += String.fromCharCode(b);
+      });
+      let image = `data:${contentType};base64,`;
+      image += window.btoa(binary);
+
+      return image;
     });
-    let image = `data:${contentType};base64,`;
-    image += window.btoa(binary);
 
-    return image;
-  });
+    console.log(imageStr);
 
-  console.log(imageStr);
-  return imageStr;
+    return imageStr;
+  }
+
+  return '';
 };
 
 export const pullImage = async (targetURL, resolution) => {
