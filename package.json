@@ -19,11 +19,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettify": "prettier --write \"src/**/*.{js,ts,css,less,scss,vue,json,gql,md}\"",
+    "format": "prettier --write \"src/**/*.{js,ts,css,less,scss,vue,json,gql,md}\"",
     "predeploy": "npm install && npm run prettify && npm run build",
     "deploy": "npm run predeploy && firebase deploy",
     "deploy:functions": "firebase deploy --only functions",
-    "deploy:hosting": "firebase deploy --only hosting"
+    "deploy:hosting": "firebase deploy --only hosting",
+    "clean-install": "rm -rf node_modules && rm package-lock.json && npm i"
   },
   "eslintConfig": {
     "extends": "react-app"
