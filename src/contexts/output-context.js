@@ -13,7 +13,8 @@ const OutputProvider = ({ children }) => {
     favicon: '',
     targetURL: '',
     loading: false,
-    firstLoad: false
+    firstLoad: false,
+    isUpload: false
   });
 
   const cleanURL = getDomain(output.targetURL);
@@ -32,7 +33,12 @@ const OutputProvider = ({ children }) => {
     const targetURL = getCorrectUrl(inputVal);
 
     if (targetURL) {
-      updateOutput({ loading: true, favicon: '', targetURL: '' });
+      updateOutput({
+        loading: true,
+        favicon: '',
+        targetURL: '',
+        isUpload: false
+      });
       const [screenshot, favicon] = await Promise.all([
         pullImage(targetURL, resolution),
         pullFavicon(targetURL)

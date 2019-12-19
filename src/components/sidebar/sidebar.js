@@ -35,7 +35,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     style?.value?.toLowerCase()?.includes('apple') ||
     style?.value?.toLowerCase()?.includes('windows10');
 
-  const { loading, screenshot } = useContext(OutputContext).output;
+  const { loading, screenshot, isUpload } = useContext(OutputContext).output;
 
   return (
     <article id="sidebar">
@@ -98,19 +98,22 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             {exportSize.width} x {exportSize.height}
           </span>
         </h2>
-        <article className="input-container">
-          <label htmlFor="vertical-padding">Screenshot Resolution</label>
-          <Select
-            id="screenshot-resolution"
-            isDisabled={loading}
-            className="resolution-select select"
-            options={RESOLUTION_OPTIONS}
-            onChange={newResolution => {
-              updateOptions({ resolution: newResolution });
-            }}
-            value={resolution}
-          />
-        </article>
+        {!isUpload && (
+          <article className="input-container">
+            <label htmlFor="vertical-padding">Screenshot Resolution</label>
+            <Select
+              id="screenshot-resolution"
+              isDisabled={loading}
+              className="resolution-select select"
+              options={RESOLUTION_OPTIONS}
+              onChange={newResolution => {
+                updateOptions({ resolution: newResolution });
+              }}
+              value={resolution}
+            />
+          </article>
+        )}
+
         <RangeInput
           containerClassName="input-container"
           label="Output Width"

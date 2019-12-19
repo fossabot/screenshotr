@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
+import { RightArrowIcon, ImageUploadIcon } from 'components/icons/icons';
 import OutputContext from 'contexts/output-context';
+import FileUploader from 'components/file-uploader/file-uploader';
 import './header.scss';
 
 function Header() {
   const inputRef = useRef();
 
   const {
+    updateOutput,
     getScreenshot,
     output: { loading }
   } = useContext(OutputContext);
@@ -19,6 +22,18 @@ function Header() {
   const getImage = async e => {
     e.preventDefault();
     getScreenshot(inputVal);
+  };
+
+  const handleUpload = file => {
+    console.log(file);
+    if (file.base64 && /^image\//.test(file.type)) {
+      updateOutput({
+        favicon: '',
+        screenshot: file.base64,
+        firstLoad: true,
+        isUpload: true
+      });
+    }
   };
 
   useEffect(() => {
@@ -38,9 +53,21 @@ function Header() {
           type="search"
         />
         <button type="submit" disabled={!inputVal || loading}>
-          GO &rarr;
+          GO <RightArrowIcon style={{ marginLeft: '0.5rem' }} />
         </button>
       </form>
+
+      <FileUploader
+        className="image-upload-button"
+        onDone={handleUpload}
+        accept="image/*"
+      >
+        <span>Upload Image</span>
+        <ImageUploadIcon
+          className="image-upload-icon"
+          style={{ height: 32, width: 32 }}
+        />
+      </FileUploader>
     </header>
   );
 }

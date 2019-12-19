@@ -42,4 +42,26 @@
       border-left: 0.125rem solid $off-black;
     }
   }
+
+  .image-upload-button {
+    border-left: $mondrian-border;
+    @include flex-center;
+    padding: 1rem;
+    background: $mondrian-blue;
+    color: $off-white;
+    transition: 80ms ease-out all;
+
+    &:hover {
+      background: $mondrian-blue-shade;
+    }
+
+    span {
+      font-size: 1.25rem;
+      margin-right: 1rem;
+    }
+
+    .image-upload-icon {
+      fill: $off-white;
+    }
+  }
 }
