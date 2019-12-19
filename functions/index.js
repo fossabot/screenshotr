@@ -56,12 +56,11 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
       await pause(200);
 
       const screenshot = await page.screenshot({
-        encoding: 'base64',
-        type: 'png',
         fullPage: false
       });
       await browser.close();
-      return res.status(200).json({ screenshot });
+      res.contentType('image/png');
+      return res.send(screenshot);
     } catch (error) {
       console.log(error.stack);
       return res.status(200).json({ error: error.stack });

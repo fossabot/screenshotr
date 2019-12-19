@@ -1,3 +1,16 @@
+const toBase64 = (buffer, contentType) => {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+
+  bytes.forEach(b => {
+    binary += String.fromCharCode(b);
+  });
+  let image = `data:${contentType};base64,`;
+  image += window.btoa(binary);
+
+  return image;
+};
+
 export const pullFavicon = async targetURL => {
   const response = await fetch(
     `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}pullFavicon`,
@@ -12,18 +25,9 @@ export const pullFavicon = async targetURL => {
   console.log('favicon response:', response);
   if (response.ok) {
     const contentType = response.headers.get('Content-Type');
-    const imageStr = await response.arrayBuffer().then(buffer => {
-      let binary = '';
-      const bytes = new Uint8Array(buffer);
-
-      bytes.forEach(b => {
-        binary += String.fromCharCode(b);
-      });
-      let image = `data:${contentType};base64,`;
-      image += window.btoa(binary);
-
-      return image;
-    });
+    const imageStr = await response
+      .arrayBuffer()
+      .then(buffer => toBase64(buffer, contentType));
 
     console.log(imageStr);
 
@@ -44,11 +48,13 @@ export const pullImage = async (targetURL, resolution) => {
       }
     }
   );
+  if (response.ok) {
+    const contentType = response.headers.get('Content-Type');
+    const imageStr = await response
+      .arrayBuffer()
+      .then(buffer => toBase64(buffer, contentType));
 
-  const { screenshot } = await response.json();
-  console.log(screenshot);
-  if (!screenshot) {
-    return null;
+    return imageStr;
   }
-  return `data:image/png;base64,${screenshot}`;
+  return '';
 };
