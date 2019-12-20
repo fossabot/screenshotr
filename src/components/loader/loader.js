@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './loader.module.scss';
 
 const Loader = ({ color = '#333' }) => {
   return (
@@ -28,7 +29,20 @@ const Loader = ({ color = '#333' }) => {
   );
 };
 
-export const LoaderFill = ({ color = '#333' }) => {
+export const BrowserLoader = () => (
+  <div className={styles['loader-container']}>
+    <div className={styles['browser-loader']}>
+      <header>
+        <div className={styles.dot} />
+        <div className={styles.dot} />
+        <div className={styles.dot} />
+      </header>
+    </div>
+    <div className={styles['loader-floor']} />
+  </div>
+);
+
+export const LoaderFill = () => {
   return (
     <article
       style={{
@@ -36,10 +50,20 @@ export const LoaderFill = ({ color = '#333' }) => {
         height: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'column'
       }}
     >
-      <Loader color={color} />
+      <BrowserLoader />
+      <h2
+        style={{
+          fontWeight: 400,
+          fontSize: '1.625rem',
+          marginTop: '.5rem'
+        }}
+      >
+        Please wait while we grab your screenshot
+      </h2>
     </article>
   );
 };
