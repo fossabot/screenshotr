@@ -1,0 +1,36 @@
+.slider-label-container {
+  display: flex;
+  align-items: center;
+
+  .slider-label {
+    font-size: 1.125rem;
+  }
+}
+
+.slider-val-container {
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.slider-val-input,
+.slider-val {
+  border: 0;
+  outline: none;
+  padding: 2px 6px;
+  flex: 0 1 4rem;
+  width: 4rem;
+  text-align: center;
+}
+
+.slider-val-unit {
+  border-left: 1px solid #333;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  line-height: 1;
+  font-weight: 400;
+  background: #e1e6ec;
+}

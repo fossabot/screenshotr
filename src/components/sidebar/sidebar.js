@@ -30,7 +30,6 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     darkLight,
     address
   } = options;
-  console.log('style', style);
   const hasDarkLightOption =
     style?.value?.toLowerCase()?.includes('apple') ||
     style?.value?.toLowerCase()?.includes('windows10');
@@ -119,40 +118,44 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           label="Output Width"
           id="output-width"
           value={outputWidth}
-          displayValue={`${Number(outputWidth).toFixed(1)}%`}
           min={20}
           max={100}
-          step={0.2}
+          step={0.1}
           onChange={val => updateOptions({ outputWidth: val })}
+          unit="%"
+          editable
         />
         <RangeInput
           containerClassName="input-container"
           label="Horizontal Padding"
           id="horizontal-padding"
           value={horizontalPadding}
-          displayValue={`${horizontalPadding}px`}
           max={200}
           onChange={val => updateOptions({ horizontalPadding: val })}
+          unit="px"
+          editable
         />
         <RangeInput
           containerClassName="input-container"
           label="Vertical Padding"
           id="vertical-padding"
           value={verticalPadding}
-          displayValue={`${verticalPadding}px`}
           max={200}
           onChange={val => updateOptions({ verticalPadding: val })}
+          unit="px"
+          editable
         />
         <RangeInput
           containerClassName="input-container"
-          label="Browser Control Scale"
+          label="Browser Scale"
           id="control-scale"
           value={controlScale}
-          displayValue={`${controlScale * 100}%`}
           min={0.5}
           max={2}
           step={0.25}
           onChange={val => updateOptions({ controlScale: val })}
+          unit={<div style={{ fontSize: 22 }}>×</div>}
+          editable
         />
       </div>
       <GithubButton link={GITHUB_LINK} color="#fff" />

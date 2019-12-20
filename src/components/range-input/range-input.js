@@ -1,4 +1,22 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import './range-input.scss';
+
+const countDecimals = num => {
+  if (Math.floor(num) === num) return 0;
+  return num.toString().split('.')[1].length || 0;
+};
+
+const normalizeInput = (val, step, min, max) => {
+  const numVal = Number(val);
+  if (Number.isNaN(numVal)) {
+    return null;
+  }
+  let normVal = Math.round(numVal / step) * step;
+  normVal = Number(normVal.toFixed(countDecimals(step)));
+  normVal = Math.max(min, normVal);
+  normVal = Math.min(max, normVal);
+  return normVal;
+};
 
 function RangeInput({
   label = '',
@@ -7,17 +25,77 @@ function RangeInput({
   step = 1,
   value = 50,
   onChange = () => {},
-  displayValue = '50',
   className = '',
   containerClassName = '',
-  id = ''
+  id = '',
+  editable = false,
+  unit = '',
+  unitSide = 'right'
 }) {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (editable) {
+      inputRef.current.value = value;
+    }
+  }, [value]);
+
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      console.log(inputRef.current.value);
+      const newVal = normalizeInput(inputRef.current.value, step, min, max);
+      if (newVal || newVal === 0) {
+        inputRef.current.value = newVal;
+        inputRef.current.blur();
+        onChange(newVal);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    const newVal = normalizeInput(inputRef.current.value, step, min, max);
+    if (newVal || newVal === 0) {
+      inputRef.current.value = newVal;
+      onChange(newVal);
+    } else {
+      inputRef.current.value = value;
+    }
+  };
+
   return (
     <article className={`range-input-container ${containerClassName}`}>
       {label && (
-        <label htmlFor={id}>
-          {label}
-          <span className="slider-val">{displayValue}</span>
+        <label className="slider-label-container" htmlFor={id}>
+          <span className="slider-label">{label}</span>
+
+          <span className="slider-val-container">
+            {unit && unitSide === 'left' && (
+              <div className="slider-val-unit">
+                <span>{unit}</span>
+              </div>
+            )}
+            {editable ? (
+              <input
+                contentEditable
+                onKeyPress={handleKeyPress}
+                onBlur={handleBlur}
+                className="slider-val-input"
+                type="number"
+                min={String(min)}
+                max={String(max)}
+                step={String(step)}
+                ref={inputRef}
+              />
+            ) : (
+              <div className="slider-val">{value}</div>
+            )}
+            {unit && unitSide === 'right' && (
+              <div className="slider-val-unit">
+                <span>{unit}</span>
+              </div>
+            )}
+          </span>
         </label>
       )}
 
