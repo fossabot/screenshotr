@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import useComponentSize from '@rehooks/component-size';
 import { Checkboard } from 'react-color/lib/components/common';
 import 'App.scss';
@@ -11,7 +11,7 @@ import { downloadScreenshot } from 'util/screenshot';
 // import ExportFrame from './components/export-frame/export-frame';
 
 function App() {
-  const { options } = useContext(OptionsContext);
+  const { options, updateOptions } = useContext(OptionsContext);
   const {
     cleanURL,
     output: { firstLoad }
@@ -23,6 +23,17 @@ function App() {
 
   const bodyContentRef = useRef(null);
   const bodySize = useComponentSize(bodyContentRef);
+  const bodyWidth = bodySize.width;
+
+  useEffect(() => {
+    const newOptions = {
+      maxOutputWidth: bodyWidth
+    };
+    if (outputWidth > bodyWidth && bodyWidth !== 0) {
+      newOptions.outputWidth = bodyWidth;
+    }
+    updateOptions(newOptions);
+  }, [bodyWidth]);
 
   const bodyAlignment =
     exportSize.height > bodySize.height ? 'flex-start' : 'center';
@@ -56,7 +67,7 @@ function App() {
             ref={exportRef}
             id="export"
             style={{
-              width: firstLoad ? `${outputWidth}%` : '65%'
+              width: firstLoad ? `${outputWidth}px` : '65%'
             }}
           >
             {firstLoad && (

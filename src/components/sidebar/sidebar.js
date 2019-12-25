@@ -28,7 +28,8 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     controlScale,
     shadow,
     darkLight,
-    address
+    address,
+    maxOutputWidth
   } = options;
   const hasDarkLightOption =
     style?.value?.toLowerCase()?.includes('apple') ||
@@ -118,9 +119,8 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           label="Output Width"
           id="output-width"
           value={outputWidth}
-          min={20}
-          max={100}
-          step={0.1}
+          min={800}
+          max={maxOutputWidth}
           onChange={val => updateOptions({ outputWidth: val })}
           unit="%"
           editable

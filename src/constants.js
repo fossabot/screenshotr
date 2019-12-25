@@ -119,10 +119,10 @@ export const DEFAULT_OPTIONS = {
   },
   verticalPadding: 75,
   horizontalPadding: 75,
-  outputWidth: 75,
-  background: 'transparent',
+  outputWidth: 1000,
   controlScale: 1,
   shadow: 'shadow-small',
   darkLight: 'dark',
-  address: 'address-full'
+  address: 'address-full',
+  maxOutputWidth: 1000
 };
