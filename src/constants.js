@@ -120,6 +120,9 @@ export const DEFAULT_OPTIONS = {
   verticalPadding: 75,
   horizontalPadding: 75,
   outputWidth: 1000,
+  background: {
+    background: 'transparent'
+  },
   controlScale: 1,
   shadow: 'shadow-small',
   darkLight: 'dark',

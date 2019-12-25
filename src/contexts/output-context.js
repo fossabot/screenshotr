@@ -13,7 +13,7 @@ const OutputProvider = ({ children }) => {
     favicon: '',
     targetURL: '',
     loading: false,
-    firstLoad: false,
+    firstLoad: true,
     isUpload: false
   });
 

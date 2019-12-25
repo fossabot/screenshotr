@@ -4,6 +4,7 @@ import ColorPicker from 'components/color-picker/color-picker';
 import RangeInput from 'components/range-input/range-input';
 import GithubButton from 'components/github-button/github-button';
 import RowInput from 'components/row-input/row-input';
+import GradientPicker from 'components/gradient-picker/gradient-picker';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
 import {
@@ -74,10 +75,22 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           <label htmlFor="background-color">Background Color</label>
           <ColorPicker
             id="background-color"
-            onChange={newColor => updateOptions({ background: newColor.hex })}
-            color={background}
+            onChange={newColor =>
+              updateOptions({ background: { background: newColor.hex } })
+            }
+            color={background.background}
           />
         </article>
+
+        <article className="input-container">
+          <label htmlFor="background-color">Background Gradient</label>
+          <GradientPicker
+            id="background-gradient"
+            color={background}
+            onChange={newGradient => updateOptions({ background: newGradient })}
+          />
+        </article>
+
         <RowInput
           label="Shadow"
           name="shadow"

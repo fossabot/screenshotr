@@ -75,10 +75,7 @@ function App() {
                 <div className="do-not-export">
                   <Checkboard />
                 </div>
-                <div
-                  className="export-background"
-                  style={{ background: background || 'transparent' }}
-                />
+                <div className="export-background" style={background} />
               </>
             )}
             <BrowserWindow />
