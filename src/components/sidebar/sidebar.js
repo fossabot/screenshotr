@@ -126,7 +126,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           min={800}
           max={maxOutputWidth}
           onChange={val => updateOptions({ outputWidth: val })}
-          unit="%"
+          unit="px"
           editable
         />
         <RangeInput
