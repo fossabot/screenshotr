@@ -2,13 +2,12 @@ import React, { useContext } from 'react';
 import Select from 'react-select';
 import ColorPicker from 'components/color-picker/color-picker';
 import RangeInput from 'components/range-input/range-input';
-import GithubButton from 'components/github-button/github-button';
 import RowInput from 'components/row-input/row-input';
 import GradientPicker from 'components/gradient-picker/gradient-picker';
+import { DownloadIcon } from 'components/icons/icons';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
 import {
-  GITHUB_LINK,
   RESOLUTION_OPTIONS,
   STYLE_OPTIONS,
   SHADOW_OPTIONS,
@@ -41,14 +40,6 @@ function Sidebar({ handleDownloadClick, exportSize }) {
   return (
     <article id="sidebar">
       <div className="sidebar-content">
-        <button
-          className="download-button"
-          type="button"
-          onClick={handleDownloadClick}
-          disabled={loading || !screenshot}
-        >
-          Download
-        </button>
         <h2>Style</h2>
         <article className="input-container">
           <label htmlFor="browser-style">Browser Style</label>
@@ -171,7 +162,17 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           editable
         />
       </div>
-      <GithubButton link={GITHUB_LINK} color="#fff" />
+      <button
+        className="download-button"
+        type="button"
+        onClick={handleDownloadClick}
+        disabled={loading || !screenshot}
+      >
+        Download
+        <DownloadIcon
+          style={{ marginLeft: '0.75rem', marginBottom: '0.25rem' }}
+        />
+      </button>
     </article>
   );
 }

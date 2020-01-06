@@ -4,11 +4,12 @@ import { Checkboard } from 'react-color/lib/components/common';
 import 'App.scss';
 import Header from 'components/header/header';
 import Sidebar from 'components/sidebar/sidebar';
+import GithubButton from 'components/github-button/github-button';
 import BrowserWindow from 'components/browser-window/browser-window';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
 import { downloadScreenshot } from 'util/screenshot';
-// import ExportFrame from './components/export-frame/export-frame';
+import { GITHUB_LINK } from 'constants.js';
 
 function App() {
   const { options, updateOptions } = useContext(OptionsContext);
@@ -80,6 +81,7 @@ function App() {
             )}
             <BrowserWindow />
           </article>
+          <GithubButton link={GITHUB_LINK} />
         </article>
       </section>
     </div>

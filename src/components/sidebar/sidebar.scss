@@ -16,14 +16,30 @@
     flex: 1;
     padding: 1rem;
     overflow-y: scroll;
+
+    & > *:first-child {
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    & > *:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
   }
 
   .download-button {
     width: 100%;
     text-transform: uppercase;
     font-weight: 500;
-    font-size: 1.25rem;
-    border-radius: 0.25rem;
+    font-size: 1.375rem;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    flex: 0 0 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .input-container {
