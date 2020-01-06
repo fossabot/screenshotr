@@ -1,5 +1,7 @@
+// new method for speed: https://github.com/puppeteer/puppeteer/issues/3120
+
 const functions = require('firebase-functions');
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 const fetch = require('node-fetch');
 const request = require('request');
 const cors = require('cors')({ origin: true });
@@ -37,15 +39,19 @@ exports.takeScreenshot = functions.https.onRequest((req, res) => {
   return cors(req, res, async () => {
     try {
       const { targetURL, resolution } = await req.body;
-      const puppeteerOpts = {
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      const browser = await chromium.puppeteer.launch({
+        args: chromium.args,
+        // https://github.com/puppeteer/puppeteer/issues/571#issuecomment-325404760
+        defaultViewport: {
+          ...resolution,
+          deviceScaleFactor: 2
+        },
+        executablePath: await chromium.executablePath,
+        headless: true,
         // https://github.com/puppeteer/puppeteer/issues/1088#issuecomment-338353489
         ignoreHTTPSErrors: true
-      };
-      const browser = await puppeteer.launch(puppeteerOpts);
+      });
       const page = await browser.newPage();
-      // https://github.com/puppeteer/puppeteer/issues/571#issuecomment-325404760
-      await page.setViewport({ ...resolution, deviceScaleFactor: 2 });
       try {
         const httpsURL = prefixHttps(targetURL);
         await page.goto(httpsURL, { waitUntil: 'networkidle2' });
