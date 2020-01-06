@@ -2,25 +2,24 @@
 @import '../../styles/general';
 
 .github-button {
-  height: 4rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: $border-width solid $off-black;
-  background: $off-black;
   flex: 0 0 4rem;
+  padding: 1rem;
 
   .github-button-icon {
     height: 2.5rem;
     width: 2.5rem;
-    fill: $off-white;
+    fill: rgba(34, 34, 34, 0.5);
   }
 
   &:hover {
-    background: $off-white;
-
     .github-button-icon {
-      fill: $off-black;
+      fill: rgba(34, 34, 34, 1);
     }
   }
 }
