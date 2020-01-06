@@ -105,3 +105,18 @@ export const RightArrowIcon = props => (
     <polyline points="12 5 19 12 12 19" />
   </Svg>
 );
+
+export const LeftArrowIcon = props => (
+  <Svg
+    size={24}
+    {...props}
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    fill="none"
+    stroke="currentColor"
+  >
+    <line x1="19" y1="12" x2="5" y2="12" />
+    <polyline points="12 19 5 12 12 5" />
+  </Svg>
+);
