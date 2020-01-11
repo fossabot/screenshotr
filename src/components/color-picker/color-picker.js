@@ -7,30 +7,12 @@ import { LeftArrowIcon } from 'components/icons/icons';
 import gradienta from 'lib/gradienta';
 import webgradients from 'lib/webgradients';
 import RowInput from 'components/row-input/row-input';
+import { BACKGROUND_TYPES } from 'constants.js';
 import styles from './color-picker.module.scss';
 
-const BACKGROUND_TYPES = [
-  {
-    label: 'Solid',
-    value: 'solid'
-  },
-  {
-    label: 'Gradient',
-    value: 'gradient'
-  },
-  {
-    label: 'Stripes',
-    value: 'stripes'
-  }
-];
+const gradientaList = gradienta.map((g, index) => ({ ...g, index }));
 
-// gradienta = gradienta.map((g, index) => ({ ...g, index }));
-
-const ColorPicker = ({
-  onChange = () => {},
-  color = 'transparent',
-  backgroundStyles = {}
-}) => {
+const ColorPicker = ({ onChange = () => {}, background = {} }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const [currentBackgroundType, setBackgroundType] = useState(
@@ -49,7 +31,7 @@ const ColorPicker = ({
         <div className={styles.swatch} onClick={handleClick}>
           <Checkboard />
 
-          <div className={styles.color} style={backgroundStyles} />
+          <div className={styles.color} style={background} />
         </div>
       </div>
       <div
@@ -75,14 +57,14 @@ const ColorPicker = ({
         >
           <div className={styles.swatch} style={{ cursor: 'default' }}>
             <Checkboard />
-            <div className={styles.color} style={backgroundStyles} />
+            <div className={styles.color} style={background} />
           </div>
         </div>
         {currentBackgroundType.value === 'solid' && (
           <SketchPicker
             disableAlpha
             width={266}
-            color={color}
+            color={background.background}
             onChange={newColor => handleChange({ background: newColor.hex })}
             presetColors={[
               'transparent',
@@ -122,7 +104,7 @@ const ColorPicker = ({
         )}
         {currentBackgroundType.value === 'stripes' && (
           <div className={styles.gradient_picker}>
-            {gradienta.map(gradient => (
+            {gradientaList.map(gradient => (
               <div
                 key={`grandienta-${gradient.index}`}
                 className={styles.gradient_tile}
