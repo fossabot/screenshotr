@@ -69,6 +69,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
               updateOptions({ background: newBackground })
             }
             color={background.background}
+            backgroundStyles={background}
           />
         </article>
 
