@@ -129,3 +129,18 @@ export const DEFAULT_OPTIONS = {
   address: 'address-full',
   maxOutputWidth: 1000
 };
+
+export const BACKGROUND_TYPES = [
+  {
+    label: 'Solid',
+    value: 'solid'
+  },
+  {
+    label: 'Gradient',
+    value: 'gradient'
+  },
+  {
+    label: 'Stripes',
+    value: 'stripes'
+  }
+];
