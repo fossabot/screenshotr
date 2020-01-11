@@ -62,13 +62,13 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         )}
 
         <article className="input-container">
-          <label htmlFor="background-color">Background Color</label>
+          <label htmlFor="background-color">Background</label>
           <ColorPicker
             id="background-color"
-            onChange={newColor =>
-              updateOptions({ background: { background: newColor.hex } })
+            onChange={newBackground =>
+              updateOptions({ background: newBackground })
             }
-            color={background.background}
+            background={background}
           />
         </article>
 
