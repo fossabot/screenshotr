@@ -118,8 +118,8 @@ export const DEFAULT_OPTIONS = {
     }
   },
   style: {
-    value: 'mondrian',
-    label: 'Mondrian'
+    value: 'apple',
+    label: 'Apple'
   },
   verticalPadding: 75,
   horizontalPadding: 75,
