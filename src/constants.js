@@ -61,6 +61,10 @@ export const STYLE_OPTIONS = [
   {
     value: 'windows98',
     label: 'Windows 98'
+  },
+  {
+    value: 'no-browser',
+    label: 'None'
   }
 ];
 

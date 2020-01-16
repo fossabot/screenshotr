@@ -73,6 +73,14 @@
     }
   }
 
+  &.no-browser {
+    border-radius: 0.25em;
+
+    .header-bar {
+      display: none;
+    }
+  }
+
   &.mondrian {
     border: $mondrian-border;
 
