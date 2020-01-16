@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function FileUploader({
   multiple = false,
@@ -9,10 +9,7 @@ export default function FileUploader({
   accept = '*',
   disabled = false
 }) {
-  const handleChange = e => {
-    // get the files
-    const { files } = e.target;
-
+  const handleFiles = files => {
     // Process each file
     const allFiles = [];
     for (let i = 0; i < files.length; i += 1) {
@@ -44,9 +41,24 @@ export default function FileUploader({
           if (multiple) onDone(allFiles);
           else onDone(allFiles[0]);
         }
-      }; // reader.onload
-    } // for
+      };
+    }
   };
+
+  const handlePaste = e => {
+    const { items } = e.clipboardData;
+    const files = [];
+    for (let i = 0; i < items.length; i += 1) {
+      const file = items[i].getAsFile();
+      if (file) files.push(items[i].getAsFile());
+    }
+    if (files.length) handleFiles(files);
+  };
+
+  useEffect(() => {
+    window.addEventListener('paste', handlePaste);
+    return () => window.removeEventListener('paste', handlePaste);
+  }, [handlePaste]);
 
   return (
     <label
@@ -58,7 +70,7 @@ export default function FileUploader({
     >
       <input
         type="file"
-        onChange={handleChange}
+        onChange={e => handleFiles(e.target.files)}
         multiple={multiple}
         style={{
           width: 0.1,
