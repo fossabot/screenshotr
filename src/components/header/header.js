@@ -62,10 +62,9 @@ function Header() {
         onDone={handleUpload}
         accept="image/*"
       >
-        <span>Upload Image</span>
         <ImageUploadIcon
           className="image-upload-icon"
-          style={{ height: 32, width: 32 }}
+          style={{ height: 32, width: 32, margin: '0 .25rem' }}
         />
       </FileUploader>
     </header>
