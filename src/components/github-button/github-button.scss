@@ -5,16 +5,12 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 4rem;
   padding: 1rem;
 
   .github-button-icon {
     height: 2.5rem;
     width: 2.5rem;
-    fill: rgba(34, 34, 34, 0.5);
+    fill: rgba(34, 34, 34, 0.4);
   }
 
   &:hover {

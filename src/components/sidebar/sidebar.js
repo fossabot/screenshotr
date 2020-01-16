@@ -3,7 +3,6 @@ import Select from 'react-select';
 import ColorPicker from 'components/color-picker/color-picker';
 import RangeInput from 'components/range-input/range-input';
 import RowInput from 'components/row-input/row-input';
-import GradientPicker from 'components/gradient-picker/gradient-picker';
 import { DownloadIcon } from 'components/icons/icons';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
@@ -63,22 +62,13 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         )}
 
         <article className="input-container">
-          <label htmlFor="background-color">Background Color</label>
+          <label htmlFor="background-color">Background</label>
           <ColorPicker
             id="background-color"
-            onChange={newColor =>
-              updateOptions({ background: { background: newColor.hex } })
+            onChange={newBackground =>
+              updateOptions({ background: newBackground })
             }
-            color={background.background}
-          />
-        </article>
-
-        <article className="input-container">
-          <label htmlFor="background-color">Background Gradient</label>
-          <GradientPicker
-            id="background-gradient"
-            color={background}
-            onChange={newGradient => updateOptions({ background: newGradient })}
+            background={background}
           />
         </article>
 
@@ -123,7 +113,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           label="Output Width"
           id="output-width"
           value={outputWidth}
-          min={800}
+          min={400}
           max={maxOutputWidth}
           onChange={val => updateOptions({ outputWidth: val })}
           unit="px"

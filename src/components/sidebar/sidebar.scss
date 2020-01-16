@@ -6,6 +6,7 @@
   border-right: $mondrian-border;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   h2 {
     font-weight: 400;
@@ -44,7 +45,7 @@
   .input-container {
     margin-top: 1.5rem;
 
-    label {
+    & > label {
       display: block;
       text-align: left;
       margin-bottom: 0.5rem;

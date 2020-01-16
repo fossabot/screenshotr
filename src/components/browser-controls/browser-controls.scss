@@ -47,15 +47,15 @@
       width: 1em;
 
       &.control-1 {
-        background: #f50f0f;
+        background: $mondrian-red;
       }
 
       &.control-2 {
-        background: #fbe317;
+        background: $mondrian-yellow;
       }
 
       &.control-3 {
-        background: #0c7fbf;
+        background: $mondrian-blue;
       }
     }
   }
@@ -183,43 +183,48 @@
       margin: 0.125em;
       position: relative;
 
-      &.control-1 {
-        &:before {
+      &.control-1:before {
+        content: ' ';
+        position: absolute;
+        bottom: 0.125em;
+        left: 0.1875em;
+        width: 0.5em;
+        height: 0.125em;
+        display: block;
+        background: $off-black;
+      }
+
+      &.control-2:before {
+        content: ' ';
+        position: absolute;
+        top: 0.125em;
+        left: 0.125em;
+        width: 0.5em;
+        height: 0.4375em;
+        display: block;
+        border: 0.0625em solid $off-black;
+        border-top-width: 0.125em;
+        background: transparent;
+      }
+
+      &.control-3 {
+        &:before,
+        &:after {
           content: ' ';
           position: absolute;
-          bottom: 0.125em;
-          left: 0.1875em;
-          width: 0.5em;
+          width: 0.75em;
           height: 0.125em;
-          display: block;
           background: $off-black;
         }
-      }
-      &.control-2 {
+
         &:before {
-          content: ' ';
-          position: absolute;
-          top: 0.125em;
-          left: 0.125em;
-          width: 0.5em;
-          height: 0.4375em;
-          display: block;
-          border: 0.0625em solid $off-black;
-          border-top-width: 0.125em;
-          background: transparent;
+          top: 0;
+          transform: translate(0.0625em, 0.375em) rotate(-45deg);
         }
-      }
-      &.control-3 {
-        &:before {
-          content: '×';
-          width: 100%;
-          // height: 100%;
-          line-height: 1;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 1.625em;
+
+        &:after {
+          bottom: 0;
+          transform: translate(0.0625em, -0.375em) rotate(45deg);
         }
       }
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import './range-input.scss';
 
 const countDecimals = num => {
@@ -34,32 +34,17 @@ function RangeInput({
 }) {
   const inputRef = useRef();
 
-  useEffect(() => {
-    if (editable) {
-      inputRef.current.value = value;
-    }
-  }, [value]);
-
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      console.log(inputRef.current.value);
-      const newVal = normalizeInput(inputRef.current.value, step, min, max);
-      if (newVal || newVal === 0) {
-        inputRef.current.value = newVal;
-        inputRef.current.blur();
-        onChange(newVal);
-      }
+      inputRef.current.blur();
     }
   };
 
   const handleBlur = () => {
     const newVal = normalizeInput(inputRef.current.value, step, min, max);
     if (newVal || newVal === 0) {
-      inputRef.current.value = newVal;
       onChange(newVal);
-    } else {
-      inputRef.current.value = value;
     }
   };
 
@@ -86,6 +71,8 @@ function RangeInput({
                 max={String(max)}
                 step={String(step)}
                 ref={inputRef}
+                value={value}
+                onChange={e => onChange(e.target.value)}
               />
             ) : (
               <div className="slider-val">{value}</div>

@@ -61,6 +61,10 @@ export const STYLE_OPTIONS = [
   {
     value: 'windows98',
     label: 'Windows 98'
+  },
+  {
+    value: 'no-browser',
+    label: 'None'
   }
 ];
 
@@ -114,8 +118,8 @@ export const DEFAULT_OPTIONS = {
     }
   },
   style: {
-    value: 'mondrian',
-    label: 'Mondrian'
+    value: 'apple',
+    label: 'Apple'
   },
   verticalPadding: 75,
   horizontalPadding: 75,
@@ -129,3 +133,18 @@ export const DEFAULT_OPTIONS = {
   address: 'address-full',
   maxOutputWidth: 1000
 };
+
+export const BACKGROUND_TYPES = [
+  {
+    label: 'Solid',
+    value: 'solid'
+  },
+  {
+    label: 'Gradient',
+    value: 'gradient'
+  },
+  {
+    label: 'Stripes',
+    value: 'stripes'
+  }
+];

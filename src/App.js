@@ -84,6 +84,15 @@ function App() {
           <GithubButton link={GITHUB_LINK} />
         </article>
       </section>
+      <div className="mobile-overlay">
+        <h1>This app does not work on mobile, sorry about that!</h1>
+        <p>
+          Due to the limitations of the technology used to make screenshotr, we
+          can&apos;t yet create images on smaller screensizes. We also do not
+          plan to add this feature any time soon, so please visit this website
+          on a full sized browser window!
+        </p>
+      </div>
     </div>
   );
 }

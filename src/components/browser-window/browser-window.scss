@@ -46,7 +46,8 @@
 
   .address {
     display: inline-block;
-    line-height: normal;
+    height: 1.5em;
+    line-height: 1.5em;
     vertical-align: middle;
     margin: 0 0.5em;
     /* Make overflowing URL shorten  */
@@ -69,6 +70,14 @@
   &.skinny {
     .address-bar {
       margin: 0 1em;
+    }
+  }
+
+  &.no-browser {
+    border-radius: 0.25em;
+
+    .header-bar {
+      display: none;
     }
   }
 
