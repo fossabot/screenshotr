@@ -11,7 +11,8 @@
     "react-color": "^2.17.3",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "react-select": "^3.0.8"
+    "react-select": "^3.0.8",
+    "typeface-montserrat": "0.0.75"
   },
   "scripts": {
     "start": "react-scripts start",
