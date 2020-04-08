@@ -55,11 +55,5 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "npm-check-updates": "^4.1.2",
     "prettier": "^2.0.4"
-  },
-  "prettier": {
-    "tabWidth": 2,
-    "singleQuote": true,
-    "arrowParens": "avoid",
-    "trailingComma": "none"
   }
 }
