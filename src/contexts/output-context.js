@@ -14,7 +14,7 @@ const OutputProvider = ({ children }) => {
     targetURL: '',
     loading: false,
     firstLoad: true,
-    isUpload: false
+    isUpload: false,
   });
 
   const cleanURL = getDomain(output.targetURL);
@@ -23,7 +23,9 @@ const OutputProvider = ({ children }) => {
     setOutput(prevOutput => {
       return {
         ...prevOutput,
-        ...newOutput
+        cleanURL:
+          getDomain(newOutput.targetURL) || getDomain(prevOutput.targetURL),
+        ...newOutput,
       };
     });
   };
@@ -37,11 +39,11 @@ const OutputProvider = ({ children }) => {
         loading: true,
         favicon: '',
         targetURL: '',
-        isUpload: false
+        isUpload: false,
       });
       const [screenshot, favicon] = await Promise.all([
         pullImage(targetURL, resolution),
-        pullFavicon(targetURL)
+        pullFavicon(targetURL),
       ]);
       console.log(screenshot, favicon);
       if (screenshot) {
@@ -50,11 +52,11 @@ const OutputProvider = ({ children }) => {
           favicon,
           screenshot,
           targetURL,
-          loading: false
+          loading: false,
         });
       } else {
         updateOutput({
-          loading: false
+          loading: false,
         });
       }
     } else {
@@ -74,7 +76,7 @@ const OutputProvider = ({ children }) => {
         output,
         cleanURL,
         updateOutput,
-        getScreenshot
+        getScreenshot,
       }}
     >
       {children}

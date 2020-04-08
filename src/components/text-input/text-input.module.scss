@@ -1,0 +1,15 @@
+@import '../../styles/colors';
+@import '../../styles/general';
+
+.text-input {
+  width: 100%;
+  border: $mondrian-border;
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  padding: 0.375rem;
+  font-size: 1rem;
+}
+
+.text-input-container {
+  margin-top: 1.5rem;
+}

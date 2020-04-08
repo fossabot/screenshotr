@@ -3,6 +3,7 @@ import Select from 'react-select';
 import ColorPicker from 'components/color-picker/color-picker';
 import RangeInput from 'components/range-input/range-input';
 import RowInput from 'components/row-input/row-input';
+import TextInput from 'components/text-input/text-input';
 import { DownloadIcon } from 'components/icons/icons';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
@@ -11,7 +12,7 @@ import {
   STYLE_OPTIONS,
   SHADOW_OPTIONS,
   DARK_LIGHT_OPTIONS,
-  ADDRESS_BAR_OPTIONS
+  ADDRESS_BAR_OPTIONS,
 } from 'constants.js';
 import './sidebar.scss';
 
@@ -28,13 +29,16 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     shadow,
     darkLight,
     address,
-    maxOutputWidth
+    maxOutputWidth,
   } = options;
   const hasDarkLightOption =
     style?.value?.toLowerCase()?.includes('apple') ||
     style?.value?.toLowerCase()?.includes('windows10');
 
-  const { loading, screenshot, isUpload } = useContext(OutputContext).output;
+  const {
+    updateOutput,
+    output: { loading, screenshot, isUpload, targetURL },
+  } = useContext(OutputContext);
 
   return (
     <article id="sidebar">
@@ -86,6 +90,15 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           value={address}
           onChange={option => updateOptions({ address: option.value })}
         />
+        {address !== 'address-none' && (
+          <TextInput
+            label="Custom Address"
+            value={targetURL}
+            onChange={newURL =>
+              updateOutput({ targetURL: newURL, cleanURL: newURL })
+            }
+          />
+        )}
         <h2>
           Sizing{' '}
           <span>

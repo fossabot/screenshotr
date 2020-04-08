@@ -10,7 +10,7 @@ function Header() {
   const {
     updateOutput,
     getScreenshot,
-    output: { loading }
+    output: { loading },
   } = useContext(OutputContext);
 
   const [inputVal, setInputVal] = useState('');
@@ -29,9 +29,10 @@ function Header() {
     if (file.base64 && /^image\//.test(file.type)) {
       updateOutput({
         favicon: '',
+        targetURL: '',
         screenshot: file.base64,
         firstLoad: true,
-        isUpload: true
+        isUpload: true,
       });
     }
   };

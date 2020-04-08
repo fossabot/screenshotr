@@ -8,8 +8,9 @@ import './browser-window.scss';
 
 function BrowserWindow() {
   const { options } = useContext(OptionsContext);
-  const { output, cleanURL } = useContext(OutputContext);
-  const { screenshot, favicon, loading } = output;
+  const { screenshot, favicon, loading, cleanURL } = useContext(
+    OutputContext
+  ).output;
 
   const {
     horizontalPadding,
@@ -18,7 +19,7 @@ function BrowserWindow() {
     shadow: shadowStyle,
     style: { value: browserStyle },
     darkLight,
-    address
+    address,
   } = options;
 
   const areControlsOnLeft = !browserStyle.toLowerCase().includes('windows');
@@ -63,7 +64,7 @@ function BrowserWindow() {
       } ${darkLight}`}
       style={{
         margin: `${verticalPadding}px ${horizontalPadding}px`,
-        fontSize: controlScale * 16
+        fontSize: controlScale * 16,
       }}
     >
       <section className="header-bar">
@@ -84,8 +85,6 @@ function BrowserWindow() {
           )}
           <span
             className="address"
-            // contentEditable
-            // spellCheck="false"
             style={
               address !== 'address-full' ? { paddingLeft: 0, border: 0 } : {}
             }
