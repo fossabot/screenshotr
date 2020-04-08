@@ -16,7 +16,7 @@ function App() {
   const { options, updateOptions } = useContext(OptionsContext);
   const {
     cleanURL,
-    output: { firstLoad }
+    output: { firstLoad },
   } = useContext(OutputContext);
   const { outputWidth, background } = options;
 
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     if (bodyWidth !== previousBodyWidth) {
       const newOptions = {
-        maxOutputWidth: bodyWidth
+        maxOutputWidth: bodyWidth,
       };
       if (outputWidth > bodyWidth && bodyWidth !== 0) {
         newOptions.outputWidth = bodyWidth;
@@ -65,14 +65,14 @@ function App() {
           className="app-body-content"
           ref={bodyContentRef}
           style={{
-            alignItems: bodyAlignment
+            alignItems: bodyAlignment,
           }}
         >
           <article
             ref={exportRef}
             id="export"
             style={{
-              width: firstLoad ? `${outputWidth}px` : '65%'
+              width: firstLoad ? `${outputWidth}px` : '65%',
             }}
           >
             {firstLoad && (

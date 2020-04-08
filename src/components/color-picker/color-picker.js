@@ -20,7 +20,7 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
   );
 
   const handleClick = () => setDisplayColorPicker(!displayColorPicker);
-  const handleChange = newColor => {
+  const handleChange = (newColor) => {
     console.log(newColor);
     onChange(newColor);
   };
@@ -47,7 +47,7 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
           name=""
           options={BACKGROUND_TYPES}
           value={currentBackgroundType}
-          onChange={option => setBackgroundType(option)}
+          onChange={(option) => setBackgroundType(option)}
           containerClassName={styles['color-picker-row-picker']}
         />
         <h3 className="label">Current</h3>
@@ -65,7 +65,7 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
             disableAlpha
             width={266}
             color={background.background}
-            onChange={newColor => handleChange({ background: newColor.hex })}
+            onChange={(newColor) => handleChange({ background: newColor.hex })}
             presetColors={[
               'transparent',
               '#1abc9c',
@@ -86,13 +86,13 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
               '#f39c12',
               '#d35400',
               '#c0392b',
-              '#7f8c8d'
+              '#7f8c8d',
             ]}
           />
         )}
         {currentBackgroundType.value === 'gradient' && (
           <div className={styles.gradient_picker}>
-            {Object.keys(webgradients).map(gradientKey => (
+            {Object.keys(webgradients).map((gradientKey) => (
               <div
                 key={gradientKey}
                 className={styles.gradient_tile}
@@ -104,7 +104,7 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
         )}
         {currentBackgroundType.value === 'stripes' && (
           <div className={styles.gradient_picker}>
-            {gradientaList.map(gradient => (
+            {gradientaList.map((gradient) => (
               <div
                 key={`grandienta-${gradient.index}`}
                 className={styles.gradient_tile}

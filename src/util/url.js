@@ -1,6 +1,6 @@
 // https://github.com/wexond/desktop/blob/master/src/utils/url.ts
 
-export const isURL = input => {
+export const isURL = (input) => {
   const pattern = /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[:?\d]*)\S*$/;
 
   if (pattern.test(input)) {
@@ -20,7 +20,7 @@ export const matchesPattern = (pattern, url) => {
   return url.match(regexp) != null;
 };
 
-export const getDomain = url => {
+export const getDomain = (url) => {
   let hostname = url;
 
   if (hostname.includes('http://') || hostname.includes('https://')) {
@@ -32,19 +32,19 @@ export const getDomain = url => {
   return hostname;
 };
 
-export const prefixHttps = url => {
+export const prefixHttps = (url) => {
   return url.includes('://')
     ? `https://${url.split('://')[1].trim()}`
     : `https://${url.trim()}`;
 };
 
-export const prefixHttp = url => {
+export const prefixHttp = (url) => {
   return url.includes('://')
     ? `http://${url.split('://')[1].trim()}`
     : `http://${url.trim()}`;
 };
 
-export const getCorrectUrl = url => {
+export const getCorrectUrl = (url) => {
   const newUrl = prefixHttps(url);
   if (isURL(newUrl)) {
     console.log('is web uri');

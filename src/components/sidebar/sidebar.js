@@ -11,7 +11,7 @@ import {
   STYLE_OPTIONS,
   SHADOW_OPTIONS,
   DARK_LIGHT_OPTIONS,
-  ADDRESS_BAR_OPTIONS
+  ADDRESS_BAR_OPTIONS,
 } from 'constants.js';
 import './sidebar.scss';
 
@@ -28,7 +28,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     shadow,
     darkLight,
     address,
-    maxOutputWidth
+    maxOutputWidth,
   } = options;
   const hasDarkLightOption =
     style?.value?.toLowerCase()?.includes('apple') ||
@@ -46,7 +46,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             id="browser-style"
             className="style-select select"
             options={STYLE_OPTIONS}
-            onChange={newStyle => {
+            onChange={(newStyle) => {
               updateOptions({ style: newStyle });
             }}
             value={style}
@@ -57,7 +57,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
             name="dark-light"
             options={DARK_LIGHT_OPTIONS}
             value={darkLight}
-            onChange={option => updateOptions({ darkLight: option.value })}
+            onChange={(option) => updateOptions({ darkLight: option.value })}
           />
         )}
 
@@ -65,7 +65,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           <label htmlFor="background-color">Background</label>
           <ColorPicker
             id="background-color"
-            onChange={newBackground =>
+            onChange={(newBackground) =>
               updateOptions({ background: newBackground })
             }
             background={background}
@@ -77,14 +77,14 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           name="shadow"
           options={SHADOW_OPTIONS}
           value={shadow}
-          onChange={option => updateOptions({ shadow: option.value })}
+          onChange={(option) => updateOptions({ shadow: option.value })}
         />
         <RowInput
           label="Address Bar"
           name="address-bar"
           options={ADDRESS_BAR_OPTIONS}
           value={address}
-          onChange={option => updateOptions({ address: option.value })}
+          onChange={(option) => updateOptions({ address: option.value })}
         />
         <h2>
           Sizing{' '}
@@ -100,7 +100,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
               isDisabled={loading}
               className="resolution-select select"
               options={RESOLUTION_OPTIONS}
-              onChange={newResolution => {
+              onChange={(newResolution) => {
                 updateOptions({ resolution: newResolution });
               }}
               value={resolution}
@@ -115,7 +115,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           value={outputWidth}
           min={400}
           max={maxOutputWidth}
-          onChange={val => updateOptions({ outputWidth: val })}
+          onChange={(val) => updateOptions({ outputWidth: val })}
           unit="px"
           editable
         />
@@ -125,7 +125,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           id="horizontal-padding"
           value={horizontalPadding}
           max={200}
-          onChange={val => updateOptions({ horizontalPadding: val })}
+          onChange={(val) => updateOptions({ horizontalPadding: val })}
           unit="px"
           editable
         />
@@ -135,7 +135,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           id="vertical-padding"
           value={verticalPadding}
           max={200}
-          onChange={val => updateOptions({ verticalPadding: val })}
+          onChange={(val) => updateOptions({ verticalPadding: val })}
           unit="px"
           editable
         />
@@ -147,7 +147,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           min={0.5}
           max={2}
           step={0.25}
-          onChange={val => updateOptions({ controlScale: val })}
+          onChange={(val) => updateOptions({ controlScale: val })}
           unit={<div style={{ fontSize: 22 }}>×</div>}
           editable
         />

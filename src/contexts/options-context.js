@@ -6,11 +6,11 @@ const OptionsContext = createContext();
 const OptionsProvider = ({ children }) => {
   const [options, setOptions] = useState(DEFAULT_OPTIONS);
 
-  const updateOptions = newOpts => {
-    setOptions(prevOpts => {
+  const updateOptions = (newOpts) => {
+    setOptions((prevOpts) => {
       return {
         ...prevOpts,
-        ...newOpts
+        ...newOpts,
       };
     });
   };
@@ -19,7 +19,7 @@ const OptionsProvider = ({ children }) => {
     <OptionsContext.Provider
       value={{
         options,
-        updateOptions
+        updateOptions,
       }}
     >
       {children}

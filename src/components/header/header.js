@@ -10,21 +10,21 @@ function Header() {
   const {
     updateOutput,
     getScreenshot,
-    output: { loading }
+    output: { loading },
   } = useContext(OutputContext);
 
   const [inputVal, setInputVal] = useState('');
 
-  const updateInputVal = e => {
+  const updateInputVal = (e) => {
     setInputVal(e.target.value);
   };
 
-  const getImage = async e => {
+  const getImage = async (e) => {
     e.preventDefault();
     getScreenshot(inputVal);
   };
 
-  const handleUpload = file => {
+  const handleUpload = (file) => {
     console.log(file);
     if (file.base64 && /^image\//.test(file.type)) {
       updateOutput({
@@ -32,7 +32,7 @@ function Header() {
         targetURL: '',
         screenshot: file.base64,
         firstLoad: true,
-        isUpload: true
+        isUpload: true,
       });
     }
   };

@@ -20,7 +20,7 @@ const handleFiles = (files, isMultiple, callback) => {
         type: file.type,
         size: file.size,
         base64: reader.result,
-        file
+        file,
       };
 
       // Push it to the state
@@ -43,10 +43,10 @@ export default function FileUploader({
   children,
   className = '',
   accept = '*',
-  disabled = false
+  disabled = false,
 }) {
   useEffect(() => {
-    const handlePaste = e => {
+    const handlePaste = (e) => {
       const { items } = e.clipboardData;
       const files = [];
       for (let i = 0; i < items.length; i += 1) {
@@ -64,13 +64,13 @@ export default function FileUploader({
     <label
       style={{
         cursor: 'pointer',
-        ...style
+        ...style,
       }}
       className={className}
     >
       <input
         type="file"
-        onChange={e => handleFiles(e.target.files, multiple, onDone)}
+        onChange={(e) => handleFiles(e.target.files, multiple, onDone)}
         multiple={multiple}
         style={{
           width: 0.1,
@@ -78,7 +78,7 @@ export default function FileUploader({
           opacity: 0,
           overflow: 'hidden',
           position: 'absolute',
-          zIndex: -1
+          zIndex: -1,
         }}
         accept={accept}
         disabled={disabled}

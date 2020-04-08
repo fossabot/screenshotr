@@ -4,7 +4,7 @@ import './browser-controls.scss';
 function BrowserControls({
   browserStyle = '',
   visible = true,
-  darkLight = ''
+  darkLight = '',
 }) {
   return (
     <section

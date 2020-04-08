@@ -7,14 +7,14 @@ export const downloadScreenshot = async (filename, exportNode, exportWidth) => {
   const dataURL = await toBlob(exportNode, {
     height: exportNode.offsetHeight * scale,
     width: exportNode.offsetWidth * scale,
-    filter: el => !el?.classList?.contains('do-not-export'),
+    filter: (el) => !el?.classList?.contains('do-not-export'),
     style: {
       transform: `scale(${scale})`,
       transformOrigin: 'top left',
       width: `${exportNode.offsetWidth}px`,
       height: `${exportNode.offsetHeight}px`,
-      backgroundImage: 'none'
-    }
+      backgroundImage: 'none',
+    },
   });
   saveAs(dataURL, `${filename}.png`);
 };
