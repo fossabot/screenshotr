@@ -1,7 +1,14 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useCallback
+} from 'react';
 import OptionsContext from 'contexts/options-context';
 import { getCorrectUrl, getDomain } from 'util/url';
 import { pullImage, pullFavicon } from 'api';
+import { usePrevious } from 'util/hooks';
 
 const OutputContext = createContext();
 
@@ -28,45 +35,51 @@ const OutputProvider = ({ children }) => {
     });
   };
 
-  const getScreenshot = async inputVal => {
-    console.log(inputVal);
-    const targetURL = getCorrectUrl(inputVal);
+  const getScreenshot = useCallback(
+    async inputVal => {
+      console.log(inputVal);
+      const targetURL = getCorrectUrl(inputVal);
 
-    if (targetURL) {
-      updateOutput({
-        loading: true,
-        favicon: '',
-        targetURL: '',
-        isUpload: false
-      });
-      const [screenshot, favicon] = await Promise.all([
-        pullImage(targetURL, resolution),
-        pullFavicon(targetURL)
-      ]);
-      console.log(screenshot, favicon);
-      if (screenshot) {
+      if (targetURL) {
         updateOutput({
-          firstLoad: true,
-          favicon,
-          screenshot,
-          targetURL,
-          loading: false
+          loading: true,
+          favicon: '',
+          targetURL: '',
+          isUpload: false
         });
+        const [screenshot, favicon] = await Promise.all([
+          pullImage(targetURL, resolution),
+          pullFavicon(targetURL)
+        ]);
+        console.log(screenshot, favicon);
+        if (screenshot) {
+          updateOutput({
+            firstLoad: true,
+            favicon,
+            screenshot,
+            targetURL,
+            loading: false
+          });
+        } else {
+          updateOutput({
+            loading: false
+          });
+        }
       } else {
-        updateOutput({
-          loading: false
-        });
+        console.log('INVALID URL');
       }
-    } else {
-      console.log('INVALID URL');
-    }
-  };
+    },
+    [resolution]
+  );
+
+  const previousResolution = usePrevious(resolution);
 
   useEffect(() => {
-    console.log('resolution changed');
-    console.log(output.targetURL);
-    getScreenshot(output.targetURL);
-  }, [resolution]);
+    if (resolution !== previousResolution) {
+      console.log('resolution changed');
+      getScreenshot(output.targetURL);
+    }
+  }, [resolution, getScreenshot, output.targetURL, previousResolution]);
 
   return (
     <OutputContext.Provider

@@ -29,6 +29,7 @@ function Header() {
     if (file.base64 && /^image\//.test(file.type)) {
       updateOutput({
         favicon: '',
+        targetURL: '',
         screenshot: file.base64,
         firstLoad: true,
         isUpload: true
