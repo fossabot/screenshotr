@@ -2,45 +2,59 @@ export const GITHUB_LINK = 'https://github.com/csandman/screenshotr';
 
 export const RESOLUTION_OPTIONS = [
   {
-    label: '1024 x 576',
+    label: '1024 × 576',
     value: {
       height: 576,
       width: 1024,
     },
   },
   {
-    label: '1152 x 648',
+    label: '1152 × 648',
     value: {
       height: 648,
       width: 1152,
     },
   },
   {
-    label: '1280 x 720',
+    label: '1280 × 720',
     value: {
       height: 720,
       width: 1280,
     },
   },
   {
-    label: '1366 x 768',
+    label: '1366 × 768',
     value: {
       height: 768,
       width: 1366,
     },
   },
   {
-    label: '1600 x 900',
+    label: '1600 × 900',
     value: {
       height: 900,
       width: 1600,
     },
   },
   {
-    label: '1920 x 1080',
+    label: '1920 × 1080',
     value: {
       height: 1080,
       width: 1920,
+    },
+  },
+  {
+    label: '2560 × 1440',
+    value: {
+      height: 1440,
+      width: 2560,
+    },
+  },
+  {
+    label: '3840 × 2160',
+    value: {
+      height: 2160,
+      width: 3840,
     },
   },
 ];
@@ -110,17 +124,8 @@ export const ADDRESS_BAR_OPTIONS = [
 ];
 
 export const DEFAULT_OPTIONS = {
-  resolution: {
-    label: '1366 x 768',
-    value: {
-      height: 768,
-      width: 1366,
-    },
-  },
-  style: {
-    value: 'apple',
-    label: 'Apple',
-  },
+  resolution: RESOLUTION_OPTIONS[3],
+  style: STYLE_OPTIONS[1],
   verticalPadding: 75,
   horizontalPadding: 75,
   outputWidth: 1000,
