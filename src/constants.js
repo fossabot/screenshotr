@@ -61,16 +61,16 @@ export const RESOLUTION_OPTIONS = [
 
 export const STYLE_OPTIONS = [
   {
-    value: 'mondrian',
-    label: 'Mondrian',
-  },
-  {
     value: 'apple',
-    label: 'Apple',
+    label: 'Mac OS',
   },
   {
     value: 'windows10',
     label: 'Windows 10',
+  },
+  {
+    value: 'mondrian',
+    label: 'Mondrian',
   },
   {
     value: 'windows98',
@@ -125,7 +125,7 @@ export const ADDRESS_BAR_OPTIONS = [
 
 export const DEFAULT_OPTIONS = {
   resolution: RESOLUTION_OPTIONS[3],
-  style: STYLE_OPTIONS[1],
+  style: STYLE_OPTIONS[0],
   verticalPadding: 75,
   horizontalPadding: 75,
   outputWidth: 1000,

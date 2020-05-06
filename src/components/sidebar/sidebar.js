@@ -40,25 +40,6 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     <article id="sidebar">
       <div className="sidebar-content">
         <h2>Style</h2>
-        <article className="input-container">
-          <label htmlFor="browser-style">Browser Style</label>
-          <SelectInput
-            id="browser-style"
-            options={STYLE_OPTIONS}
-            onChange={(newStyle) => {
-              updateOptions({ style: newStyle });
-            }}
-            value={style}
-          />
-        </article>
-        {hasDarkLightOption && (
-          <RowInput
-            name="dark-light"
-            options={DARK_LIGHT_OPTIONS}
-            value={darkLight}
-            onChange={(option) => updateOptions({ darkLight: option.value })}
-          />
-        )}
 
         <article className="input-container">
           <label htmlFor="background-color">Background</label>
@@ -78,6 +59,28 @@ function Sidebar({ handleDownloadClick, exportSize }) {
           value={shadow}
           onChange={(option) => updateOptions({ shadow: option.value })}
         />
+
+        <article className="input-container">
+          <label htmlFor="browser-style">Browser Style</label>
+          <SelectInput
+            id="browser-style"
+            options={STYLE_OPTIONS}
+            onChange={(newStyle) => {
+              updateOptions({ style: newStyle });
+            }}
+            value={style}
+          />
+        </article>
+
+        {hasDarkLightOption && (
+          <RowInput
+            name="dark-light"
+            options={DARK_LIGHT_OPTIONS}
+            value={darkLight}
+            onChange={(option) => updateOptions({ darkLight: option.value })}
+          />
+        )}
+
         <RowInput
           label="Address Bar"
           name="address-bar"
