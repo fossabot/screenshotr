@@ -11,6 +11,7 @@ import OutputContext from 'contexts/output-context';
 import { downloadScreenshot } from 'util/screenshot';
 import { GITHUB_LINK } from 'constants.js';
 import { usePrevious } from 'util/hooks';
+import { getFormattedTimeStamp } from 'util/general';
 
 function App() {
   const { options, updateOptions } = useContext(OptionsContext);
@@ -46,7 +47,9 @@ function App() {
 
   const handleDownloadClick = () => {
     const filenameArr = cleanURL.split('.');
-    const filename = filenameArr[filenameArr.length - 2];
+    const filename = `${
+      filenameArr[filenameArr.length - 2]
+    }_${getFormattedTimeStamp()}`;
     const exportNode = exportRef.current;
     const exportWidth = exportSize.width;
     downloadScreenshot(filename, exportNode, exportWidth);
