@@ -38,6 +38,8 @@ function App() {
 
   const bodyAlignment =
     exportSize.height > bodySize.height ? 'flex-start' : 'center';
+  const bodyOverflow =
+    exportSize.height > bodySize.height ? 'scroll' : 'auto';
 
   const handleDownloadClick = () => {
     const filenameArr = cleanURL.split('.');
@@ -61,7 +63,8 @@ function App() {
           className="app-body-content"
           ref={bodyContentRef}
           style={{
-            alignItems: bodyAlignment
+            alignItems: bodyAlignment,
+            overflowY: bodyOverflow
           }}
         >
           <article
