@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 export default function FileUploader({
   multiple = false,
@@ -9,51 +9,57 @@ export default function FileUploader({
   accept = '*',
   disabled = false
 }) {
-  const handleFiles = files => {
-    // Process each file
-    const allFiles = [];
-    for (let i = 0; i < files.length; i += 1) {
-      const file = files[i];
+  const handleFiles = useCallback(
+    files => {
+      // Process each file
+      const allFiles = [];
+      for (let i = 0; i < files.length; i += 1) {
+        const file = files[i];
 
-      // Make new FileReader
-      const reader = new FileReader();
+        // Make new FileReader
+        const reader = new FileReader();
 
-      // Convert the file to base64 text
-      reader.readAsDataURL(file);
+        // Convert the file to base64 text
+        reader.readAsDataURL(file);
 
-      // on reader load somthing...
-      reader.onload = () => {
-        // Make a fileInfo Object
-        const fileInfo = {
-          name: file.name,
-          type: file.type,
-          size: file.size,
-          base64: reader.result,
-          file
+        // on reader load somthing...
+        reader.onload = () => {
+          // Make a fileInfo Object
+          const fileInfo = {
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            base64: reader.result,
+            file
+          };
+
+          // Push it to the state
+          allFiles.push(fileInfo);
+
+          // If all files have been proceed
+          if (allFiles.length === files.length) {
+            // Apply Callback function
+            if (multiple) onDone(allFiles);
+            else onDone(allFiles[0]);
+          }
         };
+      }
+    },
+    [onDone, multiple]
+  );
 
-        // Push it to the state
-        allFiles.push(fileInfo);
-
-        // If all files have been proceed
-        if (allFiles.length === files.length) {
-          // Apply Callback function
-          if (multiple) onDone(allFiles);
-          else onDone(allFiles[0]);
-        }
-      };
-    }
-  };
-
-  const handlePaste = e => {
-    const { items } = e.clipboardData;
-    const files = [];
-    for (let i = 0; i < items.length; i += 1) {
-      const file = items[i].getAsFile();
-      if (file) files.push(items[i].getAsFile());
-    }
-    if (files.length) handleFiles(files);
-  };
+  const handlePaste = useCallback(
+    e => {
+      const { items } = e.clipboardData;
+      const files = [];
+      for (let i = 0; i < items.length; i += 1) {
+        const file = items[i].getAsFile();
+        if (file) files.push(items[i].getAsFile());
+      }
+      if (files.length) handleFiles(files);
+    },
+    [handleFiles]
+  );
 
   useEffect(() => {
     window.addEventListener('paste', handlePaste);
