@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import Select from 'react-select';
 import ColorPicker from 'components/color-picker/color-picker';
 import RangeInput from 'components/range-input/range-input';
 import RowInput from 'components/row-input/row-input';
+import SelectInput from 'components/select-input/select-input';
 import { DownloadIcon } from 'components/icons/icons';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
@@ -42,9 +42,8 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         <h2>Style</h2>
         <article className="input-container">
           <label htmlFor="browser-style">Browser Style</label>
-          <Select
+          <SelectInput
             id="browser-style"
-            className="style-select select"
             options={STYLE_OPTIONS}
             onChange={(newStyle) => {
               updateOptions({ style: newStyle });
@@ -95,10 +94,9 @@ function Sidebar({ handleDownloadClick, exportSize }) {
         {!isUpload && (
           <article className="input-container">
             <label htmlFor="vertical-padding">Screenshot Resolution</label>
-            <Select
+            <SelectInput
               id="screenshot-resolution"
               isDisabled={loading}
-              className="resolution-select select"
               options={RESOLUTION_OPTIONS}
               onChange={(newResolution) => {
                 updateOptions({ resolution: newResolution });
