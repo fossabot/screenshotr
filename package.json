@@ -25,8 +25,9 @@
     "deploy": "npm run predeploy && firebase deploy",
     "deploy:functions": "firebase deploy --only functions",
     "deploy:hosting": "firebase deploy --only hosting",
-    "clean-install": "rm -rf node_modules && rm package-lock.json && npm i",
-    "lint": "eslint src/**/*.{js,jsx}"
+    "clean-install": "rm -rf node_modules && rm -f package-lock.json && npm i",
+    "lint": "eslint src/**/*.{js,jsx}",
+    "update-packages": "ncu -u && npm i && npm audit fix"
   },
   "eslintConfig": {
     "extends": "react-app"

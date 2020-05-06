@@ -5,108 +5,108 @@ export const RESOLUTION_OPTIONS = [
     label: '1024 x 576',
     value: {
       height: 576,
-      width: 1024
-    }
+      width: 1024,
+    },
   },
   {
     label: '1152 x 648',
     value: {
       height: 648,
-      width: 1152
-    }
+      width: 1152,
+    },
   },
   {
     label: '1280 x 720',
     value: {
       height: 720,
-      width: 1280
-    }
+      width: 1280,
+    },
   },
   {
     label: '1366 x 768',
     value: {
       height: 768,
-      width: 1366
-    }
+      width: 1366,
+    },
   },
   {
     label: '1600 x 900',
     value: {
       height: 900,
-      width: 1600
-    }
+      width: 1600,
+    },
   },
   {
     label: '1920 x 1080',
     value: {
       height: 1080,
-      width: 1920
-    }
-  }
+      width: 1920,
+    },
+  },
 ];
 
 export const STYLE_OPTIONS = [
   {
     value: 'mondrian',
-    label: 'Mondrian'
+    label: 'Mondrian',
   },
   {
     value: 'apple',
-    label: 'Apple'
+    label: 'Apple',
   },
   {
     value: 'windows10',
-    label: 'Windows 10'
+    label: 'Windows 10',
   },
   {
     value: 'windows98',
-    label: 'Windows 98'
+    label: 'Windows 98',
   },
   {
     value: 'no-browser',
-    label: 'None'
-  }
+    label: 'None',
+  },
 ];
 
 export const SHADOW_OPTIONS = [
   {
     value: 'shadow-none',
-    label: 'None'
+    label: 'None',
   },
   {
     value: 'shadow-small',
-    label: 'Small'
+    label: 'Small',
   },
   {
     value: 'shadow-large',
-    label: 'Large'
-  }
+    label: 'Large',
+  },
 ];
 
 export const DARK_LIGHT_OPTIONS = [
   {
     value: 'dark',
-    label: 'Dark'
+    label: 'Dark',
   },
   {
     value: 'light',
-    label: 'Light'
-  }
+    label: 'Light',
+  },
 ];
 
 export const ADDRESS_BAR_OPTIONS = [
   {
     value: 'address-none',
-    label: 'None'
+    label: 'None',
   },
   {
     value: 'address-no-favicon',
-    label: 'Simple'
+    label: 'Simple',
   },
   {
     value: 'address-full',
-    label: 'Favicon'
-  }
+    label: 'Favicon',
+  },
 ];
 
 export const DEFAULT_OPTIONS = {
@@ -114,37 +114,37 @@ export const DEFAULT_OPTIONS = {
     label: '1366 x 768',
     value: {
       height: 768,
-      width: 1366
-    }
+      width: 1366,
+    },
   },
   style: {
     value: 'apple',
-    label: 'Apple'
+    label: 'Apple',
   },
   verticalPadding: 75,
   horizontalPadding: 75,
   outputWidth: 1000,
   background: {
-    background: 'transparent'
+    background: 'transparent',
   },
   controlScale: 1,
   shadow: 'shadow-small',
   darkLight: 'dark',
   address: 'address-full',
-  maxOutputWidth: 1000
+  maxOutputWidth: 1000,
 };
 
 export const BACKGROUND_TYPES = [
   {
     label: 'Solid',
-    value: 'solid'
+    value: 'solid',
   },
   {
     label: 'Gradient',
-    value: 'gradient'
+    value: 'gradient',
   },
   {
     label: 'Stripes',
-    value: 'stripes'
-  }
+    value: 'stripes',
+  },
 ];

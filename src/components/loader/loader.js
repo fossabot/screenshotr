@@ -51,7 +51,7 @@ export const LoaderFill = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}
     >
       <BrowserLoader />
@@ -59,7 +59,7 @@ export const LoaderFill = () => {
         style={{
           fontWeight: 400,
           fontSize: '1.625rem',
-          marginTop: '.5rem'
+          marginTop: '.5rem',
         }}
       >
         Please wait while we grab your screenshot

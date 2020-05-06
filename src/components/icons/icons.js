@@ -13,26 +13,26 @@ const Svg = ({ size, ...props }) => (
       fill: 'currentColor',
       lineHeight: 1,
       stroke: 'currentColor',
-      strokeWidth: 0
+      strokeWidth: 0,
     }}
     {...props}
   />
 );
 
-export const GithubIcon = props => (
+export const GithubIcon = (props) => (
   <Svg size={24} {...props}>
     <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
   </Svg>
 );
 
-export const DownChevronIcon = props => (
+export const DownChevronIcon = (props) => (
   <Svg size={20} {...props}>
     <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" />
   </Svg>
 );
 
 // https://www.flaticon.com/free-icon/photo_685669
-export const ImageUploadIcon = props => (
+export const ImageUploadIcon = (props) => (
   <Svg size={419.2} {...props}>
     <circle cx="158" cy="144.4" r="28.8" />
     <path
@@ -59,7 +59,7 @@ export const ImageUploadIcon = props => (
 );
 
 // https://www.flaticon.com/free-icon/photo_685686
-export const ImageUploadColorIcon = props => (
+export const ImageUploadColorIcon = (props) => (
   <Svg size={308.8} {...props}>
     <path
       fill="#4A566E"
@@ -91,7 +91,7 @@ export const ImageUploadColorIcon = props => (
   </Svg>
 );
 
-export const RightArrowIcon = props => (
+export const RightArrowIcon = (props) => (
   <Svg
     size={24}
     {...props}
@@ -106,7 +106,7 @@ export const RightArrowIcon = props => (
   </Svg>
 );
 
-export const LeftArrowIcon = props => (
+export const LeftArrowIcon = (props) => (
   <Svg
     size={24}
     {...props}
@@ -121,7 +121,7 @@ export const LeftArrowIcon = props => (
   </Svg>
 );
 
-export const DownloadIcon = props => (
+export const DownloadIcon = (props) => (
   <Svg
     size={24}
     {...props}

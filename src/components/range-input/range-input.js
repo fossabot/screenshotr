@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import './range-input.scss';
 
-const countDecimals = num => {
+const countDecimals = (num) => {
   if (Math.floor(num) === num) return 0;
   return num.toString().split('.')[1].length || 0;
 };
@@ -30,11 +30,11 @@ function RangeInput({
   id = '',
   editable = false,
   unit = '',
-  unitSide = 'right'
+  unitSide = 'right',
 }) {
   const inputRef = useRef();
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       inputRef.current.blur();
@@ -72,7 +72,7 @@ function RangeInput({
                 step={String(step)}
                 ref={inputRef}
                 value={value}
-                onChange={e => onChange(e.target.value)}
+                onChange={(e) => onChange(e.target.value)}
               />
             ) : (
               <div className="slider-val">{value}</div>
@@ -93,7 +93,7 @@ function RangeInput({
         min={String(min)}
         max={String(max)}
         step={String(step)}
-        onChange={e => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         className={className}
       />
     </article>

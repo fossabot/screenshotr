@@ -10,12 +10,13 @@ import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
 import { downloadScreenshot } from 'util/screenshot';
 import { GITHUB_LINK } from 'constants.js';
+import { usePrevious } from 'util/hooks';
 
 function App() {
   const { options, updateOptions } = useContext(OptionsContext);
   const {
     cleanURL,
-    output: { firstLoad }
+    output: { firstLoad },
   } = useContext(OutputContext);
   const { outputWidth, background } = options;
 
@@ -25,21 +26,24 @@ function App() {
   const bodyContentRef = useRef(null);
   const bodySize = useComponentSize(bodyContentRef);
   const bodyWidth = bodySize.width;
-
-  useEffect(() => {
-    const newOptions = {
-      maxOutputWidth: bodyWidth
-    };
-    if (outputWidth > bodyWidth && bodyWidth !== 0) {
-      newOptions.outputWidth = bodyWidth;
-    }
-    updateOptions(newOptions);
-  }, [bodyWidth]);
+  const previousBodyWidth = usePrevious(bodyWidth);
 
   const bodyAlignment =
     exportSize.height > bodySize.height ? 'flex-start' : 'center';
   const bodyOverflow =
     exportSize.height > bodySize.height ? 'scroll' : 'auto';
+
+  useEffect(() => {
+    if (bodyWidth !== previousBodyWidth) {
+      const newOptions = {
+        maxOutputWidth: bodyWidth,
+      };
+      if (outputWidth > bodyWidth && bodyWidth !== 0) {
+        newOptions.outputWidth = bodyWidth;
+      }
+      updateOptions(newOptions);
+    }
+  }, [bodyWidth, outputWidth, updateOptions, previousBodyWidth]);
 
   const handleDownloadClick = () => {
     const filenameArr = cleanURL.split('.');
@@ -64,14 +68,14 @@ function App() {
           ref={bodyContentRef}
           style={{
             alignItems: bodyAlignment,
-            overflowY: bodyOverflow
+            overflowY: bodyOverflow,
           }}
         >
           <article
             ref={exportRef}
             id="export"
             style={{
-              width: firstLoad ? `${outputWidth}px` : '65%'
+              width: firstLoad ? `${outputWidth}px` : '65%',
             }}
           >
             {firstLoad && (

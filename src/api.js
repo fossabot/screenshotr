@@ -2,7 +2,7 @@ const toBase64 = (buffer, contentType) => {
   let binary = '';
   const bytes = new Uint8Array(buffer);
 
-  bytes.forEach(b => {
+  bytes.forEach((b) => {
     binary += String.fromCharCode(b);
   });
   let image = `data:${contentType};base64,`;
@@ -11,15 +11,15 @@ const toBase64 = (buffer, contentType) => {
   return image;
 };
 
-export const pullFavicon = async targetURL => {
+export const pullFavicon = async (targetURL) => {
   const response = await fetch(
     `${process.env.REACT_APP_FUNCTIONS_ENDPOINT}pullFavicon`,
     {
       method: 'POST',
       body: JSON.stringify({ targetURL }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     }
   );
   console.log('favicon response:', response);
@@ -27,7 +27,7 @@ export const pullFavicon = async targetURL => {
     const contentType = response.headers.get('Content-Type');
     const imageStr = await response
       .arrayBuffer()
-      .then(buffer => toBase64(buffer, contentType));
+      .then((buffer) => toBase64(buffer, contentType));
 
     console.log(imageStr);
 
@@ -44,15 +44,15 @@ export const pullImage = async (targetURL, resolution) => {
       method: 'POST',
       body: JSON.stringify({ targetURL, resolution }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     }
   );
   if (response.ok) {
     const contentType = response.headers.get('Content-Type');
     const imageStr = await response
       .arrayBuffer()
-      .then(buffer => toBase64(buffer, contentType));
+      .then((buffer) => toBase64(buffer, contentType));
 
     return imageStr;
   }

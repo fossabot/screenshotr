@@ -7,12 +7,12 @@ function RowInput({
   options = [
     { value: 'val1', label: 'Value 1' },
     { value: 'val2', label: 'Value 2' },
-    { value: 'val3', label: 'Value 3' }
+    { value: 'val3', label: 'Value 3' },
   ],
   value = 'val1',
   containerClassName = '',
   onChange = () => {},
-  vertical = false
+  vertical = false,
 }) {
   return (
     <article
@@ -23,7 +23,7 @@ function RowInput({
       <div
         className={`${styles['row-input']} ${vertical ? styles.vertical : ''}`}
       >
-        {options.map(option => {
+        {options.map((option) => {
           const isSelected =
             typeof value === 'string'
               ? option.value === value
