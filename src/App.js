@@ -87,7 +87,6 @@ function App() {
             )}
             <BrowserWindow />
           </article>
-          <GithubButton link={GITHUB_LINK} />
         </article>
       </section>
       <div className="mobile-overlay">
@@ -99,6 +98,7 @@ function App() {
           on a full sized browser window!
         </p>
       </div>
+      <GithubButton link={GITHUB_LINK} />
     </div>
   );
 }
