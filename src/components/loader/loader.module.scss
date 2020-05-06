@@ -1,3 +1,6 @@
+@import '../../styles/colors';
+@import '../../styles/general';
+
 .loader-container {
   display: flex;
   flex-direction: column;
@@ -8,7 +11,7 @@
 .browser-loader {
   height: 5.5rem;
   width: 8rem;
-  border: 2px solid #333;
+  border: $mondrian-border;
   border-radius: 0.5rem;
   animation: bounce 0.4s infinite alternate;
   -webkit-animation: bounce 0.4s infinite alternate;
@@ -17,7 +20,7 @@
 
   header {
     height: 1rem;
-    border-bottom: 2px solid #333;
+    border-bottom: $mondrian-border;
     display: flex;
     align-items: center;
 

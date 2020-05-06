@@ -45,7 +45,7 @@ function Header() {
   return (
     <header id="header">
       <article className="logo">
-        <Logo style={{ height: 32, width: 32, marginRight: '0.75rem' }} />
+        <Logo className="logo-icon" />
         screenshotr
       </article>
       <form onSubmit={getImage} className="search-form">
@@ -58,7 +58,7 @@ function Header() {
           type="search"
         />
         <button type="submit" disabled={!inputVal || loading}>
-          GO <RightArrowIcon style={{ marginLeft: '0.5rem' }} />
+          GO <RightArrowIcon className="right-arrow-icon" />
         </button>
       </form>
 
@@ -67,10 +67,7 @@ function Header() {
         onDone={handleUpload}
         accept="image/*"
       >
-        <ImageUploadIcon
-          className="image-upload-icon"
-          style={{ height: 32, width: 32, margin: '0 .25rem' }}
-        />
+        <ImageUploadIcon className="image-upload-icon" />
       </FileUploader>
     </header>
   );

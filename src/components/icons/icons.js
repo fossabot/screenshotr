@@ -138,20 +138,20 @@ export const DownloadIcon = (props) => (
 );
 
 export const Logo = (props) => (
-  <Svg size={72} {...props} strokeWidth="4" fill="none">
-    <rect x="36" y="4" width="32" height="32" rx="2" fill="#0C7FBF" />
-    <rect x="36" y="36" width="32" height="32" rx="2" fill="white" />
-    <rect x="4" y="43" width="32" height="25" rx="2" fill="#FBE317" />
-    <rect x="4" y="23" width="30" height="18" fill="white" />
-    <rect x="4" y="4" width="32" height="20" rx="2" fill="#F50F0F" />
-    <path d="M36 36H70" stroke="#333333" strokeWidth="4" />
-    <path d="M2 43H36" stroke="#333333" strokeWidth="4" />
-    <path d="M2 24H36" stroke="#333333" strokeWidth="4" />
-    <path d="M36 2V70" stroke="#333333" strokeWidth="4" />
+  <Svg size={32} {...props} fill="none">
+    <rect x="17" y="2" width="13" height="13" fill="#0C7FBF" />
+    <rect x="17" y="17" width="13" height="13" fill="white" />
+    <rect x="2" y="20" width="13" height="10" fill="#FBE317" />
+    <rect x="2" y="12" width="13" height="6" fill="white" />
+    <rect x="2" y="2" width="13" height="8" fill="#F50F0F" />
+    <path d="M16 16H31" stroke="#333333" strokeWidth="2" />
+    <path d="M1 19H16" stroke="#333333" strokeWidth="2" />
+    <path d="M1 11H16" stroke="#333333" strokeWidth="2" />
+    <path d="M16 1V31" stroke="#333333" strokeWidth="2" />
     <path
-      d="M57 70H36H15C7.8203 70 2 64.1797 2 57V43V26V15C2 7.8203 7.8203 2 15 2H36H57C64.1797 2 70 7.8203 70 15V36V57C70 64.1797 64.1797 70 57 70Z"
+      d="M28 31H16H4C2.34315 31 1 29.6569 1 28V19.1111V11.5556V4C1 2.34315 2.34315 1 4 1H16H28C29.6569 1 31 2.34315 31 4V16V28C31 29.6569 29.6569 31 28 31Z"
       stroke="#333333"
-      strokeWidth="4"
+      strokeWidth="2"
     />
   </Svg>
 );
