@@ -1,5 +1,5 @@
 <p align="center" style="color: #343a40">
-  <a href="https://screen-shottr.firebaseapp.com/"><img src="./github/logo.png" alt="screenshotr logo" height="150"></a>
+  <a href="https://screen-shottr.firebaseapp.com/"><img src="./github/logo.png" alt="screenshotr logo" height="128"></a>
   <h1 align="center"><a href="https://screen-shottr.firebaseapp.com/">screenshotr</a></h1>
 </p>
 <p align="center" style="font-size: 1.2rem;">Create mockup screenshots of any website, just enter the URL</p>
