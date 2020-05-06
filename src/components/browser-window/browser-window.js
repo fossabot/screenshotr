@@ -42,7 +42,7 @@ function BrowserWindow() {
               <h1>
                 Welcome to <strong>screenshotr</strong>
               </h1>
-              <p>Create professional looking website mockups in a snap</p>
+              <p>Create professional looking web browser mockups in a snap</p>
               <p>Just enter a URL at the top and click GO!</p>
             </div>
           )}

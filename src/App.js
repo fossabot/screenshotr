@@ -30,8 +30,7 @@ function App() {
 
   const bodyAlignment =
     exportSize.height > bodySize.height ? 'flex-start' : 'center';
-  const bodyOverflow =
-    exportSize.height > bodySize.height ? 'scroll' : 'auto';
+  const bodyOverflow = exportSize.height > bodySize.height ? 'scroll' : 'auto';
 
   useEffect(() => {
     if (bodyWidth !== previousBodyWidth) {

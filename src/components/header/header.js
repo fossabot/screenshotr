@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
-import { RightArrowIcon, ImageUploadIcon , Logo } from 'components/icons/icons';
+import { RightArrowIcon, ImageUploadIcon, Logo } from 'components/icons/icons';
 import OutputContext from 'contexts/output-context';
 import FileUploader from 'components/file-uploader/file-uploader';
 
@@ -44,7 +44,10 @@ function Header() {
 
   return (
     <header id="header">
-      <article className="logo"><Logo style={{height: 32, width: 32, marginRight: '0.75rem'}} />screenshotr</article>
+      <article className="logo">
+        <Logo style={{ height: 32, width: 32, marginRight: '0.75rem' }} />
+        screenshotr
+      </article>
       <form onSubmit={getImage} className="search-form">
         <input
           className="address-input"
