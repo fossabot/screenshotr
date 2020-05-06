@@ -136,3 +136,24 @@ export const DownloadIcon = props => (
     <line x1="12" y1="15" x2="12" y2="3" />
   </Svg>
 );
+
+export const Logo = props => (
+  <Svg
+    size={72}
+    {...props}
+    strokeWidth="4"
+    fill="none"
+  >
+  <rect x="36" y="4" width="32" height="32" rx="2" fill="#0C7FBF"/>
+  <rect x="36" y="36" width="32" height="32" rx="2" fill="white"/>
+  <rect x="4" y="43" width="32" height="25" rx="2" fill="#FBE317"/>
+  <rect x="4" y="23" width="30" height="18" fill="white"/>
+  <rect x="4" y="4" width="32" height="20" rx="2" fill="#F50F0F"/>
+  <path d="M36 36H70" stroke="#333333" strokeWidth="4"/>
+  <path d="M2 43H36" stroke="#333333" strokeWidth="4"/>
+  <path d="M2 24H36" stroke="#333333" strokeWidth="4"/>
+  <path d="M36 2V70" stroke="#333333" strokeWidth="4"/>
+  <path d="M57 70H36H15C7.8203 70 2 64.1797 2 57V43V26V15C2 7.8203 7.8203 2 15 2H36H57C64.1797 2 70 7.8203 70 15V36V57C70 64.1797 64.1797 70 57 70Z" stroke="#333333" strokeWidth="4"/>
+  
+  </Svg>
+);
