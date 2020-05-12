@@ -67,7 +67,7 @@ function BrowserWindow() {
         className="screenshot-image"
         src={screenshot}
         alt="Screenshot"
-        style={{ cursor: isEyeDropperActive ? 'cell' : 'default' }}
+        style={{ cursor: isEyeDropperActive ? 'crosshair' : 'default' }}
         onClick={handleImageClick}
       />
     );
