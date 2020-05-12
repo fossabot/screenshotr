@@ -34,6 +34,14 @@ button {
   outline: none;
 }
 
+input[type='search'] {
+  -webkit-appearance: textfield;
+}
+
+input[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
 button {
   flex: 0 0 auto;
   color: white;
@@ -45,6 +53,7 @@ button {
   border: 0.125rem solid $off-black;
   transition: 80ms ease all;
   user-select: none;
+  margin: 0;
 
   &:hover {
     background: $mondrian-blue-shade;
