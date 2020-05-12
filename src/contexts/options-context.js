@@ -7,12 +7,10 @@ const OptionsProvider = ({ children }) => {
   const [options, setOptions] = useState(DEFAULT_OPTIONS);
 
   const updateOptions = (newOpts) => {
-    setOptions((prevOpts) => {
-      return {
-        ...prevOpts,
-        ...newOpts,
-      };
-    });
+    setOptions((prevOpts) => ({
+      ...prevOpts,
+      ...newOpts,
+    }));
   };
 
   return (
