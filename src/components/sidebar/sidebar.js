@@ -29,6 +29,7 @@ function Sidebar({ handleDownloadClick, exportSize }) {
     darkLight,
     address,
     maxOutputWidth,
+    isEyeDropperActive,
   } = options;
   const hasDarkLightOption =
     style?.value?.toLowerCase()?.includes('apple') ||
@@ -49,6 +50,11 @@ function Sidebar({ handleDownloadClick, exportSize }) {
               updateOptions({ background: newBackground })
             }
             background={background}
+            isEyeDropperDisabled={!screenshot}
+            isEyeDropperActive={isEyeDropperActive}
+            setEyeDropperActive={(newState) => {
+              updateOptions({ isEyeDropperActive: newState });
+            }}
           />
         </article>
 

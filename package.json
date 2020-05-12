@@ -6,6 +6,7 @@
     "@rehooks/component-size": "^1.0.3",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",
+    "html2canvas": "^1.0.0-rc.5",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-color": "^2.18.1",

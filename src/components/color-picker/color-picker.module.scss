@@ -3,6 +3,7 @@
 
 .swatch-container {
   position: relative;
+  margin-bottom: 1rem;
 }
 
 .swatch {
@@ -13,6 +14,27 @@
   cursor: pointer;
   height: 2rem;
   border-radius: 0.25rem;
+}
+
+.eye-dropper-button {
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+
+  span {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
+.eye-dropper-icon {
+  color: inherit;
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
 }
 
 .color {
@@ -97,8 +119,7 @@
   padding: 0 0.125rem 0.25rem 0.125rem;
   flex-grow: 0;
   flex-shrink: 1;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px,
-    rgba(0, 0, 0, 0.15) 0px 8px 16px;
+  border: $mondrian-border;
 }
 
 .gradient_tile {
@@ -107,9 +128,10 @@
   cursor: pointer;
   margin: 0.25rem 0.125rem 0 0.125rem;
   transition: ease-out all 0.1s;
+  border: 0 solid $mondrian-blue;
 
   &:hover {
-    border: 4px solid $mondrian-blue;
+    border-width: 4px;
   }
 }
 

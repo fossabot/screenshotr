@@ -4,13 +4,11 @@ import BrowserControls from 'components/browser-controls/browser-controls';
 import { LoaderFill } from 'components/loader/loader';
 import OptionsContext from 'contexts/options-context';
 import OutputContext from 'contexts/output-context';
+import { getColorFromElement } from 'util/color';
 import './browser-window.scss';
 
 function BrowserWindow() {
-  const { options } = useContext(OptionsContext);
-  const { output, cleanURL } = useContext(OutputContext);
-  const { screenshot, favicon, loading } = output;
-
+  const { options, updateOptions } = useContext(OptionsContext);
   const {
     horizontalPadding,
     verticalPadding,
@@ -19,7 +17,11 @@ function BrowserWindow() {
     style: { value: browserStyle },
     darkLight,
     address,
+    isEyeDropperActive,
   } = options;
+
+  const { output, cleanURL } = useContext(OutputContext);
+  const { screenshot, favicon, loading } = output;
 
   const areControlsOnLeft = !browserStyle.toLowerCase().includes('windows');
 
@@ -27,6 +29,16 @@ function BrowserWindow() {
   const browserWidth = useComponentSize(browserWindowRef).width;
   const placeholderHeight = browserWidth / (16 / 9);
   const isBrowserSkinny = browserWidth < 500;
+
+  const handleImageClick = async (e) => {
+    if (isEyeDropperActive) {
+      const backgroundColor = await getColorFromElement(e);
+      updateOptions({
+        background: { backgroundColor },
+        isEyeDropperActive: false,
+      });
+    }
+  };
 
   const getBodyContent = () => {
     if (loading || !screenshot) {
@@ -51,7 +63,13 @@ function BrowserWindow() {
     }
 
     return (
-      <img className="screenshot-image" src={screenshot} alt="Screenshot" />
+      <img
+        className="screenshot-image"
+        src={screenshot}
+        alt="Screenshot"
+        style={{ cursor: isEyeDropperActive ? 'cell' : 'default' }}
+        onClick={handleImageClick}
+      />
     );
   };
 
@@ -84,8 +102,6 @@ function BrowserWindow() {
           )}
           <span
             className="address"
-            // contentEditable
-            // spellCheck="false"
             style={
               address !== 'address-full' ? { paddingLeft: 0, border: 0 } : {}
             }

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { SketchPicker } from 'react-color';
 import { Checkboard } from 'react-color/lib/components/common';
-import { LeftArrowIcon } from 'components/icons/icons';
+import { LeftArrowIcon, EyeDropperIcon } from 'components/icons/icons';
 import gradienta from 'lib/gradienta';
 import webgradients from 'lib/webgradients';
 import RowInput from 'components/row-input/row-input';
@@ -12,14 +12,25 @@ import styles from './color-picker.module.scss';
 
 const gradientaList = gradienta.map((g, index) => ({ ...g, index }));
 
-const ColorPicker = ({ onChange = () => {}, background = {} }) => {
+const ColorPicker = ({
+  onChange = () => {},
+  background = {},
+  isEyeDropperDisabled = true,
+  isEyeDropperActive = false,
+  setEyeDropperActive = () => {},
+}) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const [currentBackgroundType, setBackgroundType] = useState(
     () => BACKGROUND_TYPES[0]
   );
 
-  const handleClick = () => setDisplayColorPicker(!displayColorPicker);
+  const openColorPicker = () => setDisplayColorPicker(true);
+  const closeColorPicker = () => {
+    setDisplayColorPicker(false);
+    setEyeDropperActive(false);
+  };
+
   const handleChange = (newColor) => {
     console.log(newColor);
     onChange(newColor);
@@ -28,9 +39,8 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
   return (
     <>
       <div className={styles['swatch-container']}>
-        <div className={styles.swatch} onClick={handleClick}>
+        <div className={styles.swatch} onClick={openColorPicker}>
           <Checkboard />
-
           <div className={styles.color} style={background} />
         </div>
       </div>
@@ -39,7 +49,7 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
           displayColorPicker ? styles.open : styles.closed
         }`}
       >
-        <header onClick={handleClick}>
+        <header onClick={closeColorPicker}>
           <LeftArrowIcon />
           <span>Background</span>
         </header>
@@ -51,44 +61,58 @@ const ColorPicker = ({ onChange = () => {}, background = {} }) => {
           containerClassName={styles['color-picker-row-picker']}
         />
         <h3 className="label">Current</h3>
-        <div
-          className={styles['swatch-container']}
-          style={{ marginBottom: '2rem' }}
-        >
+        <div className={styles['swatch-container']}>
           <div className={styles.swatch} style={{ cursor: 'default' }}>
             <Checkboard />
             <div className={styles.color} style={background} />
           </div>
         </div>
         {currentBackgroundType.value === 'solid' && (
-          <SketchPicker
-            disableAlpha
-            width={266}
-            color={background.background}
-            onChange={(newColor) => handleChange({ background: newColor.hex })}
-            presetColors={[
-              'transparent',
-              '#1abc9c',
-              '#2ecc71',
-              '#3498db',
-              '#9b59b6',
-              '#34495e',
-              '#f1c40f',
-              '#e67e22',
-              '#e74c3c',
-              '#95a5a6',
-              '#ffffff',
-              '#16a085',
-              '#27ae60',
-              '#2980b9',
-              '#8e44ad',
-              '#2c3e50',
-              '#f39c12',
-              '#d35400',
-              '#c0392b',
-              '#7f8c8d',
-            ]}
-          />
+          <>
+            <button
+              type="button"
+              disabled={isEyeDropperDisabled}
+              className={styles['eye-dropper-button']}
+              onClick={() => setEyeDropperActive(!isEyeDropperActive)}
+            >
+              <EyeDropperIcon className={styles['eye-dropper-icon']} />
+              {isEyeDropperActive ? (
+                <span>Cancel</span>
+              ) : (
+                <span>Pick Color from Image</span>
+              )}
+            </button>
+            <SketchPicker
+              disableAlpha
+              width={262}
+              color={background.background}
+              onChange={(newColor) =>
+                handleChange({ background: newColor.hex })
+              }
+              presetColors={[
+                'transparent',
+                '#1abc9c',
+                '#2ecc71',
+                '#3498db',
+                '#9b59b6',
+                '#34495e',
+                '#f1c40f',
+                '#e67e22',
+                '#e74c3c',
+                '#95a5a6',
+                '#ffffff',
+                '#16a085',
+                '#27ae60',
+                '#2980b9',
+                '#8e44ad',
+                '#2c3e50',
+                '#f39c12',
+                '#d35400',
+                '#c0392b',
+                '#7f8c8d',
+              ]}
+            />
+          </>
         )}
         {currentBackgroundType.value === 'gradient' && (
           <div className={styles.gradient_picker}>

@@ -137,6 +137,7 @@ export const DEFAULT_OPTIONS = {
   darkLight: 'dark',
   address: 'address-full',
   maxOutputWidth: 1000,
+  isEyeDropperActive: false,
 };
 
 export const BACKGROUND_TYPES = [

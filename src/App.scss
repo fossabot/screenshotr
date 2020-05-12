@@ -107,6 +107,11 @@ h3.label {
   }
 }
 
+.sketch-picker {
+  border: $mondrian-border;
+  box-shadow: none !important;
+}
+
 @media only screen and (max-width: 800px) {
   .App {
     .mobile-overlay {
