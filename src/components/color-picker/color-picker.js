@@ -77,7 +77,7 @@ const ColorPicker = ({
             >
               <EyeDropperIcon className={styles['eye-dropper-icon']} />
               {isEyeDropperActive ? (
-                <span>Cancel</span>
+                <span>Done</span>
               ) : (
                 <span>Pick Color from Image</span>
               )}

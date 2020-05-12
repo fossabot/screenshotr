@@ -35,7 +35,6 @@ function BrowserWindow() {
       const backgroundColor = await getColorFromElement(e);
       updateOptions({
         background: { backgroundColor },
-        isEyeDropperActive: false,
       });
     }
   };
